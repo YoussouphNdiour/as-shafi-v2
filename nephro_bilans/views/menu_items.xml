@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Biological Results menu under Nephrology root -->
+    <menuitem id="nephro_bilan_menu"
+        name="Biological Results"
+        parent="nephro_core.menu_nephrology_root"
+        action="nephro_bilan_action"
+        sequence="50"
+        groups="nephro_core.group_nephro_nurse,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+
+    <!-- Thresholds under Configuration -->
+    <menuitem id="nephro_threshold_menu"
+        name="Thresholds"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_threshold_action"
+        sequence="20"
+        groups="nephro_core.group_nephro_manager"/>
+</odoo>

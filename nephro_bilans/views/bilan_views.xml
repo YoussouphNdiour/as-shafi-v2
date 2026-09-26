@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="nephro_bilan_view_form" model="ir.ui.view">
+        <field name="name">nephro.bilan.form</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group string="Patient">
+                            <field name="patient_id"/>
+                            <field name="physician_id"/>
+                            <field name="date"/>
+                            <field name="bilan_type"/>
+                        </group>
+                        <group string="Status">
+                            <field name="status" widget="badge"
+                                decoration-success="status == 'normal'"
+                                decoration-warning="status == 'warning'"
+                                decoration-danger="status == 'critical'"/>
+                            <field name="alert_count"/>
+                            <field name="ca_p_ratio"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Hematology">
+                            <group>
+                                <group>
+                                    <field name="hemoglobin"/>
+                                    <field name="hematocrit"/>
+                                    <field name="wbc"/>
+                                </group>
+                                <group>
+                                    <field name="platelets"/>
+                                    <field name="ferritin"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Biochemistry">
+                            <group>
+                                <group>
+                                    <field name="creatinine"/>
+                                    <field name="urea_pre"/>
+                                    <field name="urea_post"/>
+                                </group>
+                                <group>
+                                    <field name="uric_acid"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Electrolytes">
+                            <group>
+                                <group>
+                                    <field name="sodium"/>
+                                    <field name="potassium"/>
+                                    <field name="calcium"/>
+                                    <field name="phosphorus"/>
+                                </group>
+                                <group>
+                                    <field name="bicarbonate"/>
+                                    <field name="chloride"/>
+                                    <field name="ca_p_ratio"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Mineral-Bone">
+                            <group>
+                                <group>
+                                    <field name="pth"/>
+                                    <field name="vitamin_d"/>
+                                </group>
+                                <group>
+                                    <field name="alkaline_phosphatase"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Nutrition / Inflammation">
+                            <group>
+                                <group>
+                                    <field name="albumin"/>
+                                    <field name="total_protein"/>
+                                </group>
+                                <group>
+                                    <field name="crp"/>
+                                    <field name="prealbumin"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Serology">
+                            <group>
+                                <group>
+                                    <field name="hbs_ag"/>
+                                    <field name="anti_hbs"/>
+                                    <field name="anti_hbc"/>
+                                </group>
+                                <group>
+                                    <field name="anti_hcv"/>
+                                    <field name="anti_hiv"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Documents">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view -->
+    <record id="nephro_bilan_view_list" model="ir.ui.view">
+        <field name="name">nephro.bilan.list</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="physician_id"/>
+                <field name="date"/>
+                <field name="bilan_type"/>
+                <field name="alert_count"/>
+                <field name="status" widget="badge"
+                    decoration-success="status == 'normal'"
+                    decoration-warning="status == 'warning'"
+                    decoration-danger="status == 'critical'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="nephro_bilan_view_search" model="ir.ui.view">
+        <field name="name">nephro.bilan.search</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="physician_id"/>
+                <filter name="normal" string="Normal" domain="[('status', '=', 'normal')]"/>
+                <filter name="warning" string="Warning" domain="[('status', '=', 'warning')]"/>
+                <filter name="critical" string="Critical" domain="[('status', '=', 'critical')]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
+                    <filter name="group_type" string="Type" context="{'group_by': 'bilan_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="nephro_bilan_action" model="ir.actions.act_window">
+        <field name="name">Biological Results</field>
+        <field name="res_model">nephro.bilan</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No biological results yet.
+            </p>
+            <p>Create the first bilan for a patient.</p>
+        </field>
+    </record>
+
+    <!-- Patient smart button: inherit patient form to add bilan button -->
+    <record id="nephro_bilan_patient_form_inherit" model="ir.ui.view">
+        <field name="name">nephro.patient.bilan.button</field>
+        <field name="model">nephro.patient</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_patient_view_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="%(nephro_bilan_action)d" type="action"
+                    class="oe_stat_button" icon="fa-flask">
+                    <field name="bilan_count" widget="statinfo" string="Bilans"/>
+                </button>
+            </div>
+        </field>
+    </record>
+</odoo>

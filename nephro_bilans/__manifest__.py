@@ -1,0 +1,19 @@
+{
+    'name': 'Nephro Bilans',
+    'version': '19.0.2.0.0',
+    'category': 'Healthcare',
+    'summary': 'Biological lab results with thresholds, alerts, and trend tracking',
+    'author': 'As-Shafi Medical',
+    'license': 'LGPL-3',
+    'depends': ['nephro_dialysis'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/sequence_data.xml',
+        'data/threshold_data.xml',
+        'views/bilan_views.xml',
+        'views/threshold_views.xml',
+        'views/menu_items.xml',
+    ],
+    'installable': True,
+    'application': False,
+}

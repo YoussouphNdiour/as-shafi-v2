@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="threshold_hemoglobin" model="nephro.bilan.threshold">
+            <field name="parameter">hemoglobin</field>
+            <field name="min_value">10.0</field>
+            <field name="max_value">12.0</field>
+            <field name="unit">g/dL</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_potassium" model="nephro.bilan.threshold">
+            <field name="parameter">potassium</field>
+            <field name="min_value">3.5</field>
+            <field name="max_value">5.5</field>
+            <field name="unit">mmol/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_calcium" model="nephro.bilan.threshold">
+            <field name="parameter">calcium</field>
+            <field name="min_value">2.1</field>
+            <field name="max_value">2.5</field>
+            <field name="unit">mmol/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_phosphorus" model="nephro.bilan.threshold">
+            <field name="parameter">phosphorus</field>
+            <field name="min_value">1.1</field>
+            <field name="max_value">1.8</field>
+            <field name="unit">mmol/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_pth" model="nephro.bilan.threshold">
+            <field name="parameter">pth</field>
+            <field name="min_value">150.0</field>
+            <field name="max_value">300.0</field>
+            <field name="unit">pg/mL</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_albumin" model="nephro.bilan.threshold">
+            <field name="parameter">albumin</field>
+            <field name="min_value">35.0</field>
+            <field name="max_value">50.0</field>
+            <field name="unit">g/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_crp" model="nephro.bilan.threshold">
+            <field name="parameter">crp</field>
+            <field name="min_value">0.0</field>
+            <field name="max_value">10.0</field>
+            <field name="unit">mg/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_ferritin" model="nephro.bilan.threshold">
+            <field name="parameter">ferritin</field>
+            <field name="min_value">200.0</field>
+            <field name="max_value">500.0</field>
+            <field name="unit">µg/L</field>
+            <field name="active" eval="True"/>
+        </record>
+    </data>
+</odoo>
