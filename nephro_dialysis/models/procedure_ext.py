@@ -37,7 +37,7 @@ class NephroProcedureDialysis(models.Model):
 
     # --- Machine parameters ---
     schedule_id = fields.Many2one('nephro.schedule', string="Schedule")
-    station_id = fields.Many2one('nephro.station', string="Station")
+    station_id = fields.Many2one('nephro.station', string="Station", required=True)
     vascular_access_id = fields.Many2one(
         'nephro.vascular.access.type', string="Vascular Access",
     )

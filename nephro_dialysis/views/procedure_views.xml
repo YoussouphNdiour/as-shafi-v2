@@ -28,7 +28,7 @@
                     <group>
                         <group string="Assignment">
                             <field name="schedule_id"/>
-                            <field name="station_id"/>
+                            <field name="station_id" required="1"/>
                             <field name="vascular_access_id"/>
                             <field name="dialyzer_id"/>
                             <field name="dialysate_id"/>

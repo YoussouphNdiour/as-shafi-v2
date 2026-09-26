@@ -24,7 +24,7 @@ class NephroAppointment(models.Model):
         'nephro.patient', string="Patient", required=True, tracking=True,
     )
     physician_id = fields.Many2one(
-        'nephro.physician', string="Physician", tracking=True,
+        'nephro.physician', string="Physician", required=True, tracking=True,
     )
     date = fields.Datetime(string="Date", required=True)
     duration = fields.Float(string="Duration (h)")

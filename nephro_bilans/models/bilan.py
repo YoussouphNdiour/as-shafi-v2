@@ -31,7 +31,7 @@ class NephroBilan(models.Model):
     patient_id = fields.Many2one('nephro.patient', required=True, tracking=True)
     physician_id = fields.Many2one('nephro.physician', tracking=True)
     date = fields.Date(string="Date", required=True, default=fields.Date.today)
-    bilan_type = fields.Selection(BILAN_TYPES, string="Type", default='monthly')
+    bilan_type = fields.Selection(BILAN_TYPES, string="Type", required=True, default='monthly')
     attachment_ids = fields.Many2many('ir.attachment', string="Lab Reports")
 
     # --- Hematology ---

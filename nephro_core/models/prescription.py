@@ -56,6 +56,10 @@ class NephroPrescription(models.Model):
         self.ensure_one()
         if self.state != 'draft':
             raise UserError(_("Only draft prescriptions can be confirmed."))
+        if not self.line_ids:
+            raise UserError(
+                _("At least one prescription line is required before confirming.")
+            )
         self.write({'state': 'confirmed'})
 
     def action_done(self):

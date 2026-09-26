@@ -3,7 +3,8 @@ from datetime import date
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -35,7 +36,7 @@ class NephroPatient(models.Model):
     birth_date = fields.Date(string="Date of Birth")
     gender = fields.Selection(
         [('male', 'Male'), ('female', 'Female')],
-        string="Gender",
+        string="Gender", required=True,
     )
     blood_group = fields.Selection(BLOOD_GROUPS, string="Blood Group")
     emergency_contact = fields.Char(string="Emergency Contact")
@@ -63,6 +64,14 @@ class NephroPatient(models.Model):
     procedure_count = fields.Integer(
         string="Sessions", compute='_compute_procedure_count',
     )
+
+    @api.constrains('is_nephro', 'birth_date')
+    def _check_nephro_birth_date(self):
+        for rec in self:
+            if rec.is_nephro and not rec.birth_date:
+                raise UserError(
+                    _("Date of birth is required for nephrology patients.")
+                )
 
     @api.depends('birth_date')
     def _compute_age(self):
