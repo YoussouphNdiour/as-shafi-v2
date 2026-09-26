@@ -26,3 +26,5 @@ access_schedule_manager,nephro.schedule.manager,model_nephro_schedule,nephro_cor
 access_vital_sign_nurse,nephro.vital.sign.nurse,model_nephro_vital_sign,nephro_core.group_nephro_nurse,1,1,1,1
 access_vital_sign_doctor,nephro.vital.sign.doctor,model_nephro_vital_sign,nephro_core.group_nephro_doctor,1,1,1,1
 access_vital_sign_manager,nephro.vital.sign.manager,model_nephro_vital_sign,nephro_core.group_nephro_manager,1,1,1,1
+access_dry_weight_doctor,nephro.dry.weight.history.doctor,model_nephro_dry_weight_history,nephro_core.group_nephro_doctor,1,1,1,1
+access_dry_weight_manager,nephro.dry.weight.history.manager,model_nephro_dry_weight_history,nephro_core.group_nephro_manager,1,1,1,1
