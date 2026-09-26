@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Cron J-1: Send reminders the day before at 18:00 -->
+        <record id="cron_whatsapp_j1_reminders" model="ir.cron">
+            <field name="name">Nephro: WhatsApp J-1 Reminders</field>
+            <field name="model_id" ref="nephro_dialysis.model_nephro_procedure"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_j1_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="nextcall">2026-01-01 18:00:00</field>
+            <field name="priority">10</field>
+        </record>
+
+        <!-- Cron J: Send reminders the day of session at 06:30 -->
+        <record id="cron_whatsapp_j_reminders" model="ir.cron">
+            <field name="name">Nephro: WhatsApp J Reminders</field>
+            <field name="model_id" ref="nephro_dialysis.model_nephro_procedure"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_send_j_reminders()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="nextcall">2026-01-01 06:30:00</field>
+            <field name="priority">10</field>
+        </record>
+
+    </data>
+</odoo>
