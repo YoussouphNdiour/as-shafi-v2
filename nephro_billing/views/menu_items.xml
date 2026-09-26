@@ -23,6 +23,14 @@
         sequence="20"
         groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
 
+    <!-- Batch Invoicing -->
+    <menuitem id="nephro_billing_menu_batch"
+        name="Batch Invoicing"
+        parent="nephro_billing_menu"
+        action="nephro_batch_invoice_wizard_action"
+        sequence="30"
+        groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
+
     <!-- Pricing Rules under Configuration -->
     <menuitem id="nephro_billing_menu_pricing_rules"
         name="Pricing Rules"

@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'views/pricing_rule_views.xml',
         'views/uninvoiced_views.xml',
+        'views/batch_invoice_views.xml',
         'views/menu_items.xml',
     ],
     'installable': True,

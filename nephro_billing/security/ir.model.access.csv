@@ -3,3 +3,5 @@ access_pricing_rule_secretary,nephro.pricing.rule.secretary,model_nephro_pricing
 access_pricing_rule_billing,nephro.pricing.rule.billing,model_nephro_pricing_rule,nephro_core.group_nephro_billing,1,0,0,0
 access_pricing_rule_doctor,nephro.pricing.rule.doctor,model_nephro_pricing_rule,nephro_core.group_nephro_doctor,1,0,0,0
 access_pricing_rule_manager,nephro.pricing.rule.manager,model_nephro_pricing_rule,nephro_core.group_nephro_manager,1,1,1,1
+access_batch_invoice_wizard_billing,nephro.batch.invoice.wizard.billing,model_nephro_batch_invoice_wizard,nephro_core.group_nephro_billing,1,1,1,0
+access_batch_invoice_wizard_manager,nephro.batch.invoice.wizard.manager,model_nephro_batch_invoice_wizard,nephro_core.group_nephro_manager,1,1,1,1

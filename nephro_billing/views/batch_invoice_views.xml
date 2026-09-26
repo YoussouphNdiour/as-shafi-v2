@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Batch Invoice Wizard Form View -->
+    <record id="nephro_batch_invoice_wizard_view_form" model="ir.ui.view">
+        <field name="name">nephro.batch.invoice.wizard.form</field>
+        <field name="model">nephro.batch.invoice.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Batch Invoicing">
+                <group string="Filters">
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="patient_ids" widget="many2many_tags"/>
+                </group>
+                <group string="Preview">
+                    <field name="preview_count" readonly="1"/>
+                    <field name="total_amount" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_create_invoices"
+                        string="Create Invoices"
+                        type="object"
+                        class="btn-primary"
+                        data-hotkey="s"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Batch Invoice Wizard Action -->
+    <record id="nephro_batch_invoice_wizard_action" model="ir.actions.act_window">
+        <field name="name">Batch Invoicing</field>
+        <field name="res_model">nephro.batch.invoice.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
