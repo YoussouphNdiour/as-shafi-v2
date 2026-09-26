@@ -28,3 +28,6 @@ access_vital_sign_doctor,nephro.vital.sign.doctor,model_nephro_vital_sign,nephro
 access_vital_sign_manager,nephro.vital.sign.manager,model_nephro_vital_sign,nephro_core.group_nephro_manager,1,1,1,1
 access_dry_weight_doctor,nephro.dry.weight.history.doctor,model_nephro_dry_weight_history,nephro_core.group_nephro_doctor,1,1,1,1
 access_dry_weight_manager,nephro.dry.weight.history.manager,model_nephro_dry_weight_history,nephro_core.group_nephro_manager,1,1,1,1
+access_session_generator_secretary,nephro.session.generator.secretary,model_nephro_session_generator,nephro_core.group_nephro_secretary,1,1,0,0
+access_session_generator_doctor,nephro.session.generator.doctor,model_nephro_session_generator,nephro_core.group_nephro_doctor,1,1,0,0
+access_session_generator_manager,nephro.session.generator.manager,model_nephro_session_generator,nephro_core.group_nephro_manager,1,1,1,1

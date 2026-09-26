@@ -42,4 +42,12 @@
         parent="nephro_core.nephro_core_menu_config"
         action="nephro_dialysis_schedule_action"
         sequence="80"/>
+
+    <!-- Session Generator under Nephrology root -->
+    <menuitem id="nephro_dialysis_menu_session_generator"
+        name="Generate Sessions"
+        parent="nephro_core.nephro_core_menu_root"
+        action="nephro_dialysis_session_generator_action"
+        sequence="60"
+        groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
 </odoo>

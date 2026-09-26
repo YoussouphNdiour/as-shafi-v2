@@ -12,6 +12,7 @@
         'views/config_views.xml',
         'views/station_views.xml',
         'views/schedule_views.xml',
+        'views/generator_views.xml',
         'views/menu_items.xml',
     ],
     'installable': True,
