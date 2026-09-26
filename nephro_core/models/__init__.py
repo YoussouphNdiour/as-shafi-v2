@@ -1,1 +1,2 @@
-# Models will be imported as they are created in subsequent tasks
+from . import patient
+from . import physician

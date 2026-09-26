@@ -9,6 +9,7 @@
     'depends': ['base', 'mail', 'product', 'contacts'],
     'data': [
         'security/security.xml',
+        'data/sequence_data.xml',
     ],
     'installable': True,
     'application': True,

@@ -21,6 +21,19 @@ class NephroTestCommon(TransactionCase):
         cls.user_billing = cls._create_user('billing', cls.group_billing)
         cls.user_manager = cls._create_user('manager', cls.group_manager)
 
+        cls.patient = cls.env['nephro.patient'].create({
+            'name': 'Test Patient',
+            'birth_date': '1997-03-15',
+            'gender': 'female',
+            'blood_group': 'o_pos',
+            'is_nephro': True,
+        })
+        cls.physician = cls.env['nephro.physician'].create({
+            'name': 'Dr Test',
+            'user_id': cls.user_doctor.id,
+            'specialty': 'Nephrology',
+        })
+
     @classmethod
     def _create_user(cls, login, group):
         return cls.env['res.users'].create({
