@@ -10,6 +10,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/config_views.xml',
+        'views/station_views.xml',
+        'views/schedule_views.xml',
         'views/menu_items.xml',
     ],
     'installable': True,

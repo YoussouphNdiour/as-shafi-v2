@@ -13,3 +13,13 @@ access_holiday_manager,nephro.holiday.manager,model_nephro_holiday,nephro_core.g
 access_allergy_nurse,nephro.allergy.nurse,model_nephro_allergy,nephro_core.group_nephro_nurse,1,0,0,0
 access_allergy_doctor,nephro.allergy.doctor,model_nephro_allergy,nephro_core.group_nephro_doctor,1,0,0,0
 access_allergy_manager,nephro.allergy.manager,model_nephro_allergy,nephro_core.group_nephro_manager,1,1,1,1
+access_station_user,nephro.station.user,model_nephro_station,nephro_core.group_nephro_user,1,0,0,0
+access_station_secretary,nephro.station.secretary,model_nephro_station,nephro_core.group_nephro_secretary,1,0,0,0
+access_station_nurse,nephro.station.nurse,model_nephro_station,nephro_core.group_nephro_nurse,1,0,0,0
+access_station_doctor,nephro.station.doctor,model_nephro_station,nephro_core.group_nephro_doctor,1,1,1,0
+access_station_manager,nephro.station.manager,model_nephro_station,nephro_core.group_nephro_manager,1,1,1,1
+access_schedule_user,nephro.schedule.user,model_nephro_schedule,nephro_core.group_nephro_user,1,0,0,0
+access_schedule_secretary,nephro.schedule.secretary,model_nephro_schedule,nephro_core.group_nephro_secretary,1,0,0,0
+access_schedule_nurse,nephro.schedule.nurse,model_nephro_schedule,nephro_core.group_nephro_nurse,1,0,0,0
+access_schedule_doctor,nephro.schedule.doctor,model_nephro_schedule,nephro_core.group_nephro_doctor,1,1,1,0
+access_schedule_manager,nephro.schedule.manager,model_nephro_schedule,nephro_core.group_nephro_manager,1,1,1,1

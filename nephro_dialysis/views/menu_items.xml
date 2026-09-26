@@ -30,4 +30,16 @@
         parent="nephro_core.nephro_core_menu_config"
         action="nephro_dialysis_holiday_action"
         sequence="60"/>
+
+    <menuitem id="nephro_dialysis_menu_stations"
+        name="Stations"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_station_action"
+        sequence="70"/>
+
+    <menuitem id="nephro_dialysis_menu_schedules"
+        name="Schedules"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_schedule_action"
+        sequence="80"/>
 </odoo>
