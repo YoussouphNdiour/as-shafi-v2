@@ -36,7 +36,7 @@
         <record id="threshold_pth" model="nephro.bilan.threshold">
             <field name="parameter">pth</field>
             <field name="min_value">150.0</field>
-            <field name="max_value">300.0</field>
+            <field name="max_value">600.0</field>
             <field name="unit">pg/mL</field>
             <field name="active" eval="True"/>
         </record>
@@ -62,6 +62,22 @@
             <field name="min_value">200.0</field>
             <field name="max_value">500.0</field>
             <field name="unit">µg/L</field>
+            <field name="active" eval="True"/>
+        </record>
+        <!-- Added: KDIGO bicarbonate and sodium targets -->
+        <record id="threshold_bicarbonate" model="nephro.bilan.threshold">
+            <field name="parameter">bicarbonate</field>
+            <field name="min_value">22.0</field>
+            <field name="max_value">26.0</field>
+            <field name="unit">mmol/L</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="threshold_sodium" model="nephro.bilan.threshold">
+            <field name="parameter">sodium</field>
+            <field name="min_value">136.0</field>
+            <field name="max_value">145.0</field>
+            <field name="unit">mmol/L</field>
             <field name="active" eval="True"/>
         </record>
     </data>

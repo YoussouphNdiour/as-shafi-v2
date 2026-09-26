@@ -10,6 +10,8 @@
     'data': [
         'security/ir.model.access.csv',
         'security/security_rules.xml',
+        'data/config_data.xml',
+        'data/schedule_data.xml',
         'views/config_views.xml',
         'views/station_views.xml',
         'views/schedule_views.xml',

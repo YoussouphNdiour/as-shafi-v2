@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Vascular Access Types -->
+        <record id="vascular_access_fav" model="nephro.vascular.access.type">
+            <field name="name">AVF (Arteriovenous Fistula)</field>
+        </record>
+        <record id="vascular_access_kt_temp" model="nephro.vascular.access.type">
+            <field name="name">Temporary Catheter</field>
+        </record>
+        <record id="vascular_access_kt_perm" model="nephro.vascular.access.type">
+            <field name="name">Tunneled Catheter (Permcath)</field>
+        </record>
+        <record id="vascular_access_avg" model="nephro.vascular.access.type">
+            <field name="name">AVG (Arteriovenous Graft)</field>
+        </record>
+
+        <!-- Dialyzer Types -->
+        <record id="dialyzer_fx60" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX60</field>
+        </record>
+        <record id="dialyzer_fx80" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX80</field>
+        </record>
+        <record id="dialyzer_fx100" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX100</field>
+        </record>
+        <record id="dialyzer_polyflux170" model="nephro.dialyzer.type">
+            <field name="name">Gambro Polyflux 170H</field>
+        </record>
+        <record id="dialyzer_elisio17" model="nephro.dialyzer.type">
+            <field name="name">Nipro Elisio 17H</field>
+        </record>
+        <record id="dialyzer_toray_bk16" model="nephro.dialyzer.type">
+            <field name="name">Toray BK-1.6U</field>
+        </record>
+
+        <!-- Dialysate Types -->
+        <record id="dialysate_bicarb_std" model="nephro.dialysate.type">
+            <field name="name">Bicarbonate Standard</field>
+        </record>
+        <record id="dialysate_bicarb_low_ca" model="nephro.dialysate.type">
+            <field name="name">Bicarbonate Low Calcium</field>
+        </record>
+        <record id="dialysate_acetate" model="nephro.dialysate.type">
+            <field name="name">Acetate</field>
+        </record>
+        <record id="dialysate_citrate" model="nephro.dialysate.type">
+            <field name="name">Citrate</field>
+        </record>
+
+        <!-- Holidays (Senegal) -->
+        <record id="holiday_new_year" model="nephro.holiday">
+            <field name="name">New Year's Day</field>
+            <field name="date">2026-01-01</field>
+        </record>
+        <record id="holiday_independence" model="nephro.holiday">
+            <field name="name">Independence Day</field>
+            <field name="date">2026-04-04</field>
+        </record>
+        <record id="holiday_labor" model="nephro.holiday">
+            <field name="name">Labor Day</field>
+            <field name="date">2026-05-01</field>
+        </record>
+        <record id="holiday_assumption" model="nephro.holiday">
+            <field name="name">Assumption</field>
+            <field name="date">2026-08-15</field>
+        </record>
+        <record id="holiday_all_saints" model="nephro.holiday">
+            <field name="name">All Saints' Day</field>
+            <field name="date">2026-11-01</field>
+        </record>
+        <record id="holiday_christmas" model="nephro.holiday">
+            <field name="name">Christmas Day</field>
+            <field name="date">2026-12-25</field>
+        </record>
+
+        <!-- Allergies -->
+        <record id="allergy_heparin" model="nephro.allergy">
+            <field name="name">Heparin</field>
+        </record>
+        <record id="allergy_iodine" model="nephro.allergy">
+            <field name="name">Iodine</field>
+        </record>
+        <record id="allergy_latex" model="nephro.allergy">
+            <field name="name">Latex</field>
+        </record>
+        <record id="allergy_penicillin" model="nephro.allergy">
+            <field name="name">Penicillin</field>
+        </record>
+        <record id="allergy_sulfonamides" model="nephro.allergy">
+            <field name="name">Sulfonamides</field>
+        </record>
+        <record id="allergy_nsaids" model="nephro.allergy">
+            <field name="name">NSAIDs</field>
+        </record>
+    </data>
+</odoo>

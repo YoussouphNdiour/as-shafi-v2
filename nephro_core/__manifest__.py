@@ -12,6 +12,7 @@
         'security/ir.model.access.csv',
         'security/security_rules.xml',
         'data/sequence_data.xml',
+        'data/medications_data.xml',
         'views/patient_views.xml',
         'views/physician_views.xml',
         'views/procedure_views.xml',
