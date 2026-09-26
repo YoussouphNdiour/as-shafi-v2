@@ -6,7 +6,7 @@
     'author': 'As-Shafi Medical',
     'website': 'https://as-shafi.com',
     'license': 'LGPL-3',
-    'depends': ['base', 'mail', 'product', 'contacts'],
+    'depends': ['base', 'mail', 'product', 'stock', 'contacts'],
     'data': [
         'security/security.xml',
         'data/sequence_data.xml',
