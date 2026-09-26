@@ -9,9 +9,12 @@
     'depends': ['nephro_core'],
     'data': [
         'security/ir.model.access.csv',
+        'security/security_rules.xml',
         'views/config_views.xml',
         'views/station_views.xml',
         'views/schedule_views.xml',
+        'views/procedure_views.xml',
+        'views/patient_ext_views.xml',
         'views/generator_views.xml',
         'views/menu_items.xml',
     ],

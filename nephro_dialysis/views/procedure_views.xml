@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nephro_dialysis_procedure_view_form" model="ir.ui.view">
+        <field name="name">nephro.procedure.form.dialysis</field>
+        <field name="model">nephro.procedure</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_procedure_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+
+                <!-- Pre-dialysis tab -->
+                <page string="Pre-dialysis">
+                    <group>
+                        <group string="Measurements">
+                            <field name="pre_weight"/>
+                            <field name="pre_bp"/>
+                            <field name="pre_temp"/>
+                            <field name="arrival_status"/>
+                        </group>
+                        <group string="Weight">
+                            <field name="interdialytic_weight_gain" readonly="1"/>
+                            <field name="target_uf" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- Machine Parameters tab -->
+                <page string="Machine Parameters">
+                    <group>
+                        <group string="Assignment">
+                            <field name="schedule_id"/>
+                            <field name="station_id"/>
+                            <field name="vascular_access_id"/>
+                            <field name="dialyzer_id"/>
+                            <field name="dialysate_id"/>
+                        </group>
+                        <group string="Flow Settings">
+                            <field name="blood_flow"/>
+                            <field name="dialysate_flow"/>
+                            <field name="anticoagulation"/>
+                            <field name="anticoag_dose"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="parameter_change_reason" colspan="2"/>
+                    </group>
+                </page>
+
+                <!-- Vital Signs tab -->
+                <page string="Vital Signs">
+                    <field name="vital_sign_ids">
+                        <list editable="bottom">
+                            <field name="timestamp"/>
+                            <field name="systolic_bp"/>
+                            <field name="diastolic_bp"/>
+                            <field name="heart_rate"/>
+                            <field name="spo2"/>
+                            <field name="temperature"/>
+                            <field name="is_alert" readonly="1"
+                                decoration-danger="is_alert"/>
+                        </list>
+                    </field>
+                </page>
+
+                <!-- Post-dialysis tab -->
+                <page string="Post-dialysis">
+                    <group>
+                        <group string="Measurements">
+                            <field name="post_weight"/>
+                            <field name="post_bp"/>
+                            <field name="actual_uf" readonly="1"/>
+                            <field name="global_tolerance"/>
+                        </group>
+                        <group string="Adequacy">
+                            <field name="ktv" readonly="1"/>
+                            <field name="ktv_status" readonly="1"/>
+                            <field name="urr" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="end_notes" colspan="2"/>
+                    </group>
+                </page>
+
+                <!-- Machine Readings tab -->
+                <page string="Machine Readings">
+                    <group>
+                        <group>
+                            <field name="pv_arterial"/>
+                            <field name="ptm"/>
+                            <field name="conductivity"/>
+                        </group>
+                        <group>
+                            <field name="uf_rate"/>
+                            <field name="vst_start"/>
+                        </group>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

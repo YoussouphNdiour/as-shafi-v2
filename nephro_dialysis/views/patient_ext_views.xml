@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nephro_dialysis_patient_view_form" model="ir.ui.view">
+        <field name="name">nephro.patient.form.dialysis</field>
+        <field name="model">nephro.patient</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_patient_view_form"/>
+        <field name="arch" type="xml">
+            <!-- Add dialysis-specific fields into the existing Nephrology group -->
+            <xpath expr="//group[@string='Nephrology']" position="inside">
+                <field name="schedule_id" invisible="not is_nephro"/>
+                <field name="vascular_access_id" invisible="not is_nephro"/>
+                <field name="allergy_ids" widget="many2many_tags"
+                    invisible="not is_nephro"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
