@@ -23,3 +23,6 @@ access_schedule_secretary,nephro.schedule.secretary,model_nephro_schedule,nephro
 access_schedule_nurse,nephro.schedule.nurse,model_nephro_schedule,nephro_core.group_nephro_nurse,1,0,0,0
 access_schedule_doctor,nephro.schedule.doctor,model_nephro_schedule,nephro_core.group_nephro_doctor,1,1,1,0
 access_schedule_manager,nephro.schedule.manager,model_nephro_schedule,nephro_core.group_nephro_manager,1,1,1,1
+access_vital_sign_nurse,nephro.vital.sign.nurse,model_nephro_vital_sign,nephro_core.group_nephro_nurse,1,1,1,1
+access_vital_sign_doctor,nephro.vital.sign.doctor,model_nephro_vital_sign,nephro_core.group_nephro_doctor,1,1,1,1
+access_vital_sign_manager,nephro.vital.sign.manager,model_nephro_vital_sign,nephro_core.group_nephro_manager,1,1,1,1
