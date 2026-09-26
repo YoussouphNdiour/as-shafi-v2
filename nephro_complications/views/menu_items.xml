@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Complications accessible to doctor/manager under Nephrology root, not in main nav for nurse -->
+    <menuitem id="nephro_complication_menu"
+        name="Complications"
+        parent="nephro_core.menu_nephrology_root"
+        action="nephro_complication_action"
+        sequence="55"
+        groups="nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+</odoo>
