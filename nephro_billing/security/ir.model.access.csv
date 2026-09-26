@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pricing_rule_secretary,nephro.pricing.rule.secretary,model_nephro_pricing_rule,nephro_core.group_nephro_secretary,1,0,0,0
+access_pricing_rule_billing,nephro.pricing.rule.billing,model_nephro_pricing_rule,nephro_core.group_nephro_billing,1,0,0,0
+access_pricing_rule_doctor,nephro.pricing.rule.doctor,model_nephro_pricing_rule,nephro_core.group_nephro_doctor,1,0,0,0
+access_pricing_rule_manager,nephro.pricing.rule.manager,model_nephro_pricing_rule,nephro_core.group_nephro_manager,1,1,1,1
