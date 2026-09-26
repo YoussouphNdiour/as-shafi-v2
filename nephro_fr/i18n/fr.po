@@ -1,0 +1,170 @@
+# French translations for Nephro modules (As-Shafi Medical)
+# Copyright (C) 2026 As-Shafi Medical
+# This file is distributed under the same license as the nephro_fr package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Nephro 19.0.2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-26 00:00+0000\n"
+"PO-Revision-Date: 2026-09-26 00:00+0000\n"
+"Last-Translator: As-Shafi Medical <contact@as-shafi.com>\n"
+"Language-Team: French <fr@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+# ── General clinical terms ──────────────────────────────────────────────────
+
+msgid "Patient"
+msgstr "Patient"
+
+msgid "Session"
+msgstr "Séance"
+
+msgid "Sessions"
+msgstr "Séances"
+
+msgid "Appointment"
+msgstr "Rendez-vous"
+
+msgid "Appointments"
+msgstr "Rendez-vous"
+
+msgid "Prescription"
+msgstr "Ordonnance"
+
+msgid "Prescriptions"
+msgstr "Ordonnances"
+
+msgid "Invoice"
+msgstr "Facture"
+
+msgid "Invoices"
+msgstr "Factures"
+
+msgid "Blood Pressure"
+msgstr "Tension artérielle"
+
+msgid "Hemoglobin"
+msgstr "Hémoglobine"
+
+msgid "Weight"
+msgstr "Poids"
+
+msgid "Dry Weight"
+msgstr "Poids sec"
+
+msgid "Ultrafiltration"
+msgstr "Ultrafiltration"
+
+msgid "Station"
+msgstr "Poste"
+
+msgid "Stations"
+msgstr "Postes"
+
+msgid "Dialyzer"
+msgstr "Dialyseur"
+
+msgid "Vascular Access"
+msgstr "Accès vasculaire"
+
+msgid "Blood Flow Rate"
+msgstr "Débit sanguin"
+
+msgid "Dialysate Flow Rate"
+msgstr "Débit dialysat"
+
+msgid "Conductivity"
+msgstr "Conductivité"
+
+msgid "Temperature"
+msgstr "Température"
+
+msgid "KT/V"
+msgstr "KT/V"
+
+msgid "URR"
+msgstr "URR"
+
+msgid "Creatinine"
+msgstr "Créatinine"
+
+msgid "Urea"
+msgstr "Urée"
+
+msgid "Potassium"
+msgstr "Potassium"
+
+msgid "Phosphorus"
+msgstr "Phosphore"
+
+msgid "Calcium"
+msgstr "Calcium"
+
+msgid "PTH"
+msgstr "PTH"
+
+msgid "Ferritin"
+msgstr "Ferritine"
+
+msgid "Transferrin Saturation"
+msgstr "Saturation de transferrine"
+
+msgid "Albumin"
+msgstr "Albumine"
+
+msgid "Bicarbonate"
+msgstr "Bicarbonate"
+
+msgid "Scheduled"
+msgstr "Planifiée"
+
+msgid "In Progress"
+msgstr "En cours"
+
+msgid "Done"
+msgstr "Terminée"
+
+msgid "Canceled"
+msgstr "Annulée"
+
+msgid "Complication"
+msgstr "Complication"
+
+msgid "Complications"
+msgstr "Complications"
+
+# ── Portal labels ────────────────────────────────────────────────────────────
+
+msgid "My Sessions"
+msgstr "Mes séances"
+
+msgid "My Lab Results"
+msgstr "Mes bilans"
+
+msgid "My Appointments"
+msgstr "Mes rendez-vous"
+
+msgid "My Prescriptions"
+msgstr "Mes ordonnances"
+
+msgid "My Invoices"
+msgstr "Mes factures"
+
+msgid "Cancel appointment"
+msgstr "Annuler le rendez-vous"
+
+msgid "Cancel reason"
+msgstr "Motif d'annulation"
+
+# ── WhatsApp notifications ───────────────────────────────────────────────────
+
+msgid "Reminder: your dialysis session is scheduled for tomorrow %(date)s, station %(station)s."
+msgstr "Rappel : votre séance de dialyse est prévue demain le %(date)s, poste %(station)s."
+
+msgid "Your dialysis session is today at %(time)s, station %(station)s."
+msgstr "Votre séance de dialyse est aujourd'hui à %(time)s, poste %(station)s."
