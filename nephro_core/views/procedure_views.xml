@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nephro_core_procedure_view_form" model="ir.ui.view">
+        <field name="name">nephro.procedure.form</field>
+        <field name="model">nephro.procedure</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_start" string="Start" type="object"
+                        class="btn-primary" invisible="state != 'scheduled'"/>
+                    <button name="action_done" string="Complete" type="object"
+                        class="btn-primary" invisible="state != 'running'"/>
+                    <button name="action_cancel" string="Cancel" type="object"
+                        class="btn-secondary" invisible="state in ('done', 'cancel')"/>
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="scheduled,running,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="physician_id"/>
+                            <field name="date"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="start_time" readonly="1"/>
+                            <field name="end_time" readonly="1"/>
+                            <field name="actual_duration" readonly="1"/>
+                            <field name="is_invoiced"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Consumables">
+                            <field name="consumable_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="uom_id"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Cancellation" invisible="state != 'cancel'">
+                            <field name="cancel_reason"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_core_procedure_view_list" model="ir.ui.view">
+        <field name="name">nephro.procedure.list</field>
+        <field name="model">nephro.procedure</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="duration"/>
+                <field name="state" widget="badge"
+                    decoration-info="state == 'scheduled'"
+                    decoration-warning="state == 'running'"
+                    decoration-success="state == 'done'"
+                    decoration-danger="state == 'cancel'"/>
+                <field name="is_invoiced"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_core_procedure_action" model="ir.actions.act_window">
+        <field name="name">Hemodialysis Sessions</field>
+        <field name="res_model">nephro.procedure</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

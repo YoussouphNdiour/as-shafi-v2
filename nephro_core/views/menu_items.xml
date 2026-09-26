@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Root menu -->
+    <menuitem id="menu_nephrology_root"
+        name="Nephrology"
+        web_icon="nephro_core,static/description/icon.png"
+        groups="nephro_core.group_nephro_user"
+        sequence="50"/>
+
+    <!-- Sub-menus -->
+    <menuitem id="nephro_core_menu_patients"
+        name="Patients"
+        parent="menu_nephrology_root"
+        action="nephro_core_patient_action"
+        sequence="10"
+        groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+
+    <menuitem id="nephro_core_menu_appointments"
+        name="Appointments"
+        parent="menu_nephrology_root"
+        action="nephro_core_appointment_action"
+        sequence="20"
+        groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+
+    <menuitem id="nephro_core_menu_procedures"
+        name="Hemodialysis"
+        parent="menu_nephrology_root"
+        action="nephro_core_procedure_action"
+        sequence="30"
+        groups="nephro_core.group_nephro_user"/>
+
+    <menuitem id="nephro_core_menu_prescriptions"
+        name="Prescriptions"
+        parent="menu_nephrology_root"
+        action="nephro_core_prescription_action"
+        sequence="40"
+        groups="nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+
+    <!-- Configuration parent -->
+    <menuitem id="nephro_core_menu_config"
+        name="Configuration"
+        parent="menu_nephrology_root"
+        sequence="100"
+        groups="nephro_core.group_nephro_manager"/>
+
+    <menuitem id="nephro_core_menu_physicians"
+        name="Physicians"
+        parent="nephro_core_menu_config"
+        action="nephro_core_physician_action"
+        sequence="10"/>
+</odoo>

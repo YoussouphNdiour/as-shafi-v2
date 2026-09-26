@@ -52,8 +52,16 @@ class NephroPatient(models.Model):
     medical_history = fields.Html(string="Medical History")
     active = fields.Boolean(default=True)
 
+    # --- Relations ---
+    physician_id = fields.Many2one(
+        'nephro.physician', string="Attending Physician",
+    )
+
     # --- Computed ---
     age = fields.Integer(string="Age", compute='_compute_age')
+    procedure_count = fields.Integer(
+        string="Sessions", compute='_compute_procedure_count',
+    )
 
     @api.depends('birth_date')
     def _compute_age(self):
@@ -63,6 +71,15 @@ class NephroPatient(models.Model):
                 rec.age = relativedelta(today, rec.birth_date).years
             else:
                 rec.age = 0
+
+    def _compute_procedure_count(self):
+        data = self.env['nephro.procedure'].read_group(
+            [('patient_id', 'in', self.ids)],
+            ['patient_id'], ['patient_id'],
+        )
+        mapped = {d['patient_id'][0]: d['patient_id_count'] for d in data}
+        for rec in self:
+            rec.procedure_count = mapped.get(rec.id, 0)
 
     @api.model_create_multi
     def create(self, vals_list):
