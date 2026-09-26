@@ -1,0 +1,18 @@
+{
+    'name': 'Nephro Dialysis',
+    'version': '19.0.2.0.0',
+    'category': 'Healthcare',
+    'summary': 'Dialysis sessions, vital signs, KT/V, scheduling, session generator',
+    'author': 'As-Shafi Medical',
+    'website': 'https://as-shafi.com',
+    'license': 'LGPL-3',
+    'depends': ['nephro_core'],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/config_views.xml',
+        'views/menu_items.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'auto_install': False,
+}

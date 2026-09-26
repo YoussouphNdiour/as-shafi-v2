@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- ===== Dialyzer Type ===== -->
+    <record id="nephro_dialysis_dialyzer_type_view_list" model="ir.ui.view">
+        <field name="name">nephro.dialyzer.type.list</field>
+        <field name="model">nephro.dialyzer.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_dialyzer_type_view_form" model="ir.ui.view">
+        <field name="name">nephro.dialyzer.type.form</field>
+        <field name="model">nephro.dialyzer.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_dialyzer_type_action" model="ir.actions.act_window">
+        <field name="name">Dialyzer Types</field>
+        <field name="res_model">nephro.dialyzer.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ===== Dialysate Type ===== -->
+    <record id="nephro_dialysis_dialysate_type_view_list" model="ir.ui.view">
+        <field name="name">nephro.dialysate.type.list</field>
+        <field name="model">nephro.dialysate.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_dialysate_type_view_form" model="ir.ui.view">
+        <field name="name">nephro.dialysate.type.form</field>
+        <field name="model">nephro.dialysate.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_dialysate_type_action" model="ir.actions.act_window">
+        <field name="name">Dialysate Types</field>
+        <field name="res_model">nephro.dialysate.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ===== Vascular Access Type ===== -->
+    <record id="nephro_dialysis_vascular_access_type_view_list" model="ir.ui.view">
+        <field name="name">nephro.vascular.access.type.list</field>
+        <field name="model">nephro.vascular.access.type</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_vascular_access_type_view_form" model="ir.ui.view">
+        <field name="name">nephro.vascular.access.type.form</field>
+        <field name="model">nephro.vascular.access.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_vascular_access_type_action" model="ir.actions.act_window">
+        <field name="name">Vascular Access Types</field>
+        <field name="res_model">nephro.vascular.access.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ===== Holiday ===== -->
+    <record id="nephro_dialysis_holiday_view_list" model="ir.ui.view">
+        <field name="name">nephro.holiday.list</field>
+        <field name="model">nephro.holiday</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="date"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_holiday_view_form" model="ir.ui.view">
+        <field name="name">nephro.holiday.form</field>
+        <field name="model">nephro.holiday</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_holiday_action" model="ir.actions.act_window">
+        <field name="name">Holidays</field>
+        <field name="res_model">nephro.holiday</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ===== Allergy ===== -->
+    <record id="nephro_dialysis_allergy_view_list" model="ir.ui.view">
+        <field name="name">nephro.allergy.list</field>
+        <field name="model">nephro.allergy</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_allergy_view_form" model="ir.ui.view">
+        <field name="name">nephro.allergy.form</field>
+        <field name="model">nephro.allergy</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_allergy_action" model="ir.actions.act_window">
+        <field name="name">Allergies</field>
+        <field name="res_model">nephro.allergy</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

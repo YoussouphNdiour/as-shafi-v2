@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dialyzer_nurse,nephro.dialyzer.type.nurse,model_nephro_dialyzer_type,nephro_core.group_nephro_nurse,1,0,0,0
+access_dialyzer_doctor,nephro.dialyzer.type.doctor,model_nephro_dialyzer_type,nephro_core.group_nephro_doctor,1,0,0,0
+access_dialyzer_manager,nephro.dialyzer.type.manager,model_nephro_dialyzer_type,nephro_core.group_nephro_manager,1,1,1,1
+access_dialysate_nurse,nephro.dialysate.type.nurse,model_nephro_dialysate_type,nephro_core.group_nephro_nurse,1,0,0,0
+access_dialysate_doctor,nephro.dialysate.type.doctor,model_nephro_dialysate_type,nephro_core.group_nephro_doctor,1,0,0,0
+access_dialysate_manager,nephro.dialysate.type.manager,model_nephro_dialysate_type,nephro_core.group_nephro_manager,1,1,1,1
+access_vascular_nurse,nephro.vascular.access.type.nurse,model_nephro_vascular_access_type,nephro_core.group_nephro_nurse,1,0,0,0
+access_vascular_doctor,nephro.vascular.access.type.doctor,model_nephro_vascular_access_type,nephro_core.group_nephro_doctor,1,0,0,0
+access_vascular_manager,nephro.vascular.access.type.manager,model_nephro_vascular_access_type,nephro_core.group_nephro_manager,1,1,1,1
+access_holiday_secretary,nephro.holiday.secretary,model_nephro_holiday,nephro_core.group_nephro_secretary,1,0,0,0
+access_holiday_manager,nephro.holiday.manager,model_nephro_holiday,nephro_core.group_nephro_manager,1,1,1,1
+access_allergy_nurse,nephro.allergy.nurse,model_nephro_allergy,nephro_core.group_nephro_nurse,1,0,0,0
+access_allergy_doctor,nephro.allergy.doctor,model_nephro_allergy,nephro_core.group_nephro_doctor,1,0,0,0
+access_allergy_manager,nephro.allergy.manager,model_nephro_allergy,nephro_core.group_nephro_manager,1,1,1,1

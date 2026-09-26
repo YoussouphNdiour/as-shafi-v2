@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Configuration items under Nephrology > Configuration (parent defined in nephro_core) -->
+    <menuitem id="nephro_dialysis_menu_dialyzer_types"
+        name="Dialyzer Types"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_dialyzer_type_action"
+        sequence="20"/>
+
+    <menuitem id="nephro_dialysis_menu_dialysate_types"
+        name="Dialysate Types"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_dialysate_type_action"
+        sequence="30"/>
+
+    <menuitem id="nephro_dialysis_menu_vascular_access_types"
+        name="Vascular Access Types"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_vascular_access_type_action"
+        sequence="40"/>
+
+    <menuitem id="nephro_dialysis_menu_allergies"
+        name="Allergies"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_allergy_action"
+        sequence="50"/>
+
+    <menuitem id="nephro_dialysis_menu_holidays"
+        name="Holidays"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_holiday_action"
+        sequence="60"/>
+</odoo>
