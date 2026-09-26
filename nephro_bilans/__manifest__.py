@@ -10,6 +10,7 @@
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
         'data/threshold_data.xml',
+        'data/cron_data.xml',
         'views/bilan_views.xml',
         'views/threshold_views.xml',
         'views/menu_items.xml',
