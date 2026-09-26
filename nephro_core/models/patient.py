@@ -19,6 +19,7 @@ class NephroPatient(models.Model):
     _name = 'nephro.patient'
     _description = 'Nephrology Patient'
     _inherits = {'res.partner': 'partner_id'}
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name asc'
 
     # --- Partner link ---
@@ -73,13 +74,10 @@ class NephroPatient(models.Model):
                 rec.age = 0
 
     def _compute_procedure_count(self):
-        data = self.env['nephro.procedure'].read_group(
-            [('patient_id', 'in', self.ids)],
-            ['patient_id'], ['patient_id'],
-        )
-        mapped = {d['patient_id'][0]: d['patient_id_count'] for d in data}
         for rec in self:
-            rec.procedure_count = mapped.get(rec.id, 0)
+            rec.procedure_count = self.env['nephro.procedure'].search_count([
+                ('patient_id', '=', rec.id),
+            ])
 
     @api.model_create_multi
     def create(self, vals_list):
