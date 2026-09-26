@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Module category -->
+        <record id="module_category_nephrology" model="ir.module.category">
+            <field name="name">Nephrology HMS</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- Base group — read-only access -->
+        <record id="group_nephro_user" model="res.groups">
+            <field name="name">Nephro User</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+        </record>
+
+        <!-- Secretary — CRUD patients, RDV, absences -->
+        <record id="group_nephro_secretary" model="res.groups">
+            <field name="name">Secretary</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Nurse — sessions, vitals, complications -->
+        <record id="group_nephro_nurse" model="res.groups">
+            <field name="name">Nurse</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Billing — invoices, pricing, payments -->
+        <record id="group_nephro_billing" model="res.groups">
+            <field name="name">Billing</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Doctor — all clinical (prescriptions, bilans, dashboard) -->
+        <record id="group_nephro_doctor" model="res.groups">
+            <field name="name">Doctor</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Manager — configuration, all menus, all rights -->
+        <record id="group_nephro_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_category_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_doctor'))]"/>
+        </record>
+    </data>
+</odoo>
