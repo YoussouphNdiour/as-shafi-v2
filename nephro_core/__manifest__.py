@@ -9,6 +9,8 @@
     'depends': ['base', 'mail', 'product', 'stock', 'contacts'],
     'data': [
         'security/security.xml',
+        'security/ir.model.access.csv',
+        'security/security_rules.xml',
         'data/sequence_data.xml',
     ],
     'installable': True,
