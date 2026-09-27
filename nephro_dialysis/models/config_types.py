@@ -38,10 +38,3 @@ class NephroHoliday(models.Model):
     active = fields.Boolean(default=True)
 
 
-class NephroAllergy(models.Model):
-    _name = 'nephro.allergy'
-    _description = 'Allergy'
-    _order = 'name'
-
-    name = fields.Char(string="Name", required=True)
-    active = fields.Boolean(default=True)

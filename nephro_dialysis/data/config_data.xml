@@ -75,24 +75,6 @@
             <field name="date">2026-12-25</field>
         </record>
 
-        <!-- Allergies -->
-        <record id="allergy_heparin" model="nephro.allergy">
-            <field name="name">Heparin</field>
-        </record>
-        <record id="allergy_iodine" model="nephro.allergy">
-            <field name="name">Iodine</field>
-        </record>
-        <record id="allergy_latex" model="nephro.allergy">
-            <field name="name">Latex</field>
-        </record>
-        <record id="allergy_penicillin" model="nephro.allergy">
-            <field name="name">Penicillin</field>
-        </record>
-        <record id="allergy_sulfonamides" model="nephro.allergy">
-            <field name="name">Sulfonamides</field>
-        </record>
-        <record id="allergy_nsaids" model="nephro.allergy">
-            <field name="name">NSAIDs</field>
-        </record>
+        <!-- Allergies (types définis dans nephro_core) -->
     </data>
 </odoo>

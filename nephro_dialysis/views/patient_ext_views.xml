@@ -6,11 +6,9 @@
         <field name="inherit_id" ref="nephro_core.nephro_core_patient_view_form"/>
         <field name="arch" type="xml">
             <!-- Add dialysis-specific fields into the existing Nephrology group -->
-            <xpath expr="//group[@string='Nephrology']" position="inside">
+            <xpath expr="//group[@name='nephrology_group']" position="inside">
                 <field name="schedule_id" invisible="not is_nephro"/>
                 <field name="vascular_access_id" invisible="not is_nephro"/>
-                <field name="allergy_ids" widget="many2many_tags"
-                    invisible="not is_nephro"/>
             </xpath>
         </field>
     </record>

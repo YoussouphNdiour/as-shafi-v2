@@ -8,8 +8,6 @@ class NephroPatientDialysis(models.Model):
         'nephro.vascular.access.type', string="Vascular Access",
     )
     schedule_id = fields.Many2one('nephro.schedule', string="Schedule")
-    allergy_ids = fields.Many2many('nephro.allergy', string="Allergies")
-
     def write(self, vals):
         res = super().write(vals)
         if 'dry_weight' in vals and vals['dry_weight']:

@@ -19,12 +19,6 @@
         action="nephro_dialysis_vascular_access_type_action"
         sequence="40"/>
 
-    <menuitem id="nephro_dialysis_menu_allergies"
-        name="Allergies"
-        parent="nephro_core.nephro_core_menu_config"
-        action="nephro_dialysis_allergy_action"
-        sequence="50"/>
-
     <menuitem id="nephro_dialysis_menu_holidays"
         name="Holidays"
         parent="nephro_core.nephro_core_menu_config"
@@ -46,7 +40,7 @@
     <!-- Session Generator under Nephrology root -->
     <menuitem id="nephro_dialysis_menu_session_generator"
         name="Generate Sessions"
-        parent="nephro_core.nephro_core_menu_root"
+        parent="nephro_core.menu_nephrology_root"
         action="nephro_dialysis_session_generator_action"
         sequence="60"
         groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
