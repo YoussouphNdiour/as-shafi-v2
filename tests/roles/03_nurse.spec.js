@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const { loginAs, screenshot } = require('../helpers/login');
+const { loginAs, screenshot, goToNephrology } = require('../helpers/login');
 
 test.describe('Infirmière — Parcours séance complète', () => {
 
@@ -8,46 +8,100 @@ test.describe('Infirmière — Parcours séance complète', () => {
     await loginAs(page, 'nurse');
   });
 
-  test('01 — Connexion et interface infirmier', async ({ page }) => {
-    await screenshot(page, 'inf', 1, 'accueil');
-  });
-
-  test('02 — Menu néphrologie', async ({ page }) => {
-    await page.click('text=Nephrology');
-    await screenshot(page, 'inf', 2, 'menu_nephro');
-  });
-
-  test('03 — Interface infirmier (dashboard)', async ({ page }) => {
-    await page.click('text=Nephrology');
-    const nurseMenu = page.locator('text=Nurse Interface').first();
-    if (await nurseMenu.isVisible()) {
+  test('01 — Dashboard infirmière', async ({ page }) => {
+    await goToNephrology(page);
+    const nurseMenu = page.locator('.o_menu_sections a:has-text("Nurse Interface"), .o_menu_sections a:has-text("Nurse")').first();
+    if (await nurseMenu.isVisible({ timeout: 5000 }).catch(() => false)) {
       await nurseMenu.click();
       await page.waitForTimeout(3000);
-      await screenshot(page, 'inf', 3, 'dashboard_infirmier');
     }
+    await screenshot(page, 'inf', 1, 'dashboard');
   });
 
-  test('04 — Liste hémodialyses (lecture seule)', async ({ page }) => {
-    await page.click('text=Nephrology');
+  test('02 — Liste hémodialyses', async ({ page }) => {
+    await goToNephrology(page);
     await page.click('text=Hemodialysis');
-    await page.waitForSelector('.o_list_view, .o_kanban_view');
-    await screenshot(page, 'inf', 4, 'hemodialyses_liste');
+    await page.waitForSelector('.o_list_view, .o_kanban_view', { timeout: 15000 });
+    await screenshot(page, 'inf', 2, 'hemodialyses_liste');
   });
 
-  test('05 — Ouvrir une séance', async ({ page }) => {
-    await page.click('text=Nephrology');
+  test('03 — Séance en cours — Pré-dialyse', async ({ page }) => {
+    await goToNephrology(page);
     await page.click('text=Hemodialysis');
-    await page.waitForSelector('.o_list_view');
-    const row = page.locator('.o_data_row:first-child');
-    if (await row.isVisible()) {
-      await row.click();
-      await page.waitForSelector('.o_form_view');
-      await screenshot(page, 'inf', 5, 'seance_formulaire');
-
-      // Check for workflow buttons
-      const startBtn = page.locator('button:has-text("Start")');
-      const doneBtn = page.locator('button:has-text("Complete")');
-      await screenshot(page, 'inf', 6, 'seance_boutons');
+    await page.waitForSelector('.o_list_view', { timeout: 15000 });
+    await page.click('.o_data_row:first-child');
+    await page.waitForSelector('.o_form_view', { timeout: 15000 });
+    const tab = page.locator('.o_notebook .nav-link:has-text("Pre-dialysis")');
+    if (await tab.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await tab.click();
+      await page.waitForTimeout(500);
     }
+    await screenshot(page, 'inf', 3, 'seance_pre_dialyse');
+  });
+
+  test('04 — Signes vitaux pendant la séance', async ({ page }) => {
+    await goToNephrology(page);
+    await page.click('text=Hemodialysis');
+    await page.waitForSelector('.o_list_view', { timeout: 15000 });
+    await page.click('.o_data_row:first-child');
+    await page.waitForSelector('.o_form_view', { timeout: 15000 });
+    const tab = page.locator('.o_notebook .nav-link:has-text("Vital Signs")');
+    if (await tab.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await tab.click();
+      await page.waitForTimeout(500);
+    }
+    await screenshot(page, 'inf', 4, 'seance_signes_vitaux');
+  });
+
+  test('05 — Paramètres machine', async ({ page }) => {
+    await goToNephrology(page);
+    await page.click('text=Hemodialysis');
+    await page.waitForSelector('.o_list_view', { timeout: 15000 });
+    await page.click('.o_data_row:first-child');
+    await page.waitForSelector('.o_form_view', { timeout: 15000 });
+    const tab = page.locator('.o_notebook .nav-link:has-text("Machine Parameters")');
+    if (await tab.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await tab.click();
+      await page.waitForTimeout(500);
+    }
+    await screenshot(page, 'inf', 5, 'seance_parametres_machine');
+  });
+
+  test('06 — Séance terminée — Post-dialyse', async ({ page }) => {
+    await goToNephrology(page);
+    await page.click('text=Hemodialysis');
+    await page.waitForSelector('.o_list_view', { timeout: 15000 });
+    await page.click('.o_data_row:first-child');
+    await page.waitForSelector('.o_form_view', { timeout: 15000 });
+    const tab = page.locator('.o_notebook .nav-link:has-text("Post-dialysis")');
+    if (await tab.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await tab.click();
+      await page.waitForTimeout(500);
+    }
+    await screenshot(page, 'inf', 6, 'seance_post_dialyse');
+  });
+
+  test('07 — Complications', async ({ page }) => {
+    await goToNephrology(page);
+    await page.click('text=Hemodialysis');
+    await page.waitForSelector('.o_list_view', { timeout: 15000 });
+    await page.click('.o_data_row:first-child');
+    await page.waitForSelector('.o_form_view', { timeout: 15000 });
+    const tab = page.locator('.o_notebook .nav-link:has-text("Complications")');
+    if (await tab.isVisible({ timeout: 3000 }).catch(() => false)) {
+      await tab.click();
+      await page.waitForTimeout(500);
+    }
+    await screenshot(page, 'inf', 7, 'seance_complications');
+  });
+
+  test('08 — Bilans biologiques (consultation)', async ({ page }) => {
+    await goToNephrology(page);
+    const bilanMenu = page.locator('.o_menu_sections a:has-text("Biological Results"), .o_menu_sections a:has-text("Bilans")').first();
+    if (await bilanMenu.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await bilanMenu.click();
+      await page.waitForSelector('.o_list_view, .o_kanban_view', { timeout: 15000 });
+    }
+    await screenshot(page, 'inf', 8, 'bilans_liste');
   });
 });
