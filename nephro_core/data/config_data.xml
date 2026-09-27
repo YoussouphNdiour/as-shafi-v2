@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Habitudes toxiques / Mode de vie -->
+        <record id="lifestyle_tabac" model="nephro.lifestyle">
+            <field name="name">Tabac</field>
+        </record>
+        <record id="lifestyle_alcool" model="nephro.lifestyle">
+            <field name="name">Alcool</field>
+        </record>
+        <record id="lifestyle_drogue" model="nephro.lifestyle">
+            <field name="name">Drogue</field>
+        </record>
+        <record id="lifestyle_sedentarite" model="nephro.lifestyle">
+            <field name="name">Sédentarité</field>
+        </record>
+        <record id="lifestyle_regime" model="nephro.lifestyle">
+            <field name="name">Régime particulier</field>
+        </record>
+
+        <!-- Types d'allergie -->
+        <record id="allergy_type_medicament" model="nephro.allergy.type">
+            <field name="name">Médicamenteuse</field>
+        </record>
+        <record id="allergy_type_alimentaire" model="nephro.allergy.type">
+            <field name="name">Alimentaire</field>
+        </record>
+        <record id="allergy_type_contact" model="nephro.allergy.type">
+            <field name="name">De contact</field>
+        </record>
+        <record id="allergy_type_respiratoire" model="nephro.allergy.type">
+            <field name="name">Respiratoire</field>
+        </record>
+        <record id="allergy_type_latex" model="nephro.allergy.type">
+            <field name="name">Latex</field>
+        </record>
+
+        <!-- Types de chirurgie -->
+        <record id="surgical_type_general" model="nephro.surgical.type">
+            <field name="name">Chirurgie générale</field>
+        </record>
+        <record id="surgical_type_urologique" model="nephro.surgical.type">
+            <field name="name">Chirurgie urologique</field>
+        </record>
+        <record id="surgical_type_cardiaque" model="nephro.surgical.type">
+            <field name="name">Chirurgie cardiaque</field>
+        </record>
+        <record id="surgical_type_orthopedique" model="nephro.surgical.type">
+            <field name="name">Chirurgie orthopédique</field>
+        </record>
+        <record id="surgical_type_vasculaire" model="nephro.surgical.type">
+            <field name="name">Chirurgie vasculaire</field>
+        </record>
+        <record id="surgical_type_fav" model="nephro.surgical.type">
+            <field name="name">Création FAV</field>
+        </record>
+
+        <!-- Liens familiaux -->
+        <record id="family_relation_pere" model="nephro.family.relation">
+            <field name="name">Père</field>
+        </record>
+        <record id="family_relation_mere" model="nephro.family.relation">
+            <field name="name">Mère</field>
+        </record>
+        <record id="family_relation_frere" model="nephro.family.relation">
+            <field name="name">Frère</field>
+        </record>
+        <record id="family_relation_soeur" model="nephro.family.relation">
+            <field name="name">Sœur</field>
+        </record>
+        <record id="family_relation_enfant" model="nephro.family.relation">
+            <field name="name">Enfant</field>
+        </record>
+        <record id="family_relation_conjoint" model="nephro.family.relation">
+            <field name="name">Conjoint(e)</field>
+        </record>
+        <record id="family_relation_gp" model="nephro.family.relation">
+            <field name="name">Grand-parent</field>
+        </record>
+
+        <!-- Types de néphropathie initiale -->
+        <record id="nephropathy_diabetique" model="nephro.nephropathy.type">
+            <field name="name">Néphropathie diabétique</field>
+        </record>
+        <record id="nephropathy_hypertensive" model="nephro.nephropathy.type">
+            <field name="name">Néphro-angiosclérose (hypertensive)</field>
+        </record>
+        <record id="nephropathy_glomerulaire" model="nephro.nephropathy.type">
+            <field name="name">Glomérulonéphrite chronique</field>
+        </record>
+        <record id="nephropathy_pkd" model="nephro.nephropathy.type">
+            <field name="name">Polykystose rénale (PKD)</field>
+        </record>
+        <record id="nephropathy_lupique" model="nephro.nephropathy.type">
+            <field name="name">Néphrite lupique</field>
+        </record>
+        <record id="nephropathy_interstitielle" model="nephro.nephropathy.type">
+            <field name="name">Néphrite tubulo-interstitielle</field>
+        </record>
+        <record id="nephropathy_obstructive" model="nephro.nephropathy.type">
+            <field name="name">Uropathie obstructive</field>
+        </record>
+        <record id="nephropathy_indeterminee" model="nephro.nephropathy.type">
+            <field name="name">Néphropathie indéterminée</field>
+        </record>
+        <record id="nephropathy_autre" model="nephro.nephropathy.type">
+            <field name="name">Autre</field>
+        </record>
+
+    </data>
+</odoo>
