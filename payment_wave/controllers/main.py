@@ -14,7 +14,7 @@ class PaymentWaveController(http.Controller):
         provider = request.env['payment.provider'].sudo().search([
             ('code', '=', 'wave'),
         ], limit=1)
-        secret = provider.wave_secret_key or ''
+        secret = provider.wave_webhook_secret or ''
         if not secret:
             _logger.error("Wave secret key is not configured")
         return secret

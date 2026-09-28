@@ -14,7 +14,7 @@ class PaymentOrangeMoneyController(http.Controller):
         provider = request.env['payment.provider'].sudo().search([
             ('code', '=', 'orange_money'),
         ], limit=1)
-        secret = provider.orange_money_secret_key or ''
+        secret = provider.orange_money_client_secret or ''
         if not secret:
             _logger.error("Orange Money secret key is not configured")
         return secret

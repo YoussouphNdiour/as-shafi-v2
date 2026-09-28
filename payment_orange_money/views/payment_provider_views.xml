@@ -6,14 +6,15 @@
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
             <group name="provider_credentials" position="inside">
-                <group string="Orange Money Credentials"
+                <group string="Identifiants Orange Money"
                        invisible="code != 'orange_money'">
-                    <field name="orange_money_api_key"
+                    <field name="orange_money_api_url"/>
+                    <field name="orange_money_client_id"
+                           required="code == 'orange_money'"/>
+                    <field name="orange_money_client_secret"
                            password="True"
                            required="code == 'orange_money'"/>
-                    <field name="orange_money_secret_key"
-                           password="True"
-                           required="code == 'orange_money'"/>
+                    <field name="orange_money_merchant_code"/>
                 </group>
             </group>
         </field>

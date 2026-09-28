@@ -12,14 +12,22 @@ class PaymentProviderOrangeMoney(models.Model):
         selection_add=[('orange_money', 'Orange Money')],
         ondelete={'orange_money': 'set default'},
     )
-    orange_money_api_key = fields.Char(
-        string='Orange Money API Key',
+    orange_money_api_url = fields.Char(
+        string='URL API Orange Money',
+        groups='base.group_system',
+    )
+    orange_money_client_id = fields.Char(
+        string='Client ID',
         required_if_provider='orange_money',
         groups='base.group_system',
     )
-    orange_money_secret_key = fields.Char(
-        string='Orange Money Secret Key',
+    orange_money_client_secret = fields.Char(
+        string='Client Secret',
         required_if_provider='orange_money',
         groups='base.group_system',
-        help='Used to sign and verify HMAC-SHA256 webhook signatures.',
+        help='Utilisé pour signer et vérifier les signatures HMAC-SHA256 des webhooks.',
+    )
+    orange_money_merchant_code = fields.Char(
+        string='Code marchand',
+        groups='base.group_system',
     )

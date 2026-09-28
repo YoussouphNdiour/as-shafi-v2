@@ -6,11 +6,11 @@
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
             <group name="provider_credentials" position="inside">
-                <group string="Wave Credentials" invisible="code != 'wave'">
+                <group string="Identifiants Wave" invisible="code != 'wave'">
                     <field name="wave_api_key"
                            password="True"
                            required="code == 'wave'"/>
-                    <field name="wave_secret_key"
+                    <field name="wave_webhook_secret"
                            password="True"
                            required="code == 'wave'"/>
                 </group>

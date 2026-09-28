@@ -13,13 +13,13 @@ class PaymentProviderWave(models.Model):
         ondelete={'wave': 'set default'},
     )
     wave_api_key = fields.Char(
-        string='Wave API Key',
+        string='Clé API Wave',
         required_if_provider='wave',
         groups='base.group_system',
     )
-    wave_secret_key = fields.Char(
-        string='Wave Secret Key',
+    wave_webhook_secret = fields.Char(
+        string='Clé secrète Webhook Wave',
         required_if_provider='wave',
         groups='base.group_system',
-        help='Used to sign and verify HMAC-SHA256 webhook signatures.',
+        help='Utilisé pour signer et vérifier les signatures HMAC-SHA256 des webhooks.',
     )
