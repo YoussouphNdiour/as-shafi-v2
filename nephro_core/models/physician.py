@@ -9,7 +9,6 @@ class NephroPhysician(models.Model):
 
     partner_id = fields.Many2one(
         'res.partner', required=True, ondelete='cascade',
-        auto_join=True,
     )
     specialty = fields.Char(string="Specialty")
     license_number = fields.Char(string="License Number")

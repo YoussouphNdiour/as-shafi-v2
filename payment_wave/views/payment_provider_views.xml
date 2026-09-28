@@ -6,13 +6,13 @@
         <field name="inherit_id" ref="payment.payment_provider_form"/>
         <field name="arch" type="xml">
             <group name="provider_credentials" position="inside">
-                <group string="Wave Credentials" attrs="{'invisible': [('code', '!=', 'wave')]}">
+                <group string="Wave Credentials" invisible="code != 'wave'">
                     <field name="wave_api_key"
                            password="True"
-                           attrs="{'required': [('code', '=', 'wave')]}"/>
+                           required="code == 'wave'"/>
                     <field name="wave_secret_key"
                            password="True"
-                           attrs="{'required': [('code', '=', 'wave')]}"/>
+                           required="code == 'wave'"/>
                 </group>
             </group>
         </field>

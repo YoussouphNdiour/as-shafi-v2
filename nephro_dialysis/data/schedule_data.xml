@@ -26,54 +26,54 @@
         <!-- Demo Schedules -->
         <record id="schedule_mwf_morning_a" model="nephro.schedule">
             <field name="name">MWF Morning (A)</field>
-            <field name="day_monday" eval="True"/>
-            <field name="day_tuesday" eval="False"/>
-            <field name="day_wednesday" eval="True"/>
-            <field name="day_thursday" eval="False"/>
-            <field name="day_friday" eval="True"/>
-            <field name="day_saturday" eval="False"/>
-            <field name="day_sunday" eval="False"/>
-            <field name="time_start">7.0</field>
-            <field name="time_stop">11.5</field>
+            <field name="monday" eval="True"/>
+            <field name="tuesday" eval="False"/>
+            <field name="wednesday" eval="True"/>
+            <field name="thursday" eval="False"/>
+            <field name="friday" eval="True"/>
+            <field name="saturday" eval="False"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">7.0</field>
+            <field name="end_time">11.5</field>
             <field name="station_id" ref="station_1a"/>
         </record>
         <record id="schedule_mwf_afternoon_a" model="nephro.schedule">
             <field name="name">MWF Afternoon (A)</field>
-            <field name="day_monday" eval="True"/>
-            <field name="day_tuesday" eval="False"/>
-            <field name="day_wednesday" eval="True"/>
-            <field name="day_thursday" eval="False"/>
-            <field name="day_friday" eval="True"/>
-            <field name="day_saturday" eval="False"/>
-            <field name="day_sunday" eval="False"/>
-            <field name="time_start">13.0</field>
-            <field name="time_stop">17.5</field>
+            <field name="monday" eval="True"/>
+            <field name="tuesday" eval="False"/>
+            <field name="wednesday" eval="True"/>
+            <field name="thursday" eval="False"/>
+            <field name="friday" eval="True"/>
+            <field name="saturday" eval="False"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">13.0</field>
+            <field name="end_time">17.5</field>
             <field name="station_id" ref="station_1a"/>
         </record>
         <record id="schedule_tts_morning_b" model="nephro.schedule">
             <field name="name">TTS Morning (B)</field>
-            <field name="day_monday" eval="False"/>
-            <field name="day_tuesday" eval="True"/>
-            <field name="day_wednesday" eval="False"/>
-            <field name="day_thursday" eval="True"/>
-            <field name="day_friday" eval="False"/>
-            <field name="day_saturday" eval="True"/>
-            <field name="day_sunday" eval="False"/>
-            <field name="time_start">7.0</field>
-            <field name="time_stop">11.5</field>
+            <field name="monday" eval="False"/>
+            <field name="tuesday" eval="True"/>
+            <field name="wednesday" eval="False"/>
+            <field name="thursday" eval="True"/>
+            <field name="friday" eval="False"/>
+            <field name="saturday" eval="True"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">7.0</field>
+            <field name="end_time">11.5</field>
             <field name="station_id" ref="station_2a"/>
         </record>
         <record id="schedule_tts_afternoon_b" model="nephro.schedule">
             <field name="name">TTS Afternoon (B)</field>
-            <field name="day_monday" eval="False"/>
-            <field name="day_tuesday" eval="True"/>
-            <field name="day_wednesday" eval="False"/>
-            <field name="day_thursday" eval="True"/>
-            <field name="day_friday" eval="False"/>
-            <field name="day_saturday" eval="True"/>
-            <field name="day_sunday" eval="False"/>
-            <field name="time_start">13.0</field>
-            <field name="time_stop">17.5</field>
+            <field name="monday" eval="False"/>
+            <field name="tuesday" eval="True"/>
+            <field name="wednesday" eval="False"/>
+            <field name="thursday" eval="True"/>
+            <field name="friday" eval="False"/>
+            <field name="saturday" eval="True"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">13.0</field>
+            <field name="end_time">17.5</field>
             <field name="station_id" ref="station_2a"/>
         </record>
     </data>

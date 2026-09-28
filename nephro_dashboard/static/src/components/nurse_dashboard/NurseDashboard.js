@@ -3,12 +3,12 @@
 import { Component, useState, onMounted, onWillUnmount } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { useService } from "@web/core/utils/hooks";
+import { rpc } from "@web/core/network/rpc";
 
 class NurseDashboard extends Component {
     static template = "nephro_dashboard.NurseDashboard";
 
     setup() {
-        this.rpc = useService("rpc");
         this.orm = useService("orm");
         this.action = useService("action");
         this.notification = useService("notification");
@@ -35,7 +35,7 @@ class NurseDashboard extends Component {
 
     async loadData() {
         try {
-            const data = await this.rpc("/nephro/dashboard/nurse/data", {});
+            const data = await rpc("/nephro/dashboard/nurse/data", {});
             this.state.patients = data.patients;
             this.state.loading = false;
         } catch (e) {

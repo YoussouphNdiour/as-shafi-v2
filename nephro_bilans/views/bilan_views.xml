@@ -145,7 +145,7 @@
                 <filter name="normal" string="Normal" domain="[('status', '=', 'normal')]"/>
                 <filter name="warning" string="Warning" domain="[('status', '=', 'warning')]"/>
                 <filter name="critical" string="Critical" domain="[('status', '=', 'critical')]"/>
-                <group expand="0" string="Group By">
+                <group>
                     <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
                     <filter name="group_type" string="Type" context="{'group_by': 'bilan_type'}"/>
                 </group>

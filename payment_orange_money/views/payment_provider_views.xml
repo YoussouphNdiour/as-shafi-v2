@@ -7,13 +7,13 @@
         <field name="arch" type="xml">
             <group name="provider_credentials" position="inside">
                 <group string="Orange Money Credentials"
-                       attrs="{'invisible': [('code', '!=', 'orange_money')]}">
+                       invisible="code != 'orange_money'">
                     <field name="orange_money_api_key"
                            password="True"
-                           attrs="{'required': [('code', '=', 'orange_money')]}"/>
+                           required="code == 'orange_money'"/>
                     <field name="orange_money_secret_key"
                            password="True"
-                           attrs="{'required': [('code', '=', 'orange_money')]}"/>
+                           required="code == 'orange_money'"/>
                 </group>
             </group>
         </field>

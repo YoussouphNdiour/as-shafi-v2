@@ -9,6 +9,8 @@ THRESHOLD_PARAMS = [
     ('albumin', 'Albumin'),
     ('crp', 'CRP'),
     ('ferritin', 'Ferritin'),
+    ('bicarbonate', 'Bicarbonate'),
+    ('sodium', 'Sodium'),
 ]
 
 

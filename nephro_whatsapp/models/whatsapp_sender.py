@@ -59,7 +59,7 @@ class NephroProcedureWhatsApp(models.Model):
             ('date', '<', tomorrow_end),
         ])
         for proc in procedures:
-            phone = proc.patient_id.mobile or proc.patient_id.phone
+            phone = proc.patient_id.phone
             if not phone:
                 continue
             msg = _(
@@ -81,7 +81,7 @@ class NephroProcedureWhatsApp(models.Model):
             ('date', '<', today_end),
         ])
         for proc in procedures:
-            phone = proc.patient_id.mobile or proc.patient_id.phone
+            phone = proc.patient_id.phone
             if not phone:
                 continue
             msg = _(

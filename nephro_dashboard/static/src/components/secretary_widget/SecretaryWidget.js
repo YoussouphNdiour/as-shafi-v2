@@ -2,13 +2,12 @@
 
 import { Component, useState, onMounted, onWillUnmount } from "@odoo/owl";
 import { registry } from "@web/core/registry";
-import { useService } from "@web/core/utils/hooks";
+import { rpc } from "@web/core/network/rpc";
 
 class SecretaryWidget extends Component {
     static template = "nephro_dashboard.SecretaryWidget";
 
     setup() {
-        this.rpc = useService("rpc");
         this.state = useState({
             total: 0,
             done: 0,
@@ -37,7 +36,7 @@ class SecretaryWidget extends Component {
 
     async loadData() {
         try {
-            const data = await this.rpc("/nephro/dashboard/secretary/data", {});
+            const data = await rpc("/nephro/dashboard/secretary/data", {});
             Object.assign(this.state, data, { loading: false });
         } catch (e) {
             this.state.loading = false;
