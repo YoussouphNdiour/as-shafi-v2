@@ -5,9 +5,9 @@ class NephroPatientDialysis(models.Model):
     _inherit = 'nephro.patient'
 
     vascular_access_id = fields.Many2one(
-        'nephro.vascular.access.type', string="Vascular Access",
+        'nephro.vascular.access.type', string="Abord vasculaire",
     )
-    schedule_id = fields.Many2one('nephro.schedule', string="Schedule")
+    schedule_id = fields.Many2one('nephro.schedule', string="Programme")
     def write(self, vals):
         res = super().write(vals)
         if 'dry_weight' in vals and vals['dry_weight']:

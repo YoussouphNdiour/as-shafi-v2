@@ -6,12 +6,12 @@ class NephroPricingRule(models.Model):
     _description = 'Dialysis Pricing Rule'
     _order = 'name'
 
-    name = fields.Char(string="Name", required=True)
-    price = fields.Float(string="Price (excl. tax)", required=True)
-    tax_rate = fields.Float(string="Tax Rate (%)")
-    insurance_coverage = fields.Float(string="Insurance Coverage (%)")
+    name = fields.Char(string="Nom", required=True)
+    price = fields.Float(string="Prix (HT)", required=True)
+    tax_rate = fields.Float(string="Taux TVA (%)")
+    insurance_coverage = fields.Float(string="Couverture assurance (%)")
     patient_share = fields.Float(
-        string="Patient Share (%)",
+        string="Part patient (%)",
         compute='_compute_patient_share', store=True,
     )
     active = fields.Boolean(default=True)

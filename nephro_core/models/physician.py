@@ -10,8 +10,8 @@ class NephroPhysician(models.Model):
     partner_id = fields.Many2one(
         'res.partner', required=True, ondelete='cascade',
     )
-    specialty = fields.Char(string="Specialty")
-    license_number = fields.Char(string="License Number")
-    user_id = fields.Many2one('res.users', string="Related User")
-    department = fields.Char(string="Department")
+    specialty = fields.Char(string="Spécialité")
+    license_number = fields.Char(string="N° Ordre")
+    user_id = fields.Many2one('res.users', string="Utilisateur lié")
+    department = fields.Char(string="Service")
     active = fields.Boolean(default=True)

@@ -7,81 +7,81 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 ARRIVAL_STATES = [
-    ('normal', 'Normal'), ('tired', 'Tired'), ('pain', 'Pain'),
-    ('fever', 'Fever'), ('other', 'Other'),
+    ('normal', 'Normal'), ('tired', 'Fatigué'), ('pain', 'Douleur'),
+    ('fever', 'Fièvre'), ('other', 'Autre'),
 ]
 TOLERANCE_STATES = [
-    ('good', 'Good'), ('fair', 'Fair'), ('poor', 'Poor'),
+    ('good', 'Bonne'), ('fair', 'Moyenne'), ('poor', 'Mauvaise'),
 ]
 ANTICOAG_TYPES = [
-    ('heparin', 'Heparin'), ('lmwh', 'LMWH'), ('none', 'None'),
+    ('heparin', 'Héparine'), ('lmwh', 'HBPM'), ('none', 'Aucune'),
 ]
 
 
 class NephroProcedureDialysis(models.Model):
     _inherit = 'nephro.procedure'
 
-    # --- Pre-dialysis ---
-    pre_weight = fields.Float(string="Pre-dialysis Weight (kg)", digits=(5, 1))
-    pre_bp = fields.Char(string="Pre-dialysis BP")
-    pre_temp = fields.Float(string="Pre-dialysis Temp (°C)", digits=(4, 1))
-    arrival_status = fields.Selection(ARRIVAL_STATES, string="Arrival Status")
+    # --- Pré-dialyse ---
+    pre_weight = fields.Float(string="Poids pré-dialyse (kg)", digits=(5, 1))
+    pre_bp = fields.Char(string="TA pré-dialyse")
+    pre_temp = fields.Float(string="Temp. pré-dialyse (°C)", digits=(4, 1))
+    arrival_status = fields.Selection(ARRIVAL_STATES, string="État à l'arrivée")
     interdialytic_weight_gain = fields.Float(
-        string="Interdialytic Weight Gain (kg)",
+        string="Prise de poids interdialytique (kg)",
         compute='_compute_weight_gain', digits=(5, 1),
     )
     target_uf = fields.Float(
-        string="Target UF (L)",
+        string="UF cible (L)",
         compute='_compute_weight_gain', digits=(5, 1),
     )
 
-    # --- Machine parameters ---
-    schedule_id = fields.Many2one('nephro.schedule', string="Schedule")
-    station_id = fields.Many2one('nephro.station', string="Station", required=True)
+    # --- Paramètres machine ---
+    schedule_id = fields.Many2one('nephro.schedule', string="Programme")
+    station_id = fields.Many2one('nephro.station', string="Poste", required=True)
     vascular_access_id = fields.Many2one(
-        'nephro.vascular.access.type', string="Vascular Access",
+        'nephro.vascular.access.type', string="Abord vasculaire",
     )
-    dialyzer_id = fields.Many2one('nephro.dialyzer.type', string="Dialyzer")
-    dialysate_id = fields.Many2one('nephro.dialysate.type', string="Dialysate")
-    blood_flow = fields.Float(string="Blood Flow (mL/min)")
-    dialysate_flow = fields.Float(string="Dialysate Flow (mL/min)")
+    dialyzer_id = fields.Many2one('nephro.dialyzer.type', string="Dialyseur")
+    dialysate_id = fields.Many2one('nephro.dialysate.type', string="Dialysat")
+    blood_flow = fields.Float(string="Débit sanguin (mL/min)")
+    dialysate_flow = fields.Float(string="Débit dialysat (mL/min)")
     anticoagulation = fields.Selection(ANTICOAG_TYPES, string="Anticoagulation")
-    anticoag_dose = fields.Float(string="Anticoagulant Dose")
-    parameter_change_reason = fields.Text(string="Parameter Change Reason")
+    anticoag_dose = fields.Float(string="Dose anticoagulant")
+    parameter_change_reason = fields.Text(string="Motif changement paramètres")
 
-    # --- Post-dialysis ---
-    post_weight = fields.Float(string="Post-dialysis Weight (kg)", digits=(5, 1))
-    post_bp = fields.Char(string="Post-dialysis BP")
+    # --- Post-dialyse ---
+    post_weight = fields.Float(string="Poids post-dialyse (kg)", digits=(5, 1))
+    post_bp = fields.Char(string="TA post-dialyse")
     actual_uf = fields.Float(
-        string="Actual UF (L)", compute='_compute_actual_uf',
+        string="UF réelle (L)", compute='_compute_actual_uf',
         store=True, digits=(5, 1),
     )
-    global_tolerance = fields.Selection(TOLERANCE_STATES, string="Tolerance")
+    global_tolerance = fields.Selection(TOLERANCE_STATES, string="Tolérance")
     ktv = fields.Float(
         string="Kt/V", compute='_compute_ktv', store=True, digits=(4, 2),
     )
     ktv_status = fields.Selection(
-        [('adequate', 'Adequate'), ('inadequate', 'Inadequate')],
-        string="Kt/V Status", compute='_compute_ktv', store=True,
+        [('adequate', 'Adéquat'), ('inadequate', 'Inadéquat')],
+        string="Statut Kt/V", compute='_compute_ktv', store=True,
     )
     urr = fields.Float(
         string="UF/TBW (%)", compute='_compute_ktv', store=True, digits=(5, 1),
-        help="Ultrafiltration fraction relative to total body water. "
-             "Not a true URR (Urea Reduction Ratio) which requires lab urea values.",
+        help="Fraction d'ultrafiltration par rapport à l'eau corporelle totale. "
+             "Ne correspond pas au vrai URR (taux de réduction de l'urée) qui nécessite des valeurs de laboratoire.",
     )
-    end_notes = fields.Text(string="End Notes")
+    end_notes = fields.Text(string="Notes de fin")
 
-    # --- Vital signs ---
+    # --- Signes vitaux ---
     vital_sign_ids = fields.One2many(
-        'nephro.vital.sign', 'procedure_id', string="Vital Signs",
+        'nephro.vital.sign', 'procedure_id', string="Signes vitaux",
     )
 
-    # --- Machine readings ---
-    pv_arterial = fields.Float(string="Venous Pressure (mmHg)")
-    ptm = fields.Float(string="Transmembrane Pressure")
-    conductivity = fields.Float(string="Conductivity")
-    uf_rate = fields.Float(string="UF Rate (mL/h)")
-    vst_start = fields.Float(string="VST Start")
+    # --- Lectures machine ---
+    pv_arterial = fields.Float(string="Pression veineuse (mmHg)")
+    ptm = fields.Float(string="Pression transmembranaire")
+    conductivity = fields.Float(string="Conductivité")
+    uf_rate = fields.Float(string="Débit UF (mL/h)")
+    vst_start = fields.Float(string="Début VST")
 
     @api.depends('pre_weight', 'patient_id.dry_weight')
     def _compute_weight_gain(self):
@@ -129,7 +129,7 @@ class NephroProcedureDialysis(models.Model):
         self.ensure_one()
         if not self.pre_weight or not self.pre_bp:
             raise UserError(
-                _("Pre-dialysis weight and blood pressure are required to start the session.")
+                _("Le poids et la tension artérielle pré-dialyse sont requis pour démarrer la séance.")
             )
         return super().action_start()
 
@@ -138,6 +138,6 @@ class NephroProcedureDialysis(models.Model):
         self.ensure_one()
         if not self.post_weight:
             raise UserError(
-                _("Post-dialysis weight is required to complete the session.")
+                _("Le poids post-dialyse est requis pour terminer la séance.")
             )
         return super().action_done()

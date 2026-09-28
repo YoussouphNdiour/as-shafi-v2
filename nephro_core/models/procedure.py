@@ -6,10 +6,10 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 PROCEDURE_STATES = [
-    ('scheduled', 'Scheduled'),
-    ('running', 'Running'),
-    ('done', 'Done'),
-    ('cancel', 'Cancelled'),
+    ('scheduled', 'Planifiée'),
+    ('running', 'En cours'),
+    ('done', 'Terminée'),
+    ('cancel', 'Annulée'),
 ]
 
 
@@ -19,49 +19,49 @@ class NephroProcedure(models.Model):
     _order = 'date desc, id desc'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    # --- Identity ---
+    # --- Identité ---
     name = fields.Char(
-        string="Reference", readonly=True, copy=False, default='/',
+        string="Référence", readonly=True, copy=False, default='/',
     )
     patient_id = fields.Many2one(
         'nephro.patient', string="Patient", required=True,
         tracking=True,
     )
     physician_id = fields.Many2one(
-        'nephro.physician', string="Physician", tracking=True,
+        'nephro.physician', string="Médecin", tracking=True,
     )
     product_id = fields.Many2one(
-        'product.product', string="Service",
+        'product.product', string="Prestation",
     )
     date = fields.Datetime(string="Date", required=True, tracking=True)
-    duration = fields.Float(string="Planned Duration (h)")
+    duration = fields.Float(string="Durée prévue (h)")
 
-    # --- Workflow ---
+    # --- Flux ---
     state = fields.Selection(
-        PROCEDURE_STATES, string="Status",
+        PROCEDURE_STATES, string="Statut",
         default='scheduled', tracking=True, copy=False,
     )
-    start_time = fields.Datetime(string="Start Time", readonly=True)
-    end_time = fields.Datetime(string="End Time", readonly=True)
-    cancel_reason = fields.Text(string="Cancellation Reason")
+    start_time = fields.Datetime(string="Heure début", readonly=True)
+    end_time = fields.Datetime(string="Heure fin", readonly=True)
+    cancel_reason = fields.Text(string="Motif d'annulation")
 
-    # --- Computed ---
+    # --- Calculés ---
     actual_duration = fields.Float(
-        string="Actual Duration (h)",
+        string="Durée réelle (h)",
         compute='_compute_actual_duration', store=True,
     )
     is_invoiced = fields.Boolean(
-        string="Invoiced",
+        string="Facturé",
         compute='_compute_is_invoiced', store=True,
     )
 
-    # --- Billing ---
-    invoice_id = fields.Many2one('account.move', string="Invoice", copy=False)
+    # --- Facturation ---
+    invoice_id = fields.Many2one('account.move', string="Facture", copy=False)
 
-    # --- Consumables ---
+    # --- Consommables ---
     consumable_line_ids = fields.One2many(
         'nephro.consumable.line', 'procedure_id',
-        string="Consumables",
+        string="Consommables",
     )
 
     @api.depends('start_time', 'end_time')
@@ -92,7 +92,7 @@ class NephroProcedure(models.Model):
         self.ensure_one()
         if self.state != 'scheduled':
             raise UserError(
-                _("Only scheduled sessions can be started.")
+                _("Seules les séances planifiées peuvent être démarrées.")
             )
         self.write({
             'state': 'running',
@@ -105,7 +105,7 @@ class NephroProcedure(models.Model):
         self.ensure_one()
         if self.state != 'running':
             raise UserError(
-                _("Only running sessions can be completed.")
+                _("Seules les séances en cours peuvent être terminées.")
             )
         vals = {'state': 'done'}
         if not self.end_time:
@@ -118,11 +118,11 @@ class NephroProcedure(models.Model):
         self.ensure_one()
         if self.state == 'done':
             raise UserError(
-                _("Completed sessions cannot be cancelled.")
+                _("Les séances terminées ne peuvent pas être annulées.")
             )
         if not self.cancel_reason:
             raise UserError(
-                _("A cancellation reason is required.")
+                _("Un motif d'annulation est requis.")
             )
         self.write({'state': 'cancel'})
         _logger.info("Procedure %s cancelled", self.name)

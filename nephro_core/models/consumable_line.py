@@ -9,8 +9,8 @@ class NephroConsumableLine(models.Model):
         'nephro.procedure', required=True, ondelete='cascade',
     )
     product_id = fields.Many2one(
-        'product.product', string="Product", required=True,
+        'product.product', string="Produit", required=True,
     )
-    quantity = fields.Float(string="Quantity", default=1.0)
-    uom_id = fields.Many2one('uom.uom', string="Unit of Measure")
-    lot_id = fields.Many2one('stock.lot', string="Lot/Serial")
+    quantity = fields.Float(string="Quantité", default=1.0)
+    uom_id = fields.Many2one('uom.uom', string="Unité de mesure")
+    lot_id = fields.Many2one('stock.lot', string="Lot/N° série")

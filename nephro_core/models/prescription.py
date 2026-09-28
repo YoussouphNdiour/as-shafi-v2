@@ -6,17 +6,17 @@ from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
 
 PRESCRIPTION_STATES = [
-    ('draft', 'Draft'),
-    ('confirmed', 'Confirmed'),
-    ('done', 'Done'),
-    ('cancel', 'Cancelled'),
+    ('draft', 'Brouillon'),
+    ('confirmed', 'Confirmée'),
+    ('done', 'Terminée'),
+    ('cancel', 'Annulée'),
 ]
 
 ROUTES = [
     ('oral', 'Oral'),
-    ('iv', 'Intravenous'),
-    ('sc', 'Subcutaneous'),
-    ('im', 'Intramuscular'),
+    ('iv', 'Intraveineuse'),
+    ('sc', 'Sous-cutanée'),
+    ('im', 'Intramusculaire'),
 ]
 
 
@@ -26,19 +26,19 @@ class NephroPrescription(models.Model):
     _order = 'date desc'
     _inherit = ['mail.thread']
 
-    name = fields.Char(string="Reference", readonly=True, copy=False, default='/')
+    name = fields.Char(string="Référence", readonly=True, copy=False, default='/')
     patient_id = fields.Many2one(
         'nephro.patient', string="Patient", required=True, tracking=True,
     )
     physician_id = fields.Many2one(
-        'nephro.physician', string="Physician", required=True, tracking=True,
+        'nephro.physician', string="Médecin", required=True, tracking=True,
     )
     date = fields.Date(string="Date", default=fields.Date.today)
     state = fields.Selection(
         PRESCRIPTION_STATES, default='draft', tracking=True, copy=False,
     )
     line_ids = fields.One2many(
-        'nephro.prescription.line', 'prescription_id', string="Lines",
+        'nephro.prescription.line', 'prescription_id', string="Lignes",
     )
     notes = fields.Text(string="Notes")
 
@@ -55,10 +55,10 @@ class NephroPrescription(models.Model):
         """Draft -> Confirmed."""
         self.ensure_one()
         if self.state != 'draft':
-            raise UserError(_("Only draft prescriptions can be confirmed."))
+            raise UserError(_("Seules les ordonnances en brouillon peuvent être confirmées."))
         if not self.line_ids:
             raise UserError(
-                _("At least one prescription line is required before confirming.")
+                _("Au moins une ligne d'ordonnance est requise avant la confirmation.")
             )
         self.write({'state': 'confirmed'})
 
@@ -67,7 +67,7 @@ class NephroPrescription(models.Model):
         self.ensure_one()
         if self.state != 'confirmed':
             raise UserError(
-                _("Only confirmed prescriptions can be completed.")
+                _("Seules les ordonnances confirmées peuvent être terminées.")
             )
         self.write({'state': 'done'})
 
@@ -76,7 +76,7 @@ class NephroPrescription(models.Model):
         self.ensure_one()
         if self.state in ('done', 'confirmed'):
             raise UserError(
-                _("Confirmed/completed prescriptions cannot be cancelled.")
+                _("Les ordonnances confirmées/terminées ne peuvent pas être annulées.")
             )
         self.write({'state': 'cancel'})
 
@@ -88,9 +88,9 @@ class NephroPrescriptionLine(models.Model):
     prescription_id = fields.Many2one(
         'nephro.prescription', required=True, ondelete='cascade',
     )
-    product_id = fields.Many2one('product.product', string="Medication")
-    dosage = fields.Char(string="Dosage")
-    frequency = fields.Char(string="Frequency")
-    route = fields.Selection(ROUTES, string="Route")
-    duration_days = fields.Integer(string="Duration (days)")
+    product_id = fields.Many2one('product.product', string="Médicament")
+    dosage = fields.Char(string="Posologie")
+    frequency = fields.Char(string="Fréquence")
+    route = fields.Selection(ROUTES, string="Voie")
+    duration_days = fields.Integer(string="Durée (jours)")
     notes = fields.Text(string="Notes")

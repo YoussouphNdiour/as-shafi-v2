@@ -1,14 +1,14 @@
 from odoo import fields, models
 
 THRESHOLD_PARAMS = [
-    ('hemoglobin', 'Hemoglobin'),
+    ('hemoglobin', 'Hémoglobine'),
     ('potassium', 'Potassium'),
     ('calcium', 'Calcium'),
-    ('phosphorus', 'Phosphorus'),
+    ('phosphorus', 'Phosphore'),
     ('pth', 'PTH'),
-    ('albumin', 'Albumin'),
+    ('albumin', 'Albumine'),
     ('crp', 'CRP'),
-    ('ferritin', 'Ferritin'),
+    ('ferritin', 'Ferritine'),
     ('bicarbonate', 'Bicarbonate'),
     ('sodium', 'Sodium'),
 ]
@@ -20,7 +20,7 @@ class NephroBilanThreshold(models.Model):
     _order = 'parameter'
 
     parameter = fields.Selection(THRESHOLD_PARAMS, required=True)
-    min_value = fields.Float(string="Min Value", digits=(6, 1))
-    max_value = fields.Float(string="Max Value", digits=(6, 1))
-    unit = fields.Char(string="Unit")
+    min_value = fields.Float(string="Valeur min", digits=(6, 1))
+    max_value = fields.Float(string="Valeur max", digits=(6, 1))
+    unit = fields.Char(string="Unité")
     active = fields.Boolean(default=True)

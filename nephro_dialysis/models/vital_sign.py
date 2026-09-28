@@ -10,15 +10,15 @@ class NephroVitalSign(models.Model):
         'nephro.procedure', required=True, ondelete='cascade',
     )
     timestamp = fields.Datetime(default=fields.Datetime.now)
-    systolic_bp = fields.Integer(string="Systolic BP")
-    diastolic_bp = fields.Integer(string="Diastolic BP")
-    heart_rate = fields.Integer(string="Heart Rate")
-    respiratory_rate = fields.Integer(string="Respiratory Rate")
+    systolic_bp = fields.Integer(string="TA systolique")
+    diastolic_bp = fields.Integer(string="TA diastolique")
+    heart_rate = fields.Integer(string="Fréquence cardiaque")
+    respiratory_rate = fields.Integer(string="Fréquence respiratoire")
     spo2 = fields.Float(string="SpO2 (%)", digits=(5, 1))
-    temperature = fields.Float(string="Temperature (°C)", digits=(4, 1))
-    glycemia = fields.Float(string="Glycemia")
+    temperature = fields.Float(string="Température (°C)", digits=(4, 1))
+    glycemia = fields.Float(string="Glycémie")
     is_alert = fields.Boolean(
-        string="Alert", compute='_compute_is_alert', store=True,
+        string="Alerte", compute='_compute_is_alert', store=True,
     )
     notes = fields.Text(string="Notes")
 

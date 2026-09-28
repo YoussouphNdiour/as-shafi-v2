@@ -32,7 +32,7 @@ class NephroProcedureBilling(models.Model):
 
         invoice_lines = [(0, 0, {
             'product_id': self.product_id.id if self.product_id else False,
-            'name': _("Hemodialysis Session %s") % self.name,
+            'name': _("Séance d'hémodialyse %s") % self.name,
             'quantity': 1,
             'price_unit': rule.price,
         })]

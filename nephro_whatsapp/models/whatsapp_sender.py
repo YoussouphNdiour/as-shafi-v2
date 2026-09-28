@@ -63,8 +63,8 @@ class NephroProcedureWhatsApp(models.Model):
             if not phone:
                 continue
             msg = _(
-                "Reminder: your dialysis session is scheduled for tomorrow "
-                "%(date)s, station %(station)s.",
+                "Rappel : votre séance de dialyse est prévue demain "
+                "%(date)s, poste %(station)s.",
                 date=proc.date.strftime('%d/%m/%Y %H:%M') if proc.date else '',
                 station=proc.station_id.name or '',
             )
@@ -85,7 +85,7 @@ class NephroProcedureWhatsApp(models.Model):
             if not phone:
                 continue
             msg = _(
-                "Your dialysis session is today at %(time)s, station %(station)s.",
+                "Votre séance de dialyse est aujourd'hui à %(time)s, poste %(station)s.",
                 time=proc.date.strftime('%H:%M') if proc.date else '',
                 station=proc.station_id.name or '',
             )

@@ -12,12 +12,12 @@ class NephroSessionGenerator(models.TransientModel):
     _description = 'Session Generator Wizard'
 
     patient_ids = fields.Many2many('nephro.patient', string="Patients")
-    schedule_id = fields.Many2one('nephro.schedule', string="Schedule", required=True)
-    date_start = fields.Date(string="Start Date", required=True)
-    date_end = fields.Date(string="End Date", required=True)
-    exclude_holidays = fields.Boolean(string="Exclude Holidays", default=True)
+    schedule_id = fields.Many2one('nephro.schedule', string="Programme", required=True)
+    date_start = fields.Date(string="Date début", required=True)
+    date_end = fields.Date(string="Date fin", required=True)
+    exclude_holidays = fields.Boolean(string="Exclure jours fériés", default=True)
     preview_count = fields.Integer(
-        string="Sessions to Create", compute='_compute_preview',
+        string="Séances à créer", compute='_compute_preview',
     )
 
     @api.depends('patient_ids', 'schedule_id', 'date_start', 'date_end', 'exclude_holidays')
@@ -54,7 +54,7 @@ class NephroSessionGenerator(models.TransientModel):
         self.ensure_one()
         if not self.schedule_id.station_id:
             raise UserError(
-                _("The schedule '%s' has no default station. Please set a station before generating sessions.",
+                _("Le programme '%s' n'a pas de poste par défaut. Veuillez définir un poste avant de générer les séances.",
                   self.schedule_id.display_name)
             )
         dates = self._get_session_dates()
@@ -86,7 +86,7 @@ class NephroSessionGenerator(models.TransientModel):
 
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Generated Sessions',
+            'name': 'Séances générées',
             'res_model': 'nephro.procedure',
             'view_mode': 'list,form',
             'domain': [('id', 'in', created.ids)],

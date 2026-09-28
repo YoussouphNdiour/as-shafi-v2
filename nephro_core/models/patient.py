@@ -30,27 +30,27 @@ class NephroPatient(models.Model):
 
     # --- Identity ---
     hms_id = fields.Char(
-        string="HMS ID", readonly=True, copy=False,
+        string="N° Dossier", readonly=True, copy=False,
     )
-    birth_date = fields.Date(string="Date of Birth")
+    birth_date = fields.Date(string="Date de naissance")
     gender = fields.Selection(
-        [('male', 'Male'), ('female', 'Female')],
-        string="Gender", required=True,
+        [('male', 'Homme'), ('female', 'Femme')],
+        string="Sexe", required=True,
     )
-    blood_group = fields.Selection(BLOOD_GROUPS, string="Blood Group")
-    emergency_contact = fields.Char(string="Emergency Contact")
+    blood_group = fields.Selection(BLOOD_GROUPS, string="Groupe sanguin")
+    emergency_contact = fields.Char(string="Contact d'urgence")
 
-    # --- Nephrology ---
-    is_nephro = fields.Boolean(string="Nephrology Care", default=False)
+    # --- Néphrologie ---
+    is_nephro = fields.Boolean(string="Prise en charge néphro", default=False)
     dialysis_type = fields.Selection(
-        [('hemodialysis', 'Hemodialysis'), ('peritoneal', 'Peritoneal')],
-        string="Dialysis Type",
+        [('hemodialysis', 'Hémodialyse'), ('peritoneal', 'Péritonéale')],
+        string="Type de dialyse",
     )
-    dry_weight = fields.Float(string="Dry Weight (kg)", digits=(5, 1))
-    dialysis_start_date = fields.Date(string="Dialysis Start Date")
+    dry_weight = fields.Float(string="Poids sec (kg)", digits=(5, 1))
+    dialysis_start_date = fields.Date(string="Date début dialyse")
 
-    # --- Medical ---
-    medical_history = fields.Html(string="Medical History")
+    # --- Médical ---
+    medical_history = fields.Html(string="Antécédents médicaux")
     active = fields.Boolean(default=True)
 
     # --- Antécédants ---
@@ -116,13 +116,13 @@ class NephroPatient(models.Model):
 
     # --- Relations ---
     physician_id = fields.Many2one(
-        'nephro.physician', string="Attending Physician",
+        'nephro.physician', string="Médecin traitant",
     )
 
-    # --- Computed ---
-    age = fields.Integer(string="Age", compute='_compute_age')
+    # --- Calculés ---
+    age = fields.Integer(string="Âge", compute='_compute_age')
     procedure_count = fields.Integer(
-        string="Sessions", compute='_compute_procedure_count',
+        string="Séances", compute='_compute_procedure_count',
     )
 
     @api.constrains('is_nephro', 'birth_date')
@@ -130,7 +130,7 @@ class NephroPatient(models.Model):
         for rec in self:
             if rec.is_nephro and not rec.birth_date:
                 raise UserError(
-                    _("Date of birth is required for nephrology patients.")
+                    _("La date de naissance est obligatoire pour les patients en néphrologie.")
                 )
 
     @api.depends('birth_date')

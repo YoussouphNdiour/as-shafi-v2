@@ -9,13 +9,13 @@ class NephroBatchInvoiceWizard(models.TransientModel):
     _description = 'Batch Invoice Wizard'
 
     patient_ids = fields.Many2many('nephro.patient', string="Patients")
-    date_from = fields.Date(string="From", required=True)
-    date_to = fields.Date(string="To", required=True)
+    date_from = fields.Date(string="Du", required=True)
+    date_to = fields.Date(string="Au", required=True)
     preview_count = fields.Integer(
-        string="Sessions to Invoice", compute='_compute_preview',
+        string="Séances à facturer", compute='_compute_preview',
     )
     total_amount = fields.Float(
-        string="Total Amount", compute='_compute_preview',
+        string="Montant total", compute='_compute_preview',
     )
 
     @api.depends('patient_ids', 'date_from', 'date_to')
@@ -47,7 +47,7 @@ class NephroBatchInvoiceWizard(models.TransientModel):
             proc._create_invoice()
         return {
             'type': 'ir.actions.act_window',
-            'name': _("Created Invoices"),
+            'name': _("Factures créées"),
             'res_model': 'account.move',
             'view_mode': 'list,form',
             'domain': [('id', 'in', procedures.mapped('invoice_id').ids)],

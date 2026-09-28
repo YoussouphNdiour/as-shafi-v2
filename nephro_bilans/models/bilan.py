@@ -6,17 +6,17 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 BILAN_TYPES = [
-    ('monthly', 'Monthly'),
-    ('quarterly', 'Quarterly'),
-    ('semi_annual', 'Semi-Annual'),
-    ('annual', 'Annual'),
-    ('punctual', 'Punctual'),
+    ('monthly', 'Mensuel'),
+    ('quarterly', 'Trimestriel'),
+    ('semi_annual', 'Semestriel'),
+    ('annual', 'Annuel'),
+    ('punctual', 'Ponctuel'),
 ]
 
 SEROLOGY_STATES = [
-    ('pos', 'Positive'),
-    ('neg', 'Negative'),
-    ('pending', 'Pending'),
+    ('pos', 'Positif'),
+    ('neg', 'Négatif'),
+    ('pending', 'En attente'),
 ]
 
 
@@ -26,48 +26,48 @@ class NephroBilan(models.Model):
     _order = 'date desc'
     _inherit = ['mail.thread']
 
-    # --- Identity ---
-    name = fields.Char(string="Reference", readonly=True, copy=False, default='/')
+    # --- Identité ---
+    name = fields.Char(string="Référence", readonly=True, copy=False, default='/')
     patient_id = fields.Many2one('nephro.patient', required=True, tracking=True)
     physician_id = fields.Many2one('nephro.physician', tracking=True)
     date = fields.Date(string="Date", required=True, default=fields.Date.today)
     bilan_type = fields.Selection(BILAN_TYPES, string="Type", required=True, default='monthly')
-    attachment_ids = fields.Many2many('ir.attachment', string="Lab Reports")
+    attachment_ids = fields.Many2many('ir.attachment', string="Résultats labo")
 
-    # --- Hematology ---
-    hemoglobin = fields.Float(string="Hemoglobin (g/dL)", digits=(5, 1))
-    hematocrit = fields.Float(string="Hematocrit (%)", digits=(5, 1))
-    wbc = fields.Float(string="WBC (G/L)", digits=(5, 1))
-    platelets = fields.Float(string="Platelets (G/L)", digits=(6, 0))
-    ferritin = fields.Float(string="Ferritin (µg/L)", digits=(6, 0))
+    # --- Hématologie ---
+    hemoglobin = fields.Float(string="Hémoglobine (g/dL)", digits=(5, 1))
+    hematocrit = fields.Float(string="Hématocrite (%)", digits=(5, 1))
+    wbc = fields.Float(string="GB (G/L)", digits=(5, 1))
+    platelets = fields.Float(string="Plaquettes (G/L)", digits=(6, 0))
+    ferritin = fields.Float(string="Ferritine (µg/L)", digits=(6, 0))
 
-    # --- Renal biochemistry ---
-    creatinine = fields.Float(string="Creatinine (µmol/L)", digits=(6, 0))
-    urea_pre = fields.Float(string="Urea Pre (mmol/L)", digits=(5, 1))
-    urea_post = fields.Float(string="Urea Post (mmol/L)", digits=(5, 1))
-    uric_acid = fields.Float(string="Uric Acid (µmol/L)", digits=(6, 0))
+    # --- Biochimie rénale ---
+    creatinine = fields.Float(string="Créatinine (µmol/L)", digits=(6, 0))
+    urea_pre = fields.Float(string="Urée pré (mmol/L)", digits=(5, 1))
+    urea_post = fields.Float(string="Urée post (mmol/L)", digits=(5, 1))
+    uric_acid = fields.Float(string="Acide urique (µmol/L)", digits=(6, 0))
 
-    # --- Electrolytes ---
+    # --- Électrolytes ---
     sodium = fields.Float(string="Sodium (mmol/L)", digits=(5, 1))
     potassium = fields.Float(string="Potassium (mmol/L)", digits=(4, 1))
     calcium = fields.Float(string="Calcium (mmol/L)", digits=(4, 2))
-    phosphorus = fields.Float(string="Phosphorus (mmol/L)", digits=(4, 2))
+    phosphorus = fields.Float(string="Phosphore (mmol/L)", digits=(4, 2))
     bicarbonate = fields.Float(string="Bicarbonate (mmol/L)", digits=(5, 1))
-    chloride = fields.Float(string="Chloride (mmol/L)", digits=(5, 1))
+    chloride = fields.Float(string="Chlore (mmol/L)", digits=(5, 1))
     ca_p_ratio = fields.Float(
-        string="Ca×P Ratio", compute='_compute_ca_p', store=True, digits=(5, 1),
+        string="Produit Ca×P", compute='_compute_ca_p', store=True, digits=(5, 1),
     )
 
-    # --- Mineral-bone ---
+    # --- Os-minéral ---
     pth = fields.Float(string="PTH (pg/mL)", digits=(6, 0))
-    vitamin_d = fields.Float(string="Vitamin D (ng/mL)", digits=(5, 1))
-    alkaline_phosphatase = fields.Float(string="Alkaline Phosphatase (UI/L)", digits=(6, 0))
+    vitamin_d = fields.Float(string="Vitamine D (ng/mL)", digits=(5, 1))
+    alkaline_phosphatase = fields.Float(string="Phosphatase alcaline (UI/L)", digits=(6, 0))
 
     # --- Nutrition / Inflammation ---
-    albumin = fields.Float(string="Albumin (g/L)", digits=(5, 1))
-    total_protein = fields.Float(string="Total Protein (g/L)", digits=(5, 1))
+    albumin = fields.Float(string="Albumine (g/L)", digits=(5, 1))
+    total_protein = fields.Float(string="Protéines totales (g/L)", digits=(5, 1))
     crp = fields.Float(string="CRP (mg/L)", digits=(5, 1))
-    prealbumin = fields.Float(string="Prealbumin (mg/L)", digits=(5, 1))
+    prealbumin = fields.Float(string="Préalbumine (mg/L)", digits=(5, 1))
 
     # --- Serology ---
     hbs_ag = fields.Selection(SEROLOGY_STATES, string="HBs Ag")
@@ -76,13 +76,13 @@ class NephroBilan(models.Model):
     anti_hcv = fields.Selection(SEROLOGY_STATES, string="Anti-HCV")
     anti_hiv = fields.Selection(SEROLOGY_STATES, string="Anti-HIV")
 
-    # --- Computed ---
+    # --- Calculés ---
     alert_count = fields.Integer(
-        string="Alerts", compute='_compute_alerts', store=True,
+        string="Alertes", compute='_compute_alerts', store=True,
     )
     status = fields.Selection(
-        [('normal', 'Normal'), ('warning', 'Warning'), ('critical', 'Critical')],
-        string="Status", compute='_compute_alerts', store=True,
+        [('normal', 'Normal'), ('warning', 'Attention'), ('critical', 'Critique')],
+        string="Statut", compute='_compute_alerts', store=True,
     )
 
     @api.depends('calcium', 'phosphorus')
@@ -146,7 +146,7 @@ class NephroBilan(models.Model):
                     patient.activity_schedule(
                         'mail.mail_activity_data_todo',
                         user_id=patient.physician_id.user_id.id,
-                        summary="Overdue bilan for %s" % patient.name,
+                        summary="Bilan en retard pour %s" % patient.name,
                     )
                     _logger.info(
                         "Scheduled overdue bilan activity for patient %s",

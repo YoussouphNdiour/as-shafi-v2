@@ -5,10 +5,10 @@ class NephroPatientBilling(models.Model):
     _inherit = 'nephro.patient'
 
     pricing_rule_id = fields.Many2one(
-        'nephro.pricing.rule', string="Pricing Rule",
+        'nephro.pricing.rule', string="Règle tarifaire",
     )
     balance_due = fields.Float(
-        string="Balance Due", compute='_compute_balance_due',
+        string="Solde dû", compute='_compute_balance_due',
     )
 
     def _compute_balance_due(self):
