@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Portal: own patient bilans only -->
+        <record id="rule_portal_bilan" model="ir.rule">
+            <field name="name">Portal: own bilans only</field>
+            <field name="model_id" ref="model_nephro_bilan"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('patient_id.partner_id', '=', user.partner_id.id)]</field>
+        </record>
+    </data>
+</odoo>

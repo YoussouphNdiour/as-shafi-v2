@@ -186,10 +186,13 @@ class NephroPortal(CustomerPortal):
         appointment = request.env['nephro.appointment'].browse(appointment_id)
         if not appointment.exists():
             return request.not_found()
+        partner = request.env.user.partner_id
+        if appointment.patient_id.partner_id != partner:
+            return request.not_found()
         reason = (kwargs.get('cancel_reason', '') or '')[:2000]
         if appointment.state in ('draft', 'confirmed'):
-            appointment.write({'cancel_reason': reason})
-            appointment.action_cancel()
+            appointment.sudo().write({'cancel_reason': reason})
+            appointment.sudo().action_cancel()
         return request.redirect('/my/rdv')
 
     @http.route('/my/ordonnances', type='http', auth='user', website=True)

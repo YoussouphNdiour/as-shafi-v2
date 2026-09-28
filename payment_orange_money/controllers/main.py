@@ -14,16 +14,23 @@ class PaymentOrangeMoneyController(http.Controller):
         provider = request.env['payment.provider'].sudo().search([
             ('code', '=', 'orange_money'),
         ], limit=1)
-        return provider.orange_money_secret_key or ''
+        secret = provider.orange_money_secret_key or ''
+        if not secret:
+            _logger.error("Orange Money secret key is not configured")
+        return secret
 
     def _generate_signature(self, reference):
         secret = self._get_secret()
+        if not secret:
+            return None
         return hmac.new(
             secret.encode(), reference.encode(), hashlib.sha256,
         ).hexdigest()
 
     def _verify_signature(self, reference, signature):
         expected = self._generate_signature(reference)
+        if not expected:
+            return False
         return hmac.compare_digest(expected, signature)
 
     @http.route('/payment/orange/return', auth='public', methods=['GET'],

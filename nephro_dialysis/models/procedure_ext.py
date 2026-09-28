@@ -65,7 +65,9 @@ class NephroProcedureDialysis(models.Model):
         string="Kt/V Status", compute='_compute_ktv', store=True,
     )
     urr = fields.Float(
-        string="URR (%)", compute='_compute_ktv', store=True, digits=(5, 1),
+        string="UF/TBW (%)", compute='_compute_ktv', store=True, digits=(5, 1),
+        help="Ultrafiltration fraction relative to total body water. "
+             "Not a true URR (Urea Reduction Ratio) which requires lab urea values.",
     )
     end_notes = fields.Text(string="End Notes")
 
@@ -106,7 +108,7 @@ class NephroProcedureDialysis(models.Model):
         TBW = post_weight × 0.58 (Watson formula approximation).
         Guards against ZeroDivisionError and math domain error (ratio >= 1.0)."""
         for rec in self:
-            if rec.post_weight and rec.post_weight > 0 and rec.actual_uf:
+            if rec.post_weight and rec.post_weight > 0 and rec.actual_uf and rec.actual_uf > 0:
                 tbw = rec.post_weight * 0.58
                 if tbw > 0:
                     ratio = rec.actual_uf / tbw

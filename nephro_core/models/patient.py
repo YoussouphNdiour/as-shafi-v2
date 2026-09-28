@@ -143,10 +143,14 @@ class NephroPatient(models.Model):
                 rec.age = 0
 
     def _compute_procedure_count(self):
+        data = self.env['nephro.procedure']._read_group(
+            [('patient_id', 'in', self.ids)],
+            ['patient_id'],
+            ['__count'],
+        )
+        counts = {patient.id: count for patient, count in data}
         for rec in self:
-            rec.procedure_count = self.env['nephro.procedure'].search_count([
-                ('patient_id', '=', rec.id),
-            ])
+            rec.procedure_count = counts.get(rec.id, 0)
 
     @api.model_create_multi
     def create(self, vals_list):

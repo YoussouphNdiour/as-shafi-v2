@@ -1,7 +1,8 @@
 import logging
 from datetime import timedelta
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -51,6 +52,11 @@ class NephroSessionGenerator(models.TransientModel):
     def action_generate(self):
         """Create procedures for each patient on each schedule date."""
         self.ensure_one()
+        if not self.schedule_id.station_id:
+            raise UserError(
+                _("The schedule '%s' has no default station. Please set a station before generating sessions.",
+                  self.schedule_id.display_name)
+            )
         dates = self._get_session_dates()
         Procedure = self.env['nephro.procedure']
         start_time = self.schedule_id.start_time

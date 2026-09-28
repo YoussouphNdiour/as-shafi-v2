@@ -8,6 +8,7 @@
     'depends': ['nephro_dialysis'],
     'data': [
         'security/ir.model.access.csv',
+        'security/security_rules.xml',
         'data/sequence_data.xml',
         'data/threshold_data.xml',
         'data/cron_data.xml',
