@@ -31,3 +31,23 @@ class PaymentProviderOrangeMoney(models.Model):
         string='Code marchand',
         groups='base.group_system',
     )
+    orange_money_merchant_msisdn = fields.Char(
+        string='MSISDN marchand',
+        groups='base.group_system',
+    )
+    orange_money_pin_code = fields.Char(
+        string='Code PIN',
+        groups='base.group_system',
+    )
+    orange_money_public_key = fields.Text(
+        string='Clé publique',
+        groups='base.group_system',
+    )
+    orange_money_access_token = fields.Char(
+        string='Token accès',
+        groups='base.group_system',
+    )
+    orange_money_token_expiry = fields.Datetime(
+        string='Expiration token',
+        groups='base.group_system',
+    )

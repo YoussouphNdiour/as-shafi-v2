@@ -23,3 +23,9 @@ class PaymentProviderWave(models.Model):
         groups='base.group_system',
         help='Utilisé pour signer et vérifier les signatures HMAC-SHA256 des webhooks.',
     )
+    wave_webhook_strategy = fields.Selection(
+        [('hmac', 'HMAC-SHA256'), ('basic', 'Basic Auth')],
+        string='Stratégie Webhook',
+        default='hmac',
+        groups='base.group_system',
+    )
