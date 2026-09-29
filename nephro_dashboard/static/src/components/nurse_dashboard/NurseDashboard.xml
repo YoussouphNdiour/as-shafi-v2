@@ -5,19 +5,19 @@
             <t t-if="state.loading">
                 <div class="d-flex justify-content-center align-items-center" style="min-height:200px">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading…</span>
+                        <span class="visually-hidden">Chargement…</span>
                     </div>
                 </div>
             </t>
             <t t-else="">
                 <div class="d-flex align-items-center mb-4">
-                    <h2 class="mb-0 me-auto">Nurse Interface</h2>
-                    <small class="text-muted">Auto-refresh every 30 s</small>
+                    <h2 class="mb-0 me-auto">Interface infirmier</h2>
+                    <small class="text-muted">Actualisation auto toutes les 30 s</small>
                 </div>
 
                 <t t-if="!state.patients.length">
                     <div class="alert alert-info text-center">
-                        No sessions assigned for today.
+                        Aucune séance assignée aujourd'hui.
                     </div>
                 </t>
 
@@ -27,7 +27,7 @@
                             <div t-attf-class="card h-100 border-#{this.getStatusClass(p.state)}">
                                 <!-- Card header: station + status badge -->
                                 <div t-attf-class="card-header d-flex justify-content-between align-items-center bg-#{this.getStatusClass(p.state)} bg-opacity-10">
-                                    <strong t-esc="p.station || 'No station'"/>
+                                    <strong t-esc="p.station || 'Sans poste'"/>
                                     <span t-attf-class="badge text-bg-#{this.getStatusClass(p.state)}"
                                           t-esc="p.state"/>
                                 </div>
@@ -40,7 +40,7 @@
                                     <t t-if="p.state === 'running'">
                                         <div class="mb-2">
                                             <div class="d-flex justify-content-between">
-                                                <small class="text-muted">Elapsed</small>
+                                                <small class="text-muted">Écoulé</small>
                                                 <small><t t-esc="this.formatElapsed(p.elapsed_minutes)"/>
                                                     / <t t-esc="this.formatElapsed(p.duration_planned)"/>
                                                 </small>
@@ -72,7 +72,7 @@
                                         <button class="btn btn-success flex-fill"
                                                 style="min-height:48px;font-size:1rem"
                                                 t-on-click="() => this.onStartSession(p.procedure_id)">
-                                            Start
+                                            Démarrer
                                         </button>
                                         <button class="btn btn-outline-danger flex-fill"
                                                 style="min-height:48px;font-size:1rem"
@@ -86,12 +86,12 @@
                                         <button class="btn btn-primary flex-fill"
                                                 style="min-height:48px;font-size:1rem"
                                                 t-on-click="() => this.onCompleteSession(p.procedure_id)">
-                                            Complete
+                                            Terminer
                                         </button>
                                         <button class="btn btn-outline-secondary flex-fill"
                                                 style="min-height:48px;font-size:1rem"
                                                 t-on-click="() => this.onOpenSession(p.procedure_id)">
-                                            Details
+                                            Détails
                                         </button>
                                     </t>
 
@@ -100,7 +100,7 @@
                                         <button class="btn btn-outline-secondary w-100"
                                                 style="min-height:48px;font-size:1rem"
                                                 t-on-click="() => this.onOpenSession(p.procedure_id)">
-                                            View Session
+                                            Voir la séance
                                         </button>
                                     </t>
                                 </div>

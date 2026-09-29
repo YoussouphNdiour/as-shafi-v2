@@ -5,14 +5,14 @@
             <t t-if="state.loading">
                 <div class="d-flex justify-content-center align-items-center" style="min-height:200px">
                     <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Loading…</span>
+                        <span class="visually-hidden">Chargement…</span>
                     </div>
                 </div>
             </t>
             <t t-else="">
                 <div class="d-flex align-items-center mb-4">
-                    <h2 class="mb-0 me-auto">Doctor Dashboard</h2>
-                    <small class="text-muted">Auto-refresh every 30 s</small>
+                    <h2 class="mb-0 me-auto">Tableau de bord médecin</h2>
+                    <small class="text-muted">Actualisation auto toutes les 30 s</small>
                 </div>
 
                 <!-- KPI cards -->
@@ -20,25 +20,25 @@
                     <div class="col-6 col-md-3">
                         <div class="card border-primary h-100 text-center p-3">
                             <h1 class="mb-1 text-primary" t-esc="state.kpis.total_today"/>
-                            <small class="text-muted">Sessions Today</small>
+                            <small class="text-muted">Séances du jour</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="card border-success h-100 text-center p-3">
                             <h1 class="mb-1 text-success" t-esc="state.kpis.done_today"/>
-                            <small class="text-muted">Completed</small>
+                            <small class="text-muted">Terminées</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="card border-warning h-100 text-center p-3">
                             <h1 class="mb-1 text-warning" t-esc="state.kpis.running"/>
-                            <small class="text-muted">In Progress</small>
+                            <small class="text-muted">En cours</small>
                         </div>
                     </div>
                     <div class="col-6 col-md-3">
                         <div class="card border-danger h-100 text-center p-3">
                             <h1 class="mb-1 text-danger" t-esc="state.kpis.alerts"/>
-                            <small class="text-muted">Alerts</small>
+                            <small class="text-muted">Alertes</small>
                         </div>
                     </div>
                 </div>
@@ -48,15 +48,15 @@
                     <div class="col-12 col-lg-8">
                         <div class="card h-100">
                             <div class="card-header">
-                                <strong>Stations</strong>
+                                <strong>Postes</strong>
                             </div>
                             <div class="table-responsive">
                                 <table class="table table-hover mb-0">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Station</th>
+                                            <th>Poste</th>
                                             <th>Patient</th>
-                                            <th>Status</th>
+                                            <th>Statut</th>
                                             <th>Kt/V</th>
                                         </tr>
                                     </thead>
@@ -82,7 +82,7 @@
                                             </tr>
                                         </t>
                                         <tr t-if="!state.stations.length">
-                                            <td colspan="4" class="text-muted text-center">No stations configured</td>
+                                            <td colspan="4" class="text-muted text-center">Aucun poste configuré</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -94,7 +94,7 @@
                     <div class="col-12 col-lg-4">
                         <div class="card border-danger h-100">
                             <div class="card-header bg-danger text-white">
-                                <strong>Alerts (<t t-esc="state.alerts.length"/>)</strong>
+                                <strong>Alertes (<t t-esc="state.alerts.length"/>)</strong>
                             </div>
                             <div class="list-group list-group-flush" style="max-height:400px;overflow-y:auto">
                                 <t t-foreach="state.alerts" t-as="alert" t-key="alert_index">
@@ -114,7 +114,7 @@
                                 </t>
                                 <div t-if="!state.alerts.length"
                                      class="list-group-item text-muted text-center py-4">
-                                    No active alerts
+                                    Aucune alerte active
                                 </div>
                             </div>
                         </div>

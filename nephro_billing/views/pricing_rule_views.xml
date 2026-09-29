@@ -5,7 +5,7 @@
         <field name="name">nephro.pricing.rule.list</field>
         <field name="model">nephro.pricing.rule</field>
         <field name="arch" type="xml">
-            <list string="Pricing Rules">
+            <list string="Règles tarifaires">
                 <field name="name"/>
                 <field name="price"/>
                 <field name="tax_rate"/>
@@ -21,20 +21,20 @@
         <field name="name">nephro.pricing.rule.form</field>
         <field name="model">nephro.pricing.rule</field>
         <field name="arch" type="xml">
-            <form string="Pricing Rule">
+            <form string="Règle tarifaire">
                 <sheet>
                     <div class="oe_title">
                         <label for="name"/>
                         <h1>
-                            <field name="name" placeholder="Rule Name"/>
+                            <field name="name" placeholder="Nom de la règle"/>
                         </h1>
                     </div>
                     <group>
-                        <group string="Pricing">
+                        <group string="Tarification">
                             <field name="price"/>
                             <field name="tax_rate"/>
                         </group>
-                        <group string="Insurance">
+                        <group string="Assurance">
                             <field name="insurance_coverage"/>
                             <field name="patient_share"/>
                         </group>
@@ -49,7 +49,7 @@
 
     <!-- Pricing Rule Action -->
     <record id="nephro_pricing_rule_action" model="ir.actions.act_window">
-        <field name="name">Pricing Rules</field>
+        <field name="name">Règles tarifaires</field>
         <field name="res_model">nephro.pricing.rule</field>
         <field name="view_mode">list,form</field>
     </record>

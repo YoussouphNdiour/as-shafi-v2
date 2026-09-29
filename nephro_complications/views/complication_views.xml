@@ -8,7 +8,7 @@
             <form>
                 <sheet>
                     <group>
-                        <group string="Session">
+                        <group string="Séance">
                             <field name="procedure_id"/>
                             <field name="patient_id" readonly="1"/>
                             <field name="occurrence_time"/>
@@ -22,7 +22,7 @@
                         </group>
                     </group>
                     <group>
-                        <group string="Clinical Response">
+                        <group string="Réponse clinique">
                             <field name="action_taken"/>
                         </group>
                         <group string="Notes">
@@ -62,8 +62,8 @@
                 <field name="patient_id"/>
                 <field name="procedure_id"/>
                 <field name="complication_type"/>
-                <filter name="resolved" string="Resolved" domain="[('resolution', '=', 'resolved')]"/>
-                <filter name="unresolved" string="Unresolved" domain="[('resolution', '=', 'unresolved')]"/>
+                <filter name="resolved" string="Résolu" domain="[('resolution', '=', 'resolved')]"/>
+                <filter name="unresolved" string="Non résolu" domain="[('resolution', '=', 'unresolved')]"/>
                 <group>
                     <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
                     <filter name="group_type" string="Type" context="{'group_by': 'complication_type'}"/>
@@ -79,9 +79,9 @@
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No complications recorded yet.
+                Aucune complication enregistrée.
             </p>
-            <p>Complications are logged per session from the hemodialysis form.</p>
+            <p>Les complications sont enregistrées par séance depuis le formulaire d'hémodialyse.</p>
         </field>
     </record>
 

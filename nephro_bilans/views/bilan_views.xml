@@ -17,7 +17,7 @@
                             <field name="date"/>
                             <field name="bilan_type"/>
                         </group>
-                        <group string="Status">
+                        <group string="Statut">
                             <field name="status" widget="badge"
                                 decoration-success="status == 'normal'"
                                 decoration-warning="status == 'warning'"
@@ -27,7 +27,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Hematology">
+                        <page string="Hématologie">
                             <group>
                                 <group>
                                     <field name="hemoglobin"/>
@@ -40,7 +40,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Biochemistry">
+                        <page string="Biochimie">
                             <group>
                                 <group>
                                     <field name="creatinine"/>
@@ -52,7 +52,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Electrolytes">
+                        <page string="Électrolytes">
                             <group>
                                 <group>
                                     <field name="sodium"/>
@@ -67,7 +67,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Mineral-Bone">
+                        <page string="Os-Minéral">
                             <group>
                                 <group>
                                     <field name="pth"/>
@@ -90,7 +90,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Serology">
+                        <page string="Sérologie">
                             <group>
                                 <group>
                                     <field name="hbs_ag"/>
@@ -143,8 +143,8 @@
                 <field name="patient_id"/>
                 <field name="physician_id"/>
                 <filter name="normal" string="Normal" domain="[('status', '=', 'normal')]"/>
-                <filter name="warning" string="Warning" domain="[('status', '=', 'warning')]"/>
-                <filter name="critical" string="Critical" domain="[('status', '=', 'critical')]"/>
+                <filter name="warning" string="Attention" domain="[('status', '=', 'warning')]"/>
+                <filter name="critical" string="Critique" domain="[('status', '=', 'critical')]"/>
                 <group>
                     <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
                     <filter name="group_type" string="Type" context="{'group_by': 'bilan_type'}"/>
@@ -155,14 +155,14 @@
 
     <!-- Action -->
     <record id="nephro_bilan_action" model="ir.actions.act_window">
-        <field name="name">Biological Results</field>
+        <field name="name">Résultats biologiques</field>
         <field name="res_model">nephro.bilan</field>
         <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No biological results yet.
+                Aucun résultat biologique pour le moment.
             </p>
-            <p>Create the first bilan for a patient.</p>
+            <p>Créez le premier bilan pour un patient.</p>
         </field>
     </record>
 

@@ -2,7 +2,7 @@
 <odoo>
     <!-- Root menu -->
     <menuitem id="menu_nephrology_root"
-        name="Nephrology"
+        name="Néphrologie"
         web_icon="nephro_core,static/description/icon.png"
         groups="nephro_core.group_nephro_user"
         sequence="50"/>
@@ -16,14 +16,14 @@
         groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
 
     <menuitem id="nephro_core_menu_appointments"
-        name="Appointments"
+        name="Rendez-vous"
         parent="menu_nephrology_root"
         action="nephro_core_appointment_action"
         sequence="20"
         groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
 
     <menuitem id="nephro_core_menu_procedures"
-        name="Hemodialysis"
+        name="Hémodialyse"
         parent="menu_nephrology_root"
         action="nephro_core_procedure_action"
         sequence="30"
@@ -44,7 +44,7 @@
         groups="nephro_core.group_nephro_manager"/>
 
     <menuitem id="nephro_core_menu_physicians"
-        name="Physicians"
+        name="Médecins"
         parent="nephro_core_menu_config"
         action="nephro_core_physician_action"
         sequence="10"/>

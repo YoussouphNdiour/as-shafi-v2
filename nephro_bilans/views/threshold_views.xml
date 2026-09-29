@@ -36,7 +36,7 @@
 
     <!-- Action -->
     <record id="nephro_threshold_action" model="ir.actions.act_window">
-        <field name="name">Bilan Thresholds</field>
+        <field name="name">Seuils des bilans</field>
         <field name="res_model">nephro.bilan.threshold</field>
         <field name="view_mode">list,form</field>
     </record>

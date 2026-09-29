@@ -6,11 +6,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_confirm" string="Confirm" type="object"
+                    <button name="action_confirm" string="Confirmer" type="object"
                         class="btn-primary" invisible="state != 'draft'"/>
-                    <button name="action_done" string="Done" type="object"
+                    <button name="action_done" string="Terminé" type="object"
                         class="btn-primary" invisible="state != 'confirmed'"/>
-                    <button name="action_cancel" string="Cancel" type="object"
+                    <button name="action_cancel" string="Annuler" type="object"
                         class="btn-secondary" invisible="state in ('done', 'cancel')"/>
                     <field name="state" widget="statusbar"
                         statusbar_visible="draft,confirmed,done"/>
@@ -56,7 +56,7 @@
     </record>
 
     <record id="nephro_core_appointment_action" model="ir.actions.act_window">
-        <field name="name">Appointments</field>
+        <field name="name">Rendez-vous</field>
         <field name="res_model">nephro.appointment</field>
         <field name="view_mode">list,form</field>
     </record>

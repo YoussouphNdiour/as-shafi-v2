@@ -28,7 +28,7 @@
     </record>
 
     <record id="nephro_dialysis_dialyzer_type_action" model="ir.actions.act_window">
-        <field name="name">Dialyzer Types</field>
+        <field name="name">Types de dialyseurs</field>
         <field name="res_model">nephro.dialyzer.type</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -61,7 +61,7 @@
     </record>
 
     <record id="nephro_dialysis_dialysate_type_action" model="ir.actions.act_window">
-        <field name="name">Dialysate Types</field>
+        <field name="name">Types de dialysat</field>
         <field name="res_model">nephro.dialysate.type</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -94,7 +94,7 @@
     </record>
 
     <record id="nephro_dialysis_vascular_access_type_action" model="ir.actions.act_window">
-        <field name="name">Vascular Access Types</field>
+        <field name="name">Types d'abord vasculaire</field>
         <field name="res_model">nephro.vascular.access.type</field>
         <field name="view_mode">list,form</field>
     </record>
@@ -129,7 +129,7 @@
     </record>
 
     <record id="nephro_dialysis_holiday_action" model="ir.actions.act_window">
-        <field name="name">Holidays</field>
+        <field name="name">Jours fériés</field>
         <field name="res_model">nephro.holiday</field>
         <field name="view_mode">list,form</field>
     </record>

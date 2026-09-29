@@ -5,12 +5,12 @@
         <field name="name">nephro.session.generator.form</field>
         <field name="model">nephro.session.generator</field>
         <field name="arch" type="xml">
-            <form string="Generate Dialysis Sessions">
+            <form string="Générer des séances de dialyse">
                 <group>
                     <group string="Patients">
                         <field name="patient_ids" widget="many2many_tags"/>
                     </group>
-                    <group string="Schedule">
+                    <group string="Programme">
                         <field name="schedule_id"/>
                         <field name="date_start"/>
                         <field name="date_end"/>
@@ -22,8 +22,8 @@
                 </group>
                 <footer>
                     <button name="action_generate" type="object"
-                        string="Generate Sessions" class="btn-primary"/>
-                    <button string="Cancel" class="btn-secondary"
+                        string="Générer les séances" class="btn-primary"/>
+                    <button string="Annuler" class="btn-secondary"
                         special="cancel"/>
                 </footer>
             </form>
@@ -32,7 +32,7 @@
 
     <!-- Session Generator Action -->
     <record id="nephro_dialysis_session_generator_action" model="ir.actions.act_window">
-        <field name="name">Generate Sessions</field>
+        <field name="name">Générer des séances</field>
         <field name="res_model">nephro.session.generator</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>

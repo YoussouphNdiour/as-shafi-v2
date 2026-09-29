@@ -1,0 +1,135 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - button "" [ref=f1e5] [cursor=pointer]
+      - menuitem "Néphrologie" [ref=f1e168] [cursor=pointer]
+      - menu [ref=f1e8]:
+        - menuitem "Patients" [ref=f1e169] [cursor=pointer]
+        - menuitem "Rendez-vous" [ref=f1e170] [cursor=pointer]
+        - menuitem "Hémodialyse" [ref=f1e171] [cursor=pointer]
+        - menuitem "Ordonnances" [ref=f1e172] [cursor=pointer]
+        - menuitem "Bilans biologiques" [ref=f1e173] [cursor=pointer]
+        - menuitem "Générer les séances" [ref=f1e174] [cursor=pointer]
+        - button "" [ref=f1e176] [cursor=pointer]
+      - menu [ref=f1e13]:
+        - button "Messages 3" [ref=f1e15] [cursor=pointer]:
+          - img "Messages" [ref=f1e16]: 
+          - generic [ref=f1e17]: "3"
+        - button [ref=f1e18] [cursor=pointer]:
+          - img "Activités" [ref=f1e19]: 
+        - button "AS SHAFI" [disabled] [ref=f1e21]: 
+        - generic: 
+        - button [ref=f1e24] [cursor=pointer]:
+          - generic [ref=f1e25]:
+            - img "Utilisateur" [ref=f1e26]
+            - img "L'utilisateur est en ligne" [ref=f1e29]: 
+          - text: 
+  - generic [ref=f1e178]:
+    - generic [ref=f1e180]:
+      - generic [ref=f1e181]:
+        - button "Nouveau" [ref=f1e183] [cursor=pointer]
+        - generic [ref=f1e184]:
+          - generic [ref=f1e185]: Patients
+          - button "Menu Actions" [ref=f1e190] [cursor=pointer]:
+            - generic [ref=f1e191]: 
+      - search [ref=f1e193]:
+        - search [ref=f1e194]:
+          - button "Rechercher…" [ref=f1e195] [cursor=pointer]:
+            - img [ref=f1e196]: 
+          - generic [ref=f1e197]:
+            - listitem "Rechercher" [ref=f1e198]:
+              - button " " [ref=f1e200] [cursor=pointer]:
+                - generic [ref=f1e201]: 
+                - generic [ref=f1e202]: 
+              - generic [ref=f1e204]:
+                - generic "Soins néphrologiques" [ref=f1e205]
+                - button "Supprimer" [ref=f1e206] [cursor=pointer]: 
+            - searchbox "Rechercher…" [active] [ref=f1e207]
+        - button "" [ref=f1e208] [cursor=pointer]
+      - search [ref=f1e210]:
+        - navigation "Bipeur" [ref=f1e211]:
+          - generic [ref=f1e212]:
+            - generic [ref=f1e213]: 1-3
+            - text: / 3
+          - generic [ref=f1e214]:
+            - button "Précédent" [disabled]:
+              - generic: 
+            - button "Suivant" [disabled]:
+              - generic: 
+    - main [ref=f1e215]:
+      - table [ref=f1e217]:
+        - rowgroup [ref=f1e218]:
+          - row [ref=f1e219]:
+            - columnheader [ref=f1e220] [cursor=pointer]:
+              - checkbox [ref=f1e222]
+            - columnheader "N° Dossier " [ref=f1e223] [cursor=pointer]:
+              - generic [ref=f1e224]:
+                - generic [ref=f1e225]: N° Dossier
+                - generic [ref=f1e226]: 
+            - columnheader "Name " [ref=f1e228] [cursor=pointer]:
+              - generic [ref=f1e229]:
+                - generic [ref=f1e230]: Name
+                - generic [ref=f1e231]: 
+            - columnheader "Age" [ref=f1e233]:
+              - generic [ref=f1e234]:
+                - generic [ref=f1e235]: Age
+                - text: 
+            - columnheader "Genre " [ref=f1e237] [cursor=pointer]:
+              - generic [ref=f1e238]:
+                - generic [ref=f1e239]: Genre
+                - generic [ref=f1e240]: 
+            - columnheader "Groupe sanguin " [ref=f1e242] [cursor=pointer]:
+              - generic [ref=f1e243]:
+                - generic [ref=f1e244]: Groupe sanguin
+                - generic [ref=f1e245]: 
+            - columnheader "Nephrology Care " [ref=f1e247] [cursor=pointer]:
+              - generic [ref=f1e248]:
+                - generic [ref=f1e249]: Nephrology Care
+                - generic [ref=f1e250]: 
+            - columnheader "Attending Physician " [ref=f1e252] [cursor=pointer]:
+              - generic [ref=f1e253]:
+                - generic [ref=f1e254]: Attending Physician
+                - generic [ref=f1e255]: 
+        - rowgroup [ref=f1e257]:
+          - row [ref=f1e258]:
+            - cell [ref=f1e259]:
+              - checkbox [ref=f1e261] [cursor=pointer]
+            - cell "HMS/2026/0003" [ref=f1e262] [cursor=pointer]
+            - cell "Aminata Sow" [ref=f1e263] [cursor=pointer]
+            - cell "45" [ref=f1e264] [cursor=pointer]
+            - cell "Femme" [ref=f1e265] [cursor=pointer]
+            - cell "B+" [ref=f1e266] [cursor=pointer]
+            - cell [ref=f1e267] [cursor=pointer]:
+              - generic [ref=f1e268]:
+                - checkbox [checked] [disabled]
+            - cell "Dr Ndiaye" [ref=f1e269] [cursor=pointer]
+          - row [ref=f1e270]:
+            - cell [ref=f1e271]:
+              - checkbox [ref=f1e273] [cursor=pointer]
+            - cell "HMS/2026/0002" [ref=f1e274] [cursor=pointer]
+            - cell "Moussa Ba" [ref=f1e275] [cursor=pointer]
+            - cell "61" [ref=f1e276] [cursor=pointer]
+            - cell "Homme" [ref=f1e277] [cursor=pointer]
+            - cell "A+" [ref=f1e278] [cursor=pointer]
+            - cell [ref=f1e279] [cursor=pointer]:
+              - generic [ref=f1e280]:
+                - checkbox [checked] [disabled]
+            - cell "Dr Ndiaye" [ref=f1e281] [cursor=pointer]
+          - row [ref=f1e282]:
+            - cell [ref=f1e283]:
+              - checkbox [ref=f1e285] [cursor=pointer]
+            - cell "HMS/2026/0001" [ref=f1e286] [cursor=pointer]
+            - cell "Seynabou Diouf" [ref=f1e287] [cursor=pointer]
+            - cell "29" [ref=f1e288] [cursor=pointer]
+            - cell "Femme" [ref=f1e289] [cursor=pointer]
+            - cell "O+" [ref=f1e290] [cursor=pointer]
+            - cell [ref=f1e291] [cursor=pointer]:
+              - generic [ref=f1e292]:
+                - checkbox [checked] [disabled]
+            - cell "Dr Ndiaye" [ref=f1e293] [cursor=pointer]
+        - rowgroup [ref=f1e294]:
+          - row [ref=f1e295]:
+            - cell [ref=f1e296]
+  - generic:
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

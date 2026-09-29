@@ -3,16 +3,16 @@
     <data noupdate="1">
         <!-- Vascular Access Types -->
         <record id="vascular_access_fav" model="nephro.vascular.access.type">
-            <field name="name">AVF (Arteriovenous Fistula)</field>
+            <field name="name">FAV (Fistule artério-veineuse)</field>
         </record>
         <record id="vascular_access_kt_temp" model="nephro.vascular.access.type">
-            <field name="name">Temporary Catheter</field>
+            <field name="name">Cathéter temporaire</field>
         </record>
         <record id="vascular_access_kt_perm" model="nephro.vascular.access.type">
-            <field name="name">Tunneled Catheter (Permcath)</field>
+            <field name="name">Cathéter tunnelisé (Permcath)</field>
         </record>
         <record id="vascular_access_avg" model="nephro.vascular.access.type">
-            <field name="name">AVG (Arteriovenous Graft)</field>
+            <field name="name">PAV (Pontage artério-veineux)</field>
         </record>
 
         <!-- Dialyzer Types -->
@@ -37,10 +37,10 @@
 
         <!-- Dialysate Types -->
         <record id="dialysate_bicarb_std" model="nephro.dialysate.type">
-            <field name="name">Bicarbonate Standard</field>
+            <field name="name">Bicarbonate standard</field>
         </record>
         <record id="dialysate_bicarb_low_ca" model="nephro.dialysate.type">
-            <field name="name">Bicarbonate Low Calcium</field>
+            <field name="name">Bicarbonate pauvre en calcium</field>
         </record>
         <record id="dialysate_acetate" model="nephro.dialysate.type">
             <field name="name">Acetate</field>
@@ -51,27 +51,27 @@
 
         <!-- Holidays (Senegal) -->
         <record id="holiday_new_year" model="nephro.holiday">
-            <field name="name">New Year's Day</field>
+            <field name="name">Jour de l'An</field>
             <field name="date">2026-01-01</field>
         </record>
         <record id="holiday_independence" model="nephro.holiday">
-            <field name="name">Independence Day</field>
+            <field name="name">Fête de l'Indépendance</field>
             <field name="date">2026-04-04</field>
         </record>
         <record id="holiday_labor" model="nephro.holiday">
-            <field name="name">Labor Day</field>
+            <field name="name">Fête du Travail</field>
             <field name="date">2026-05-01</field>
         </record>
         <record id="holiday_assumption" model="nephro.holiday">
-            <field name="name">Assumption</field>
+            <field name="name">Assomption</field>
             <field name="date">2026-08-15</field>
         </record>
         <record id="holiday_all_saints" model="nephro.holiday">
-            <field name="name">All Saints' Day</field>
+            <field name="name">Toussaint</field>
             <field name="date">2026-11-01</field>
         </record>
         <record id="holiday_christmas" model="nephro.holiday">
-            <field name="name">Christmas Day</field>
+            <field name="name">Noël</field>
             <field name="date">2026-12-25</field>
         </record>
 

@@ -2,7 +2,7 @@
 <odoo>
     <!-- Biological Results menu under Nephrology root -->
     <menuitem id="nephro_bilan_menu"
-        name="Biological Results"
+        name="Résultats biologiques"
         parent="nephro_core.menu_nephrology_root"
         action="nephro_bilan_action"
         sequence="50"
@@ -10,7 +10,7 @@
 
     <!-- Thresholds under Configuration -->
     <menuitem id="nephro_threshold_menu"
-        name="Thresholds"
+        name="Seuils"
         parent="nephro_core.nephro_core_menu_config"
         action="nephro_threshold_action"
         sequence="20"

@@ -10,10 +10,10 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="%(nephro_core_procedure_action)d" type="action"
                             class="oe_stat_button" icon="fa-medkit">
-                            <field name="procedure_count" widget="statinfo" string="Sessions"/>
+                            <field name="procedure_count" widget="statinfo" string="Séances"/>
                         </button>
                     </div>
-                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger"
+                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger"
                         invisible="active"/>
                     <field name="active" invisible="1"/>
                     <div class="oe_title">
@@ -285,8 +285,8 @@
                 <field name="name"/>
                 <field name="hms_id"/>
                 <field name="physician_id"/>
-                <filter name="nephro" string="Nephrology Care" domain="[('is_nephro', '=', True)]"/>
-                <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                <filter name="nephro" string="Prise en charge néphro" domain="[('is_nephro', '=', True)]"/>
+                <filter name="active" string="Actif" domain="[('active', '=', True)]"/>
             </search>
         </field>
     </record>

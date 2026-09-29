@@ -4,7 +4,7 @@
 
         <!-- Cron J-1: Send reminders the day before at 18:00 -->
         <record id="cron_whatsapp_j1_reminders" model="ir.cron">
-            <field name="name">Nephro: WhatsApp J-1 Reminders</field>
+            <field name="name">Néphro : Rappels WhatsApp J-1</field>
             <field name="model_id" ref="nephro_core.model_nephro_procedure"/>
             <field name="state">code</field>
             <field name="code">model._cron_send_j1_reminders()</field>
@@ -18,7 +18,7 @@
 
         <!-- Cron J: Send reminders the day of session at 06:30 -->
         <record id="cron_whatsapp_j_reminders" model="ir.cron">
-            <field name="name">Nephro: WhatsApp J Reminders</field>
+            <field name="name">Néphro : Rappels WhatsApp Jour J</field>
             <field name="model_id" ref="nephro_core.model_nephro_procedure"/>
             <field name="state">code</field>
             <field name="code">model._cron_send_j_reminders()</field>

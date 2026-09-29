@@ -8,15 +8,15 @@
             <xpath expr="//notebook" position="inside">
 
                 <!-- Pre-dialysis tab -->
-                <page string="Pre-dialysis">
+                <page string="Pré-dialyse">
                     <group>
-                        <group string="Measurements">
+                        <group string="Mesures">
                             <field name="pre_weight"/>
                             <field name="pre_bp"/>
                             <field name="pre_temp"/>
                             <field name="arrival_status"/>
                         </group>
-                        <group string="Weight">
+                        <group string="Poids">
                             <field name="interdialytic_weight_gain" readonly="1"/>
                             <field name="target_uf" readonly="1"/>
                         </group>
@@ -24,16 +24,16 @@
                 </page>
 
                 <!-- Machine Parameters tab -->
-                <page string="Machine Parameters">
+                <page string="Paramètres machine">
                     <group>
-                        <group string="Assignment">
+                        <group string="Affectation">
                             <field name="schedule_id"/>
                             <field name="station_id" required="1"/>
                             <field name="vascular_access_id"/>
                             <field name="dialyzer_id"/>
                             <field name="dialysate_id"/>
                         </group>
-                        <group string="Flow Settings">
+                        <group string="Réglages débits">
                             <field name="blood_flow"/>
                             <field name="dialysate_flow"/>
                             <field name="anticoagulation"/>
@@ -46,7 +46,7 @@
                 </page>
 
                 <!-- Vital Signs tab -->
-                <page string="Vital Signs">
+                <page string="Signes vitaux">
                     <field name="vital_sign_ids">
                         <list editable="bottom">
                             <field name="timestamp"/>
@@ -62,15 +62,15 @@
                 </page>
 
                 <!-- Post-dialysis tab -->
-                <page string="Post-dialysis">
+                <page string="Post-dialyse">
                     <group>
-                        <group string="Measurements">
+                        <group string="Mesures">
                             <field name="post_weight"/>
                             <field name="post_bp"/>
                             <field name="actual_uf" readonly="1"/>
                             <field name="global_tolerance"/>
                         </group>
-                        <group string="Adequacy">
+                        <group string="Adéquation">
                             <field name="ktv" readonly="1"/>
                             <field name="ktv_status" readonly="1"/>
                             <field name="urr" readonly="1"/>
@@ -82,7 +82,7 @@
                 </page>
 
                 <!-- Machine Readings tab -->
-                <page string="Machine Readings">
+                <page string="Relevés machine">
                     <group>
                         <group>
                             <field name="pv_arterial"/>

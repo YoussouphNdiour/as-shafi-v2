@@ -1,0 +1,111 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - button "" [ref=f1e5] [cursor=pointer]
+      - menuitem "Néphrologie" [ref=f1e168] [cursor=pointer]
+      - menu [ref=f1e8]:
+        - menuitem "Patients" [ref=f1e169] [cursor=pointer]
+        - menuitem "Rendez-vous" [ref=f1e170] [cursor=pointer]
+        - menuitem "Hémodialyse" [ref=f1e171] [cursor=pointer]
+        - menuitem "Ordonnances" [ref=f1e172] [cursor=pointer]
+        - menuitem "Bilans biologiques" [ref=f1e173] [cursor=pointer]
+        - menuitem "Générer les séances" [ref=f1e174] [cursor=pointer]
+        - button "" [ref=f1e176] [cursor=pointer]
+      - menu [ref=f1e13]:
+        - button "Messages 3" [ref=f1e15] [cursor=pointer]:
+          - img "Messages" [ref=f1e16]: 
+          - generic [ref=f1e17]: "3"
+        - button [ref=f1e18] [cursor=pointer]:
+          - img "Activités" [ref=f1e19]: 
+        - button "AS SHAFI" [disabled] [ref=f1e21]: 
+        - generic: 
+        - button [ref=f1e24] [cursor=pointer]:
+          - generic [ref=f1e25]:
+            - img "Utilisateur" [ref=f1e26]
+            - img "L'utilisateur est en ligne" [ref=f1e29]: 
+          - text: 
+  - generic [ref=f1e617]:
+    - generic [ref=f1e619]:
+      - generic [ref=f1e620]:
+        - button "Nouveau" [ref=f1e622] [cursor=pointer]
+        - generic [ref=f1e623]:
+          - generic [ref=f1e624]: Bilans biologiques
+          - button "Menu Actions" [ref=f1e629] [cursor=pointer]:
+            - generic [ref=f1e630]: 
+      - search [ref=f1e632]:
+        - search [ref=f1e633]:
+          - button "Rechercher…" [ref=f1e634] [cursor=pointer]:
+            - img [ref=f1e635]: 
+          - searchbox "Rechercher…" [active] [ref=f1e637]
+        - button "" [ref=f1e638] [cursor=pointer]
+      - search [ref=f1e640]:
+        - navigation "Bipeur" [ref=f1e641]:
+          - generic [ref=f1e642]:
+            - generic [ref=f1e643]: 1-2
+            - text: / 2
+          - generic [ref=f1e644]:
+            - button "Précédent" [disabled]:
+              - generic: 
+            - button "Suivant" [disabled]:
+              - generic: 
+    - main [ref=f1e645]:
+      - table [ref=f1e647]:
+        - rowgroup [ref=f1e648]:
+          - row [ref=f1e649]:
+            - columnheader [ref=f1e650] [cursor=pointer]:
+              - checkbox [ref=f1e652]
+            - columnheader "Référence " [ref=f1e653] [cursor=pointer]:
+              - generic [ref=f1e654]:
+                - generic [ref=f1e655]: Référence
+                - generic [ref=f1e656]: 
+            - columnheader "Patient " [ref=f1e658] [cursor=pointer]:
+              - generic [ref=f1e659]:
+                - generic [ref=f1e660]: Patient
+                - generic [ref=f1e661]: 
+            - columnheader "Médecin " [ref=f1e663] [cursor=pointer]:
+              - generic [ref=f1e664]:
+                - generic [ref=f1e665]: Médecin
+                - generic [ref=f1e666]: 
+            - columnheader "Date " [ref=f1e668] [cursor=pointer]:
+              - generic [ref=f1e669]:
+                - generic [ref=f1e670]: Date
+                - generic [ref=f1e671]: 
+            - columnheader "Type " [ref=f1e673] [cursor=pointer]:
+              - generic [ref=f1e674]:
+                - generic [ref=f1e675]: Type
+                - generic [ref=f1e676]: 
+            - columnheader "Alertes " [ref=f1e678] [cursor=pointer]:
+              - generic [ref=f1e679]:
+                - generic [ref=f1e680]: Alertes
+                - generic [ref=f1e681]: 
+            - columnheader "Statut " [ref=f1e683] [cursor=pointer]:
+              - generic [ref=f1e684]:
+                - generic [ref=f1e685]: Statut
+                - generic [ref=f1e686]: 
+        - rowgroup [ref=f1e688]:
+          - row [ref=f1e689]:
+            - cell [ref=f1e690]:
+              - checkbox [ref=f1e692] [cursor=pointer]
+            - cell "BIL/2026/0002" [ref=f1e693] [cursor=pointer]
+            - cell "Aminata Sow" [ref=f1e694] [cursor=pointer]
+            - cell "Dr Ndiaye" [ref=f1e695] [cursor=pointer]
+            - cell "20 sept." [ref=f1e696] [cursor=pointer]
+            - cell "Mensuel" [ref=f1e697] [cursor=pointer]
+            - cell "0" [ref=f1e698] [cursor=pointer]
+            - cell "Normal" [ref=f1e699] [cursor=pointer]
+          - row [ref=f1e702]:
+            - cell [ref=f1e703]:
+              - checkbox [ref=f1e705] [cursor=pointer]
+            - cell "BIL/2026/0004" [ref=f1e706] [cursor=pointer]
+            - cell "Moussa Ba" [ref=f1e707] [cursor=pointer]
+            - cell "Dr Ndiaye" [ref=f1e708] [cursor=pointer]
+            - cell "15 sept." [ref=f1e709] [cursor=pointer]
+            - cell "Trimestriel" [ref=f1e710] [cursor=pointer]
+            - cell "4" [ref=f1e711] [cursor=pointer]
+            - cell "Critique" [ref=f1e712] [cursor=pointer]
+        - rowgroup [ref=f1e715]:
+          - row [ref=f1e716]:
+            - cell [ref=f1e717]
+  - generic:
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

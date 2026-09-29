@@ -48,7 +48,7 @@ class NurseDashboard extends Component {
             await this.orm.call("nephro.procedure", "action_start", [[procedureId]]);
             await this.loadData();
         } catch (e) {
-            this.notification.add(e.message || "Could not start session.", { type: "danger" });
+            this.notification.add(e.message || "Impossible de démarrer la séance.", { type: "danger" });
         }
     }
 
@@ -57,7 +57,7 @@ class NurseDashboard extends Component {
             await this.orm.call("nephro.procedure", "action_done", [[procedureId]]);
             await this.loadData();
         } catch (e) {
-            this.notification.add(e.message || "Could not complete session.", { type: "danger" });
+            this.notification.add(e.message || "Impossible de terminer la séance.", { type: "danger" });
         }
     }
 
@@ -67,7 +67,7 @@ class NurseDashboard extends Component {
             await this.orm.call("nephro.procedure", "action_cancel", [[procedureId]]);
             await this.loadData();
         } catch (e) {
-            this.notification.add(e.message || "Could not cancel session.", { type: "danger" });
+            this.notification.add(e.message || "Impossible d'annuler la séance.", { type: "danger" });
         }
     }
 

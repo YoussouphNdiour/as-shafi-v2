@@ -6,11 +6,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_confirm" string="Confirm" type="object"
+                    <button name="action_confirm" string="Confirmer" type="object"
                         class="btn-primary" invisible="state != 'draft'"/>
-                    <button name="action_done" string="Done" type="object"
+                    <button name="action_done" string="Terminé" type="object"
                         class="btn-primary" invisible="state != 'confirmed'"/>
-                    <button name="action_cancel" string="Cancel" type="object"
+                    <button name="action_cancel" string="Annuler" type="object"
                         class="btn-secondary" invisible="state in ('done', 'confirmed', 'cancel')"/>
                     <field name="state" widget="statusbar"
                         statusbar_visible="draft,confirmed,done"/>
@@ -27,7 +27,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Medications">
+                        <page string="Médicaments">
                             <field name="line_ids">
                                 <list editable="bottom">
                                     <field name="product_id"/>

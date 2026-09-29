@@ -2,7 +2,7 @@
 <odoo>
     <data noupdate="1">
         <record id="rule_nurse_procedure_schedule" model="ir.rule">
-            <field name="name">Nurse: own schedule procedures only</field>
+            <field name="name">Infirmier : ses propres actes planifiés uniquement</field>
             <field name="model_id" ref="nephro_core.model_nephro_procedure"/>
             <field name="groups" eval="[(4, ref('nephro_core.group_nephro_nurse'))]"/>
             <field name="domain_force">[('schedule_id.nurse_ids', 'in', [user.id])]</field>

@@ -6,11 +6,11 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_start" string="Start" type="object"
+                    <button name="action_start" string="Démarrer" type="object"
                         class="btn-primary" invisible="state != 'scheduled'"/>
-                    <button name="action_done" string="Complete" type="object"
+                    <button name="action_done" string="Terminer" type="object"
                         class="btn-primary" invisible="state != 'running'"/>
-                    <button name="action_cancel" string="Cancel" type="object"
+                    <button name="action_cancel" string="Annuler" type="object"
                         class="btn-secondary" invisible="state in ('done', 'cancel')"/>
                     <field name="state" widget="statusbar"
                         statusbar_visible="scheduled,running,done"/>
@@ -35,7 +35,7 @@
                         </group>
                     </group>
                     <notebook>
-                        <page string="Consumables">
+                        <page string="Consommables">
                             <field name="consumable_line_ids">
                                 <list editable="bottom">
                                     <field name="product_id"/>
@@ -44,7 +44,7 @@
                                 </list>
                             </field>
                         </page>
-                        <page string="Cancellation" invisible="state != 'cancel'">
+                        <page string="Annulation" invisible="state != 'cancel'">
                             <field name="cancel_reason"/>
                         </page>
                     </notebook>
@@ -74,7 +74,7 @@
     </record>
 
     <record id="nephro_core_procedure_action" model="ir.actions.act_window">
-        <field name="name">Hemodialysis Sessions</field>
+        <field name="name">Séances d'hémodialyse</field>
         <field name="res_model">nephro.procedure</field>
         <field name="view_mode">list,form</field>
     </record>

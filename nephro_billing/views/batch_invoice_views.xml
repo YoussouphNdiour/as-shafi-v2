@@ -5,23 +5,23 @@
         <field name="name">nephro.batch.invoice.wizard.form</field>
         <field name="model">nephro.batch.invoice.wizard</field>
         <field name="arch" type="xml">
-            <form string="Batch Invoicing">
-                <group string="Filters">
+            <form string="Facturation groupée">
+                <group string="Filtres">
                     <field name="date_from"/>
                     <field name="date_to"/>
                     <field name="patient_ids" widget="many2many_tags"/>
                 </group>
-                <group string="Preview">
+                <group string="Aperçu">
                     <field name="preview_count" readonly="1"/>
                     <field name="total_amount" readonly="1"/>
                 </group>
                 <footer>
                     <button name="action_create_invoices"
-                        string="Create Invoices"
+                        string="Créer les factures"
                         type="object"
                         class="btn-primary"
                         data-hotkey="s"/>
-                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button string="Annuler" class="btn-secondary" special="cancel"/>
                 </footer>
             </form>
         </field>
@@ -29,7 +29,7 @@
 
     <!-- Batch Invoice Wizard Action -->
     <record id="nephro_batch_invoice_wizard_action" model="ir.actions.act_window">
-        <field name="name">Batch Invoicing</field>
+        <field name="name">Facturation groupée</field>
         <field name="res_model">nephro.batch.invoice.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
