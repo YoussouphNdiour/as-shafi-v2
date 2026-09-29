@@ -12,6 +12,8 @@
                         class="btn-primary" invisible="state != 'running'"/>
                     <button name="action_cancel" string="Annuler" type="object"
                         class="btn-secondary" invisible="state in ('done', 'cancel')"/>
+                    <button name="action_create_invoice" string="Créer la facture" type="object"
+                        class="btn-success" invisible="state != 'done' or is_invoiced"/>
                     <field name="state" widget="statusbar"
                         statusbar_visible="scheduled,running,done"/>
                 </header>
@@ -31,7 +33,8 @@
                             <field name="start_time" readonly="1"/>
                             <field name="end_time" readonly="1"/>
                             <field name="actual_duration" readonly="1"/>
-                            <field name="is_invoiced"/>
+                            <field name="is_invoiced" readonly="1"/>
+                            <field name="invoice_id" readonly="1" invisible="not is_invoiced"/>
                         </group>
                     </group>
                     <notebook>

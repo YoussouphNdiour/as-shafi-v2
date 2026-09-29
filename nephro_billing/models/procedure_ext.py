@@ -1,5 +1,6 @@
 import logging
 from odoo import models, _
+from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -17,16 +18,33 @@ class NephroProcedureBilling(models.Model):
             self._create_invoice()
         return res
 
+    def action_create_invoice(self):
+        """Button action: create invoice for this procedure."""
+        self.ensure_one()
+        if self.invoice_id:
+            raise UserError(_("Cette séance est déjà facturée."))
+        if self.state != 'done':
+            raise UserError(_("Seules les séances terminées peuvent être facturées."))
+        self._create_invoice()
+        if self.invoice_id:
+            return {
+                'type': 'ir.actions.act_window',
+                'name': _("Facture"),
+                'res_model': 'account.move',
+                'res_id': self.invoice_id.id,
+                'view_mode': 'form',
+            }
+
     def _create_invoice(self):
         """Create an invoice for this procedure. Errors are visible."""
         self.ensure_one()
         rule = self.patient_id.pricing_rule_id
         if not rule:
-            _logger.warning(
-                "No pricing rule for patient %s, skipping invoice",
-                self.patient_id.name,
+            raise UserError(
+                _("Aucune règle tarifaire définie pour le patient %s. "
+                  "Allez dans la fiche patient → onglet Facturation pour en assigner une.")
+                % self.patient_id.name
             )
-            return
         if self.invoice_id:
             return  # already invoiced
 
