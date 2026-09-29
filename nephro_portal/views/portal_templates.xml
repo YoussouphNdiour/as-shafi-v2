@@ -26,7 +26,8 @@
                     <div class="col-md-3">
                         <div class="card text-center p-3">
                             <h6>Balance</h6>
-                            <strong t-esc="patient.balance_due" t-options="{'widget': 'monetary'}"/>
+                            <strong t-if="patient and patient.balance_due" t-esc="'%.0f FCFA' % patient.balance_due"/>
+                            <span t-else="" class="text-muted">0 FCFA</span>
                         </div>
                     </div>
                     <div class="col-md-3">

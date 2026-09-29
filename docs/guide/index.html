@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide Utilisateur — Module Nephrologie Odoo 19</title>
+  <style>
+    :root {
+      --primary: #714B67;
+      --primary-light: #8F6B83;
+      --primary-dark: #5B3A52;
+      --bg: #f8f9fa;
+      --card-bg: #ffffff;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --border: #dee2e6;
+      --sec-color: #2196F3;
+      --med-color: #4CAF50;
+      --inf-color: #FF9800;
+      --fac-color: #9C27B0;
+      --pat-color: #00BCD4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white; padding: 40px 20px; text-align: center;
+    }
+    .header h1 { font-size: 2.2em; margin-bottom: 10px; }
+    .header p { font-size: 1.1em; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+    .nav {
+      background: white; border-bottom: 2px solid var(--border); padding: 0 20px;
+      position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; }
+    .nav a {
+      display: inline-block; padding: 14px 18px; text-decoration: none;
+      color: var(--text); font-weight: 500; font-size: 0.95em;
+      border-bottom: 3px solid transparent; transition: all 0.2s;
+    }
+    .nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+    .nav a.nav-sec { border-bottom-color: var(--sec-color); color: var(--sec-color); }
+    .nav a.nav-med { border-bottom-color: var(--med-color); color: var(--med-color); }
+    .nav a.nav-inf { border-bottom-color: var(--inf-color); color: var(--inf-color); }
+    .nav a.nav-fac { border-bottom-color: var(--fac-color); color: var(--fac-color); }
+    .nav a.nav-pat { border-bottom-color: var(--pat-color); color: var(--pat-color); }
+    .nav a.nav-workflow { border-bottom-color: var(--primary); color: var(--primary); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+    .role-section {
+      margin: 40px 0; padding: 30px; background: var(--card-bg);
+      border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .role-header {
+      display: flex; align-items: center; gap: 15px; margin-bottom: 20px;
+      padding-bottom: 15px; border-bottom: 2px solid var(--border);
+    }
+    .role-icon {
+      width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5em; color: white; flex-shrink: 0;
+    }
+    .role-header h2 { font-size: 1.6em; }
+    .role-header p { color: var(--text-muted); margin-top: 4px; }
+    .access-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0 25px 0; }
+    .badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 0.85em; font-weight: 500;
+    }
+    .badge-read { background: #e3f2fd; color: #1565c0; }
+    .badge-write { background: #e8f5e9; color: #2e7d32; }
+    .badge-no { background: #ffebee; color: #c62828; text-decoration: line-through; }
+    .step {
+      margin: 25px 0; padding: 20px; background: #fafbfc;
+      border-radius: 8px; border-left: 4px solid var(--primary);
+    }
+    .step-num {
+      display: inline-block; width: 28px; height: 28px; border-radius: 50%;
+      background: var(--primary); color: white; text-align: center;
+      line-height: 28px; font-weight: bold; font-size: 0.85em; margin-right: 10px;
+    }
+    .step h3 { display: inline; font-size: 1.1em; }
+    .step p { margin: 10px 0; color: var(--text-muted); }
+    .step img {
+      width: 100%; max-width: 100%; border-radius: 8px; border: 1px solid var(--border);
+      margin-top: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .step img:hover { transform: scale(1.01); }
+    .sub-section { margin: 30px 0 10px 0; }
+    .sub-section h4 {
+      font-size: 1.15em; color: var(--primary-dark); padding-bottom: 8px;
+      border-bottom: 1px dashed var(--border); margin-bottom: 5px;
+    }
+    .workflow-section {
+      margin: 40px 0; padding: 30px; background: var(--card-bg);
+      border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .workflow-diagram {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      align-items: center; gap: 10px; margin: 30px 0; padding: 20px;
+    }
+    .wf-step {
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 15px 20px; border-radius: 10px;
+      min-width: 140px; color: white;
+    }
+    .wf-step .wf-icon { font-size: 2em; margin-bottom: 8px; }
+    .wf-step .wf-label { font-weight: 600; font-size: 0.95em; }
+    .wf-step .wf-desc { font-size: 0.8em; opacity: 0.9; margin-top: 4px; }
+    .wf-arrow { font-size: 1.8em; color: var(--text-muted); margin: 0 5px; }
+    .wf-sec { background: var(--sec-color); }
+    .wf-med { background: var(--med-color); }
+    .wf-inf { background: var(--inf-color); }
+    .wf-fac { background: var(--fac-color); }
+    .wf-pat { background: var(--pat-color); }
+    .interaction-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95em; }
+    .interaction-table th { background: var(--primary); color: white; padding: 12px 15px; text-align: left; }
+    .interaction-table td { padding: 10px 15px; border-bottom: 1px solid var(--border); }
+    .interaction-table tr:nth-child(even) { background: #f8f9fa; }
+    .interaction-table tr:hover { background: #e9ecef; }
+    .creds-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+    .creds-table th { background: var(--primary); color: white; padding: 10px 15px; text-align: left; }
+    .creds-table td { padding: 8px 15px; border-bottom: 1px solid var(--border); font-family: monospace; }
+    .creds-table tr:nth-child(even) { background: #f8f9fa; }
+    .lightbox {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); z-index: 1000; cursor: pointer;
+      justify-content: center; align-items: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .footer {
+      background: var(--primary-dark); color: white; text-align: center;
+      padding: 30px 20px; margin-top: 40px;
+    }
+    .footer p { opacity: 0.8; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.6em; }
+      .role-section, .workflow-section { padding: 20px 15px; }
+      .workflow-diagram { flex-direction: column; }
+      .wf-arrow { transform: rotate(90deg); }
+      .nav a { padding: 10px 12px; font-size: 0.85em; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Guide Utilisateur — Module Nephrologie</h1>
+  <p>Plateforme de gestion de l'hemodialyse — Odoo 19<br>As-Shafi Medical Center</p>
+</div>
+
+<div class="nav">
+  <div class="nav-inner">
+    <a href="#workflow" class="nav-workflow">Workflow</a>
+    <a href="#secretaire" class="nav-sec">Secretaire</a>
+    <a href="#medecin" class="nav-med">Medecin</a>
+    <a href="#infirmiere" class="nav-inf">Infirmiere</a>
+    <a href="#facturation" class="nav-fac">Facturation</a>
+    <a href="#patient" class="nav-pat">Patient</a>
+    <a href="#credentials">Identifiants</a>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- WORKFLOW -->
+<!-- ============================================================ -->
+<div class="workflow-section" id="workflow">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--primary);">&#x1f504;</div>
+    <div>
+      <h2>Workflow Complet — Parcours Patient</h2>
+      <p>Le circuit du patient a travers les differents intervenants</p>
+    </div>
+  </div>
+  <div class="workflow-diagram">
+    <div class="wf-step wf-sec"><div class="wf-icon">&#x1f4cb;</div><div class="wf-label">Secretaire</div><div class="wf-desc">Accueil &amp; inscription</div></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div class="wf-step wf-med"><div class="wf-icon">&#x1f9d1;&#x200d;&#x2695;&#xfe0f;</div><div class="wf-label">Medecin</div><div class="wf-desc">Diagnostic &amp; prescription</div></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div class="wf-step wf-inf"><div class="wf-icon">&#x1f489;</div><div class="wf-label">Infirmiere</div><div class="wf-desc">Realisation seance</div></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div class="wf-step wf-fac"><div class="wf-icon">&#x1f4b0;</div><div class="wf-label">Facturation</div><div class="wf-desc">Generation factures</div></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div class="wf-step wf-pat"><div class="wf-icon">&#x1f464;</div><div class="wf-label">Patient</div><div class="wf-desc">Consultation portail</div></div>
+  </div>
+  <h3>Interactions entre les roles</h3>
+  <table class="interaction-table">
+    <thead><tr><th>Etape</th><th>Qui ?</th><th>Action</th><th>Resultat</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1. Accueil</strong></td><td>Secretaire</td><td>Cree le dossier patient, assigne un medecin referent</td><td>Patient enregistre (HMS/YYYY/XXXX)</td></tr>
+      <tr><td><strong>2. Consultation</strong></td><td>Medecin</td><td>Examine le patient, prescrit le traitement de dialyse</td><td>Prescription validee, parametres definis</td></tr>
+      <tr><td><strong>3. Planification</strong></td><td>Secretaire</td><td>Genere les seances de dialyse sur une periode</td><td>Seances planifiees avec poste et horaire</td></tr>
+      <tr><td><strong>4. Seance</strong></td><td>Infirmiere</td><td>Demarre la seance, saisit les constantes et parametres machine</td><td>Seance terminee avec donnees cliniques</td></tr>
+      <tr><td><strong>5. Bilan</strong></td><td>Medecin</td><td>Consulte les resultats biologiques, ajuste le traitement</td><td>Suivi medical continu, alertes sur seuils</td></tr>
+      <tr><td><strong>6. Facturation</strong></td><td>Facturation</td><td>Identifie les seances non facturees, genere les factures</td><td>Factures emises</td></tr>
+      <tr><td><strong>7. Portail</strong></td><td>Patient</td><td>Consulte ses seances, bilans, ordonnances et factures</td><td>Transparence sur le parcours de soins</td></tr>
+    </tbody>
+  </table>
+  <h3 style="margin-top: 25px;">Cycle de vie d'une seance</h3>
+  <div class="workflow-diagram" style="gap: 15px;">
+    <div style="padding: 12px 20px; background: #e3f2fd; border-radius: 8px; border: 2px solid #1565c0; text-align: center;"><strong>Planifiee</strong><br><small>Scheduled</small></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div style="padding: 12px 20px; background: #fff3e0; border-radius: 8px; border: 2px solid #e65100; text-align: center;"><strong>En cours</strong><br><small>Running</small></div>
+    <div class="wf-arrow">&#x27A1;</div>
+    <div style="padding: 12px 20px; background: #e8f5e9; border-radius: 8px; border: 2px solid #2e7d32; text-align: center;"><strong>Terminee</strong><br><small>Done</small></div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECRETAIRE -->
+<!-- ============================================================ -->
+<div class="role-section" id="secretaire">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--sec-color);">&#x1f4cb;</div>
+    <div><h2>Secretaire / Agent d'accueil</h2><p>Accueil des patients, gestion des dossiers, rendez-vous et planification</p></div>
+  </div>
+  <div class="access-list">
+    <span class="badge badge-write">Patients</span>
+    <span class="badge badge-write">Rendez-vous</span>
+    <span class="badge badge-write">Generateur de seances</span>
+    <span class="badge badge-read">Hemodialyses (lecture)</span>
+    <span class="badge badge-no">Prescriptions</span>
+    <span class="badge badge-no">Configuration</span>
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">1</span>
+    <h3>Liste des patients</h3>
+    <p>La secretaire accede a la liste des patients nephrologiques avec HMS ID, nom, age, groupe sanguin, type de dialyse et medecin referent. C'est le point de depart pour creer un nouveau dossier ou retrouver un patient existant.</p>
+    <img src="screenshots/sec_01_patients_liste.png" alt="Secretaire - Liste patients" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">2</span>
+    <h3>Dossier patient rempli</h3>
+    <p>Fiche complete du patient : identite (nom, date de naissance, sexe, groupe sanguin), informations nephrologiques (type de dialyse, poids sec, date de debut en dialyse, medecin referent, planning hebdomadaire, acces vasculaire).</p>
+    <img src="screenshots/sec_02_patient_dossier.png" alt="Secretaire - Dossier patient" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">3</span>
+    <h3>Liste des rendez-vous</h3>
+    <p>Tous les rendez-vous de consultation planifies. Chaque ligne affiche le patient, le medecin referent, la date, la duree prevue et le statut (brouillon, confirme, annule).</p>
+    <img src="screenshots/sec_03_rendez_vous_liste.png" alt="Secretaire - Rendez-vous" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">4</span>
+    <h3>Formulaire rendez-vous rempli</h3>
+    <p>Detail d'un rendez-vous confirme : patient, medecin, date et heure, motif de consultation et notes. Le bouton "Confirmer" valide le rendez-vous.</p>
+    <img src="screenshots/sec_04_rendez_vous_form.png" alt="Secretaire - Rendez-vous formulaire" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">5</span>
+    <h3>Liste des hemodialyses</h3>
+    <p>Vue en lecture seule des seances planifiees et realisees. La secretaire peut consulter les informations mais ne peut pas modifier les seances.</p>
+    <img src="screenshots/sec_05_hemodialyses_liste.png" alt="Secretaire - Hemodialyses" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--sec-color);">
+    <span class="step-num" style="background: var(--sec-color);">6</span>
+    <h3>Generateur de seances</h3>
+    <p>Outil automatique pour planifier les seances de dialyse sur une periode donnee. Selectionner le patient, le planning (Lundi-Mercredi-Vendredi ou Mardi-Jeudi-Samedi), le poste et la date de debut/fin. Le systeme cree toutes les seances en un clic.</p>
+    <img src="screenshots/sec_06_generateur_seances.png" alt="Secretaire - Generateur seances" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MEDECIN -->
+<!-- ============================================================ -->
+<div class="role-section" id="medecin">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--med-color);">&#x1f9d1;&#x200d;&#x2695;&#xfe0f;</div>
+    <div><h2>Medecin Nephrologue</h2><p>Suivi medical complet : dossiers patients, seances de dialyse (7 onglets), prescriptions, bilans biologiques (6 onglets)</p></div>
+  </div>
+  <div class="access-list">
+    <span class="badge badge-write">Patients</span>
+    <span class="badge badge-write">Hemodialyses (7 onglets)</span>
+    <span class="badge badge-write">Prescriptions</span>
+    <span class="badge badge-write">Bilans biologiques (6 onglets)</span>
+    <span class="badge badge-write">Generateur de seances</span>
+    <span class="badge badge-no">Configuration</span>
+  </div>
+
+  <!-- Patients -->
+  <div class="sub-section"><h4>Gestion des patients</h4></div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">1</span>
+    <h3>Liste des patients</h3>
+    <p>Vue d'ensemble de tous les patients nephrologiques avec HMS ID, nom, age, groupe sanguin, type de dialyse, medecin referent et statut. Les smart buttons en haut de chaque fiche permettent d'acceder directement aux seances et bilans du patient.</p>
+    <img src="screenshots/med_01_patients_liste.png" alt="Medecin - Liste patients" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">2</span>
+    <h3>Dossier patient detaille</h3>
+    <p>Fiche complete avec smart buttons (nombre de seances, bilans), informations nephrologiques (type de dialyse, poids sec, acces vasculaire, planning), coordonnees et antecedents. Le medecin peut modifier le dossier a tout moment.</p>
+    <img src="screenshots/med_02_patient_dossier.png" alt="Medecin - Dossier patient" onclick="openLightbox(this)">
+  </div>
+
+  <!-- Seances de dialyse -->
+  <div class="sub-section"><h4>Seances d'hemodialyse — 7 onglets</h4></div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">3</span>
+    <h3>Liste des seances</h3>
+    <p>Toutes les seances avec reference (HMS/SEA/YYYY/XXXX), patient, date, duree prevue/reelle, statut (planifiee, en cours, terminee) et indicateur de facturation.</p>
+    <img src="screenshots/med_03_hemodialyses_liste.png" alt="Medecin - Hemodialyses" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">4</span>
+    <h3>Seance — Onglet Consommables</h3>
+    <p>Liste des consommables utilises pendant la seance : lignes arterielles et veineuses, aiguilles de fistule, seringues, compresses, etc. Chaque ligne indique le produit, la quantite utilisee et le lot.</p>
+    <img src="screenshots/med_04_seance_consommables.png" alt="Medecin - Consommables" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">5</span>
+    <h3>Seance — Onglet Pre-dialyse</h3>
+    <p>Donnees de debut de seance : poids avant dialyse (ex: 72.5 kg), tension arterielle (140/85 mmHg), temperature (36.8 C), etat du patient. Le systeme calcule automatiquement le gain de poids interdialytique et l'UF cible en fonction du poids sec.</p>
+    <img src="screenshots/med_05_seance_pre_dialyse.png" alt="Medecin - Pre-dialyse" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">6</span>
+    <h3>Seance — Onglet Parametres machine</h3>
+    <p>Configuration de la machine de dialyse : planning, poste, acces vasculaire (fistule, catheter), type de dialyseur (FX80, FX100), dialysat (bicarbonate, acetate), debit sang (250-400 ml/min), debit dialysat (500 ml/min), type d'anticoagulation (heparine, HBPM) et dose.</p>
+    <img src="screenshots/med_06_seance_parametres_machine.png" alt="Medecin - Parametres machine" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">7</span>
+    <h3>Seance — Onglet Signes vitaux</h3>
+    <p>Constantes prises periodiquement pendant la seance : heure, tension systolique/diastolique, frequence cardiaque, SpO2, temperature. Les alertes visuelles (icones rouge/orange) signalent les valeurs hors normes. Permet de suivre la tolerance du patient en temps reel.</p>
+    <img src="screenshots/med_07_seance_signes_vitaux.png" alt="Medecin - Signes vitaux" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">8</span>
+    <h3>Seance — Onglet Post-dialyse</h3>
+    <p>Donnees de fin de seance : poids apres dialyse (ex: 70.5 kg), tension finale (130/80 mmHg), UF reelle (calculee automatiquement = poids avant - poids apres), tolerance globale (bonne, moyenne, mauvaise), Kt/V et URR — les indicateurs d'efficacite de la dialyse.</p>
+    <img src="screenshots/med_08_seance_post_dialyse.png" alt="Medecin - Post-dialyse" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">9</span>
+    <h3>Seance — Onglet Releves machine</h3>
+    <p>Lecture des parametres machine en fin de seance : pression veineuse (mmHg), pression transmembranaire PTM (mmHg), conductivite (mS/cm), debit UF effectif (ml/h), volume sang traite VST de debut (L). Ces valeurs sont essentielles pour verifier le bon fonctionnement de la machine.</p>
+    <img src="screenshots/med_09_seance_releves_machine.png" alt="Medecin - Releves machine" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">10</span>
+    <h3>Seance — Onglet Complications</h3>
+    <p>Complications survenues pendant la seance : type (hypotension, crampes, nausees, cephalees), moment de survenue (H+30, H+120), tension au moment de l'incident, action prise (bolus NaCl, reduction UF, Trendelenburg) et resolution. Indispensable pour le suivi de la tolerance.</p>
+    <img src="screenshots/med_10_seance_complications.png" alt="Medecin - Complications" onclick="openLightbox(this)">
+  </div>
+
+  <!-- Prescriptions -->
+  <div class="sub-section"><h4>Prescriptions</h4></div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">11</span>
+    <h3>Liste des prescriptions</h3>
+    <p>Toutes les ordonnances avec reference, patient, medecin prescripteur, date et statut (brouillon, active, terminee).</p>
+    <img src="screenshots/med_11_prescriptions_liste.png" alt="Medecin - Prescriptions" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">12</span>
+    <h3>Prescription remplie</h3>
+    <p>Formulaire de prescription avec lignes de medicaments : EPO (erythropoietine), Fer injectable, Calcium, Vitamine D. Chaque ligne precise le medicament, le dosage, la frequence d'administration, la voie (IV, SC, PO) et la duree du traitement.</p>
+    <img src="screenshots/med_12_prescription_form.png" alt="Medecin - Prescription formulaire" onclick="openLightbox(this)">
+  </div>
+
+  <!-- Bilans biologiques -->
+  <div class="sub-section"><h4>Bilans biologiques — 6 onglets</h4></div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">13</span>
+    <h3>Liste des bilans biologiques</h3>
+    <p>Tous les resultats d'analyses avec date, type de bilan (mensuel, trimestriel), hemoglobine, creatinine, uree et statut (normal, alerte, critique). Le code couleur facilite le reperage des bilans anormaux.</p>
+    <img src="screenshots/med_13_bilans_liste.png" alt="Medecin - Bilans liste" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">14</span>
+    <h3>Bilan — Onglet Hematologie</h3>
+    <p>Numeration formule sanguine : hemoglobine (Hb en g/dL), hematocrite (Ht en %), globules blancs (GB /mm3), plaquettes (/mm3), ferritine (ug/L), coefficient de saturation de la transferrine (CST %). Ces valeurs guident le traitement par EPO et fer.</p>
+    <img src="screenshots/med_14_bilan_hematologie.png" alt="Medecin - Bilan Hematologie" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">15</span>
+    <h3>Bilan — Onglet Biochimie</h3>
+    <p>Biochimie renale : creatinine (umol/L), uree pre-dialyse et post-dialyse (mmol/L), acide urique (umol/L), glycemie (mmol/L). L'uree pre/post permet le calcul du Kt/V et de l'URR pour evaluer l'efficacite de la dialyse.</p>
+    <img src="screenshots/med_15_bilan_biochimie.png" alt="Medecin - Bilan Biochimie" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">16</span>
+    <h3>Bilan — Onglet Electrolytes</h3>
+    <p>Ionogramme sanguin : sodium Na (mmol/L), potassium K (mmol/L), chlore Cl (mmol/L), bicarbonates (mmol/L), calcium total et ionise (mmol/L), phosphore (mmol/L), magnesium (mmol/L). Le potassium est surveille de pres car l'hyperkaliemie est une urgence en dialyse.</p>
+    <img src="screenshots/med_16_bilan_electrolytes.png" alt="Medecin - Bilan Electrolytes" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">17</span>
+    <h3>Bilan — Onglet Mineral-Osseux</h3>
+    <p>Metabolisme phosphocalcique : PTH (parathormone en pg/mL), phosphatases alcalines (UI/L), vitamine D 25-OH (ng/mL), produit phosphocalcique (Ca x P). La PTH guide l'ajustement du calcium, de la vitamine D et des chelateurs du phosphore.</p>
+    <img src="screenshots/med_17_bilan_mineral_osseux.png" alt="Medecin - Bilan Mineral-Osseux" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">18</span>
+    <h3>Bilan — Onglet Nutrition / Inflammation</h3>
+    <p>Marqueurs nutritionnels et inflammatoires : albumine (g/L), pre-albumine (g/L), CRP (mg/L), nPCR (g/kg/j), IMC. L'albumine est le marqueur cle de la nutrition en dialyse ; la CRP detecte les infections et inflammations.</p>
+    <img src="screenshots/med_18_bilan_nutrition_inflammation.png" alt="Medecin - Bilan Nutrition Inflammation" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--med-color);">
+    <span class="step-num" style="background: var(--med-color);">19</span>
+    <h3>Bilan — Onglet Serologie</h3>
+    <p>Bilan serologique : Hepatite B (AgHBs, AcHBs, AcHBc), Hepatite C (AcVHC, PCR VHC), VIH (serologie). Ces controles sont obligatoires en dialyse pour prevenir les transmissions croisees entre patients.</p>
+    <img src="screenshots/med_19_bilan_serologie.png" alt="Medecin - Bilan Serologie" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- INFIRMIERE -->
+<!-- ============================================================ -->
+<div class="role-section" id="infirmiere">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--inf-color);">&#x1f489;</div>
+    <div><h2>Infirmiere</h2><p>Realisation des seances de dialyse : demarrage, signes vitaux, complications, fin de seance</p></div>
+  </div>
+  <div class="access-list">
+    <span class="badge badge-read">Patients (lecture)</span>
+    <span class="badge badge-write">Hemodialyses (realiser)</span>
+    <span class="badge badge-write">Signes vitaux</span>
+    <span class="badge badge-write">Complications</span>
+    <span class="badge badge-read">Bilans biologiques</span>
+    <span class="badge badge-read">Dashboard infirmier</span>
+    <span class="badge badge-no">Prescriptions</span>
+    <span class="badge badge-no">Configuration</span>
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">1</span>
+    <h3>Dashboard infirmiere</h3>
+    <p>Interface dediee avec les seances du jour, les patients en cours de dialyse, les alertes et les taches prioritaires. Permet de voir d'un coup d'oeil toutes les seances a realiser.</p>
+    <img src="screenshots/inf_01_dashboard.png" alt="Infirmiere - Dashboard" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">2</span>
+    <h3>Liste des hemodialyses</h3>
+    <p>Seances planifiees et en cours assignees a l'infirmiere. Cliquer sur une seance pour la demarrer ou la completer. Les seances sont filtrees automatiquement selon le planning de l'infirmiere.</p>
+    <img src="screenshots/inf_02_hemodialyses_liste.png" alt="Infirmiere - Hemodialyses" onclick="openLightbox(this)">
+  </div>
+
+  <div class="sub-section"><h4>Deroulement d'une seance — Onglets</h4></div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">3</span>
+    <h3>Pre-dialyse remplie</h3>
+    <p>L'infirmiere pese le patient (72.5 kg), prend la tension (140/85 mmHg), la temperature (36.8 C) et note l'etat general. Le gain de poids interdialytique et l'UF cible sont calcules automatiquement a partir du poids sec enregistre dans le dossier patient.</p>
+    <img src="screenshots/inf_03_seance_pre_dialyse.png" alt="Infirmiere - Pre-dialyse" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">4</span>
+    <h3>Signes vitaux pendant la seance</h3>
+    <p>A intervalles reguliers (toutes les 30 min a 1h), l'infirmiere saisit les constantes : tension arterielle, frequence cardiaque, SpO2, temperature. Les alertes automatiques (rouge/orange) signalent les valeurs hors normes pour reagir rapidement.</p>
+    <img src="screenshots/inf_04_seance_signes_vitaux.png" alt="Infirmiere - Signes vitaux" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">5</span>
+    <h3>Parametres machine</h3>
+    <p>Configuration de la machine : debit sang (300 ml/min), debit dialysat (500 ml/min), anticoagulation (HBPM 4000 UI), type de dialyseur et dialysat. L'infirmiere verifie que les parametres correspondent a la prescription du medecin.</p>
+    <img src="screenshots/inf_05_seance_parametres_machine.png" alt="Infirmiere - Parametres machine" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">6</span>
+    <h3>Post-dialyse</h3>
+    <p>En fin de seance : poids apres (70.5 kg), tension finale (130/80 mmHg), UF reelle (calculee automatiquement), tolerance globale. Le Kt/V et l'URR sont calcules pour evaluer l'efficacite de la seance. L'infirmiere note egalement la tolerance globale du patient.</p>
+    <img src="screenshots/inf_06_seance_post_dialyse.png" alt="Infirmiere - Post-dialyse" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">7</span>
+    <h3>Complications</h3>
+    <p>Toute complication est documentee : type (hypotension avec TA 85/55, crampes), moment de survenue, action prise (bolus NaCl 0.9%, massage, reduction du debit UF, position Trendelenburg), resolution. Ces informations sont essentielles pour le medecin et le suivi du patient.</p>
+    <img src="screenshots/inf_07_seance_complications.png" alt="Infirmiere - Complications" onclick="openLightbox(this)">
+  </div>
+
+  <div class="sub-section"><h4>Consultation des bilans</h4></div>
+
+  <div class="step" style="border-left-color: var(--inf-color);">
+    <span class="step-num" style="background: var(--inf-color);">8</span>
+    <h3>Bilans biologiques (consultation)</h3>
+    <p>L'infirmiere consulte les resultats biologiques en lecture seule pour adapter sa surveillance clinique : verifier l'hemoglobine avant une seance, controler le potassium, ou suivre l'evolution des marqueurs du patient.</p>
+    <img src="screenshots/inf_08_bilans_liste.png" alt="Infirmiere - Bilans" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- FACTURATION -->
+<!-- ============================================================ -->
+<div class="role-section" id="facturation">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--fac-color);">&#x1f4b0;</div>
+    <div><h2>Agent de Facturation</h2><p>Suivi financier : facturation des seances, generation de factures, suivi des paiements</p></div>
+  </div>
+  <div class="access-list">
+    <span class="badge badge-read">Hemodialyses (lecture)</span>
+    <span class="badge badge-write">Factures</span>
+    <span class="badge badge-write">Seances non facturees</span>
+    <span class="badge badge-no">Patients (medical)</span>
+    <span class="badge badge-no">Prescriptions</span>
+    <span class="badge badge-no">Configuration</span>
+  </div>
+
+  <div class="step" style="border-left-color: var(--fac-color);">
+    <span class="step-num" style="background: var(--fac-color);">1</span>
+    <h3>Liste des hemodialyses</h3>
+    <p>Vue d'ensemble des seances de dialyse avec les colonnes de facturation. L'agent de facturation identifie les seances terminees (statut "Terminee") qui n'ont pas encore ete facturees pour generer les factures correspondantes.</p>
+    <img src="screenshots/fac_01_hemodialyses_liste.png" alt="Facturation - Hemodialyses" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--fac-color);">
+    <span class="step-num" style="background: var(--fac-color);">2</span>
+    <h3>Seances de dialyse</h3>
+    <p>Vue detaillee des seances avec informations de facturation : reference, patient, date, duree, montant et statut de facturation (facture / non facture).</p>
+    <img src="screenshots/fac_02_seances_liste.png" alt="Facturation - Seances" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--fac-color);">
+    <span class="step-num" style="background: var(--fac-color);">3</span>
+    <h3>Liste des factures</h3>
+    <p>Toutes les factures generees avec numero, client, date d'emission, montant total (en FCFA) et statut de paiement (brouillon, emise, payee, en retard). L'agent peut suivre les paiements et relancer les impayees.</p>
+    <img src="screenshots/fac_03_factures_liste.png" alt="Facturation - Factures" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PATIENT PORTAIL -->
+<!-- ============================================================ -->
+<div class="role-section" id="patient">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--pat-color);">&#x1f464;</div>
+    <div><h2>Patient — Portail</h2><p>Acces en ligne aux informations personnelles : tableau de bord, seances, bilans, ordonnances, rendez-vous, factures</p></div>
+  </div>
+  <div class="access-list">
+    <span class="badge badge-read">Tableau de bord</span>
+    <span class="badge badge-read">Mes seances</span>
+    <span class="badge badge-read">Mes bilans</span>
+    <span class="badge badge-read">Mes ordonnances</span>
+    <span class="badge badge-read">Mes rendez-vous</span>
+    <span class="badge badge-read">Mes factures</span>
+    <span class="badge badge-no">Backend Odoo</span>
+  </div>
+
+  <div class="step" style="border-left-color: var(--pat-color);">
+    <span class="step-num" style="background: var(--pat-color);">1</span>
+    <h3>Tableau de bord du portail</h3>
+    <p>Apres connexion, le patient arrive sur son tableau de bord personnel accessible a <code>/my/nephro</code>. Il y retrouve un resume de ses informations cles : prochain rendez-vous, dernier bilan (hemoglobine), solde a payer et dernier Kt/V. Des boutons permettent d'acceder a chaque section.</p>
+    <img src="screenshots/pat_01_accueil_portail.png" alt="Patient - Accueil portail" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--pat-color);">
+    <span class="step-num" style="background: var(--pat-color);">2</span>
+    <h3>Mes seances de dialyse</h3>
+    <p>Historique complet des seances de dialyse avec date, duree, Kt/V, UF et tolerance. Le patient peut cliquer sur une seance pour voir le detail (poids avant/apres, tension, UF reelle). Accessible a <code>/my/seances</code>.</p>
+    <img src="screenshots/pat_02_mes_seances.png" alt="Patient - Mes seances" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--pat-color);">
+    <span class="step-num" style="background: var(--pat-color);">3</span>
+    <h3>Mes bilans biologiques</h3>
+    <p>Resultats d'analyses avec valeurs et indicateurs de normalite (vert = normal, orange = alerte, rouge = critique). Le patient peut cliquer sur un bilan pour voir le detail complet (hematologie, electrolytes, mineral-osseux). Accessible a <code>/my/bilans</code>.</p>
+    <img src="screenshots/pat_03_mes_bilans.png" alt="Patient - Mes bilans" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--pat-color);">
+    <span class="step-num" style="background: var(--pat-color);">4</span>
+    <h3>Mes ordonnances</h3>
+    <p>Liste des prescriptions avec reference, date, medecin prescripteur et statut. Le patient peut verifier ses traitements en cours (EPO, Fer, Calcium, etc.). Accessible a <code>/my/ordonnances</code>.</p>
+    <img src="screenshots/pat_04_mes_ordonnances.png" alt="Patient - Mes ordonnances" onclick="openLightbox(this)">
+  </div>
+
+  <div class="step" style="border-left-color: var(--pat-color);">
+    <span class="step-num" style="background: var(--pat-color);">5</span>
+    <h3>Mes rendez-vous</h3>
+    <p>Historique et prochains rendez-vous de consultation avec date, medecin et statut (confirme, brouillon, annule). Le patient peut annuler un rendez-vous directement depuis le portail. Accessible a <code>/my/rdv</code>.</p>
+    <img src="screenshots/pat_05_mes_rdv.png" alt="Patient - Mes rendez-vous" onclick="openLightbox(this)">
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- IDENTIFIANTS -->
+<!-- ============================================================ -->
+<div class="role-section" id="credentials">
+  <div class="role-header">
+    <div class="role-icon" style="background: var(--text-muted);">&#x1f511;</div>
+    <div><h2>Identifiants de connexion</h2><p>Comptes utilisateurs pour acceder a la plateforme</p></div>
+  </div>
+  <table class="creds-table">
+    <thead><tr><th>Role</th><th>Login</th><th>Mot de passe</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Administrateur</strong></td><td>admin@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+      <tr><td><strong>Secretaire</strong></td><td>secretaire@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+      <tr><td><strong>Medecin</strong></td><td>medecin@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+      <tr><td><strong>Infirmiere</strong></td><td>infirmiere@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+      <tr><td><strong>Facturation</strong></td><td>facturation@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+      <tr><td><strong>Patient (portail)</strong></td><td>patient@clinique.test</td><td>Nephro2024!</td><td>/web/login</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top: 15px; color: var(--text-muted); font-size: 0.9em;">
+    <strong>Note :</strong> Les utilisateurs backend (Secretaire, Medecin, Infirmiere, Facturation) se connectent via <code>/web/login</code> et accedent au module Nephrologie depuis le menu principal. Le patient se connecte au meme URL mais est redirige vers le portail <code>/my</code>, puis accede a son tableau de bord nephro via <code>/my/nephro</code>.
+  </p>
+</div>
+
+</div>
+
+<div class="footer">
+  <p><strong>Module Nephrologie v2 — Odoo 19</strong></p>
+  <p>As-Shafi Medical Center &mdash; Guide genere avec Playwright</p>
+  <p style="margin-top: 10px; font-size: 0.85em;">Septembre 2026 &mdash; 41 captures d'ecran couvrant 5 roles et tous les onglets</p>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(img) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightbox-img').src = img.src;
+  lb.classList.add('active');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
