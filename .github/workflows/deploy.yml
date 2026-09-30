@@ -1,0 +1,68 @@
+name: Deploy to As-Shafi
+
+on:
+  push:
+    branches:
+      - main
+      - feat/phase1-nephro-core
+
+jobs:
+  deploy:
+    name: Deploy via Portainer
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
+
+    steps:
+      - name: Pull latest code in Odoo container
+        run: |
+          # Create exec instance to run git pull inside the Odoo container
+          EXEC_ID=$(curl -s -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/exec" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "AttachStdout": true,
+              "AttachStderr": true,
+              "Cmd": ["git", "-C", "/mnt/extra-addons", "pull", "origin", "${{ github.ref_name }}"]
+            }' | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
+
+          echo "Exec ID: $EXEC_ID"
+
+          # Start the exec and capture output
+          curl -s -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/start" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"Detach": false, "Tty": false}'
+
+          echo "git pull done"
+
+      - name: Restart Odoo container
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/restart" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}")
+
+          echo "Restart HTTP status: $HTTP_STATUS"
+          if [ "$HTTP_STATUS" != "204" ]; then
+            echo "ERROR: restart failed with status $HTTP_STATUS"
+            exit 1
+          fi
+          echo "Odoo container restarted successfully"
+
+      - name: Wait for Odoo to be ready
+        run: |
+          echo "Waiting for Odoo to start..."
+          for i in $(seq 1 24); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -m 5 "https://as-shafi.com/web/health" 2>/dev/null || echo "000")
+            echo "  Attempt $i/24 → HTTP $STATUS"
+            if [ "$STATUS" = "200" ]; then
+              echo "Odoo is up!"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "WARNING: Odoo did not respond in time (may still be starting)"
+          exit 0
