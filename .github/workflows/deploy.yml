@@ -10,37 +10,48 @@ jobs:
   deploy:
     name: Deploy via Portainer
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref_name == 'main' && 'production' || 'staging' }}
 
     steps:
       - name: Pull latest code in Odoo container
         run: |
-          # Create exec instance to run git pull inside the Odoo container
-          EXEC_ID=$(curl -s -X POST \
+          BRANCH="${{ github.ref_name }}"
+          echo "Deploying branch: $BRANCH"
+
+          # Create exec to run git pull inside the Odoo container
+          EXEC_RESP=$(curl -sk -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/exec" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{
-              "AttachStdout": true,
-              "AttachStderr": true,
-              "Cmd": ["git", "-C", "/mnt/extra-addons", "pull", "origin", "${{ github.ref_name }}"]
-            }' | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
+            -d "{
+              \"AttachStdout\": true,
+              \"AttachStderr\": true,
+              \"Cmd\": [\"git\", \"-C\", \"/mnt/extra-addons\", \"pull\", \"origin\", \"$BRANCH\"]
+            }")
 
+          EXEC_ID=$(echo "$EXEC_RESP" | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
           echo "Exec ID: $EXEC_ID"
 
-          # Start the exec and capture output
-          curl -s -X POST \
+          # Start exec (blocking until done)
+          curl -sk -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/start" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{"Detach": false, "Tty": false}'
+            -d '{"Detach": false, "Tty": false}' > /tmp/exec_output.bin
 
-          echo "git pull done"
+          # Check exec exit code
+          INSPECT=$(curl -sk \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/json" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}")
+          EXIT_CODE=$(echo "$INSPECT" | python3 -c "import sys,json; print(json.load(sys.stdin).get('ExitCode', 1))")
+          echo "git pull exit code: $EXIT_CODE"
+          if [ "$EXIT_CODE" != "0" ]; then
+            echo "ERROR: git pull failed"
+            exit 1
+          fi
 
       - name: Restart Odoo container
         run: |
-          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+          HTTP_STATUS=$(curl -sk -o /dev/null -w "%{http_code}" -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/restart" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}")
 
@@ -49,20 +60,19 @@ jobs:
             echo "ERROR: restart failed with status $HTTP_STATUS"
             exit 1
           fi
-          echo "Odoo container restarted successfully"
+          echo "Container restarted"
 
       - name: Wait for Odoo to be ready
         run: |
-          echo "Waiting for Odoo to start..."
-          for i in $(seq 1 24); do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-              -m 5 "https://as-shafi.com/web/health" 2>/dev/null || echo "000")
-            echo "  Attempt $i/24 → HTTP $STATUS"
+          echo "Waiting for Odoo to come up..."
+          for i in $(seq 1 30); do
+            STATUS=$(curl -sk -o /dev/null -w "%{http_code}" -m 5 \
+              "https://as-shafi.com/web/health" 2>/dev/null || echo "000")
+            echo "  Attempt $i/30 → HTTP $STATUS"
             if [ "$STATUS" = "200" ]; then
-              echo "Odoo is up!"
+              echo "Odoo is ready!"
               exit 0
             fi
             sleep 5
           done
-          echo "WARNING: Odoo did not respond in time (may still be starting)"
-          exit 0
+          echo "WARNING: Odoo did not respond within 150s (may still be starting)"
