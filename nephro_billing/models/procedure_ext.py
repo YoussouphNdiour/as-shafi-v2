@@ -62,7 +62,9 @@ class NephroProcedureBilling(models.Model):
                 'price_unit': line.product_id.list_price,
             }))
 
-        invoice = self.env['account.move'].create({
+        invoice = self.env['account.move'].with_context(
+            default_state='draft',
+        ).create({
             'partner_id': self.patient_id.partner_id.id,
             'move_type': 'out_invoice',
             'invoice_line_ids': invoice_lines,
