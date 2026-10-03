@@ -59,20 +59,6 @@
                     <group>
                         <field name="parameter_change_reason" colspan="2"/>
                     </group>
-                    <separator string="Relevés machine horodatés"/>
-                    <field name="machine_param_ids" nolabel="1">
-                        <list editable="bottom">
-                            <field name="timestamp"/>
-                            <field name="blood_flow"/>
-                            <field name="pa"/>
-                            <field name="pv"/>
-                            <field name="ptm"/>
-                            <field name="uf_h"/>
-                            <field name="uf_total"/>
-                            <field name="dialysate_temp"/>
-                            <field name="dialysate_flow"/>
-                        </list>
-                    </field>
                 </page>
 
                 <!-- Vital Signs tab -->
@@ -114,19 +100,22 @@
                     </group>
                 </page>
 
-                <!-- Machine Readings tab (single values) -->
+                <!-- Machine Readings tab -->
                 <page string="Relevés machine">
-                    <group>
-                        <group>
-                            <field name="pv_arterial"/>
+                    <field name="machine_param_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="timestamp"/>
+                            <field name="blood_flow"/>
+                            <field name="pa"/>
+                            <field name="pv"/>
                             <field name="ptm"/>
+                            <field name="uf_h"/>
+                            <field name="uf_total"/>
                             <field name="conductivity"/>
-                        </group>
-                        <group>
-                            <field name="uf_rate"/>
-                            <field name="vst_start"/>
-                        </group>
-                    </group>
+                            <field name="dialysate_temp"/>
+                            <field name="dialysate_flow"/>
+                        </list>
+                    </field>
                 </page>
 
             </xpath>

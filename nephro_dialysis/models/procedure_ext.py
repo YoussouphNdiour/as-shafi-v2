@@ -39,6 +39,7 @@ class NephroMachineParamLine(models.Model):
     ptm = fields.Float(string="PTM", digits=(6, 0))
     uf_h = fields.Float(string="UF/H (mL)", digits=(6, 0))
     uf_total = fields.Float(string="UF total (mL)", digits=(6, 0))
+    conductivity = fields.Float(string="Conductivité (mS/cm)", digits=(4, 1))
     dialysate_temp = fields.Float(string="Temp. dialysat (°C)", digits=(4, 1))
     dialysate_flow = fields.Float(string="Débit dialysat (mL/min)", digits=(6, 0))
 
@@ -115,10 +116,6 @@ class NephroProcedureDialysis(models.Model):
     )
 
     # --- Lectures machine (valeurs uniques) ---
-    pv_arterial = fields.Float(string="Pression veineuse (mmHg)")
-    ptm = fields.Float(string="Pression transmembranaire")
-    conductivity = fields.Float(string="Conductivité")
-    uf_rate = fields.Float(string="Débit UF (mL/h)")
     vst_start = fields.Float(string="Début VST")
 
     @api.depends('pre_weight', 'dry_weight')
