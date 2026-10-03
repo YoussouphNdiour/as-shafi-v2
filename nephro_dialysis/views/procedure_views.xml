@@ -10,15 +10,29 @@
                 <!-- Pre-dialysis tab -->
                 <page string="Pré-dialyse">
                     <group>
-                        <group string="Mesures">
+                        <group string="Poids">
+                            <field name="dry_weight"/>
                             <field name="pre_weight"/>
+                            <field name="interdialytic_weight_gain" readonly="1"/>
+                            <field name="target_uf" readonly="1"/>
+                        </group>
+                        <group string="Mesures">
                             <field name="pre_bp"/>
+                            <field name="pre_bp_standing"/>
+                            <field name="pre_bp_lying"/>
                             <field name="pre_temp"/>
                             <field name="arrival_status"/>
                         </group>
-                        <group string="Poids">
-                            <field name="interdialytic_weight_gain" readonly="1"/>
-                            <field name="target_uf" readonly="1"/>
+                    </group>
+                    <group string="UF et adéquation dialyse">
+                        <group>
+                            <field name="uf_habituelle"/>
+                            <field name="uf_max"/>
+                        </group>
+                        <group>
+                            <field name="last_ktv_sp"/>
+                            <field name="last_ktv_dp"/>
+                            <field name="last_pru"/>
                         </group>
                     </group>
                 </page>
@@ -33,9 +47,11 @@
                             <field name="dialyzer_id"/>
                             <field name="dialysate_id"/>
                         </group>
-                        <group string="Réglages débits">
-                            <field name="blood_flow"/>
-                            <field name="dialysate_flow"/>
+                        <group string="Abord et ponction">
+                            <field name="needle_type"/>
+                            <field name="puncture_type"/>
+                            <field name="puncture_unipuncture"
+                                invisible="puncture_type != 'unipuncture'"/>
                             <field name="anticoagulation"/>
                             <field name="anticoag_dose"/>
                         </group>
@@ -43,6 +59,20 @@
                     <group>
                         <field name="parameter_change_reason" colspan="2"/>
                     </group>
+                    <separator string="Relevés machine horodatés"/>
+                    <field name="machine_param_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="timestamp"/>
+                            <field name="blood_flow"/>
+                            <field name="pa"/>
+                            <field name="pv"/>
+                            <field name="ptm"/>
+                            <field name="uf_h"/>
+                            <field name="uf_total"/>
+                            <field name="dialysate_temp"/>
+                            <field name="dialysate_flow"/>
+                        </list>
+                    </field>
                 </page>
 
                 <!-- Vital Signs tab -->
@@ -50,11 +80,12 @@
                     <field name="vital_sign_ids">
                         <list editable="bottom">
                             <field name="timestamp"/>
-                            <field name="systolic_bp"/>
-                            <field name="diastolic_bp"/>
+                            <field name="systolic_bp" string="TA sys"/>
+                            <field name="diastolic_bp" string="TA dia"/>
                             <field name="heart_rate"/>
                             <field name="spo2"/>
                             <field name="temperature"/>
+                            <field name="dextro"/>
                             <field name="is_alert" readonly="1"
                                 decoration-danger="is_alert"/>
                         </list>
@@ -69,6 +100,8 @@
                             <field name="post_bp"/>
                             <field name="actual_uf" readonly="1"/>
                             <field name="global_tolerance"/>
+                            <field name="dialyzer_state"/>
+                            <field name="restitution"/>
                         </group>
                         <group string="Adéquation">
                             <field name="ktv" readonly="1"/>
@@ -81,7 +114,7 @@
                     </group>
                 </page>
 
-                <!-- Machine Readings tab -->
+                <!-- Machine Readings tab (single values) -->
                 <page string="Relevés machine">
                     <group>
                         <group>

@@ -46,7 +46,6 @@ class NephroPatient(models.Model):
         [('hemodialysis', 'Hémodialyse'), ('peritoneal', 'Péritonéale')],
         string="Type de dialyse",
     )
-    dry_weight = fields.Float(string="Poids sec (kg)", digits=(5, 1))
     dialysis_start_date = fields.Date(string="Date début dialyse")
 
     # --- Médical ---

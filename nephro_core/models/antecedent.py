@@ -45,6 +45,8 @@ class NephroAntecedentGO(models.Model):
     date = fields.Date(string="Date")
     gestity = fields.Integer(string="Gestité")
     parity = fields.Integer(string="Parité")
+    avortement = fields.Integer(string="Avortements")
+    deces = fields.Integer(string="Décès")
     notes = fields.Text(string="Remarques")
 
 

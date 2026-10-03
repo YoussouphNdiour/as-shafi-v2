@@ -34,3 +34,6 @@ access_dry_weight_manager,nephro.dry.weight.history.manager,model_nephro_dry_wei
 access_session_generator_secretary,nephro.session.generator.secretary,model_nephro_session_generator,nephro_core.group_nephro_secretary,1,1,1,0
 access_session_generator_doctor,nephro.session.generator.doctor,model_nephro_session_generator,nephro_core.group_nephro_doctor,1,1,0,0
 access_session_generator_manager,nephro.session.generator.manager,model_nephro_session_generator,nephro_core.group_nephro_manager,1,1,1,1
+access_machine_param_nurse,nephro.machine.param.line.nurse,model_nephro_machine_param_line,nephro_core.group_nephro_nurse,1,1,1,1
+access_machine_param_doctor,nephro.machine.param.line.doctor,model_nephro_machine_param_line,nephro_core.group_nephro_doctor,1,1,1,1
+access_machine_param_manager,nephro.machine.param.line.manager,model_nephro_machine_param_line,nephro_core.group_nephro_manager,1,1,1,1

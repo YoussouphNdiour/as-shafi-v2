@@ -17,6 +17,7 @@ class NephroVitalSign(models.Model):
     spo2 = fields.Float(string="SpO2 (%)", digits=(5, 1))
     temperature = fields.Float(string="Température (°C)", digits=(4, 1))
     glycemia = fields.Float(string="Glycémie")
+    dextro = fields.Char(string="Dextro")
     is_alert = fields.Boolean(
         string="Alerte", compute='_compute_is_alert', store=True,
     )

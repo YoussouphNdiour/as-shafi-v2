@@ -32,14 +32,25 @@
                         <group string="Néphrologie" name="nephrology_group">
                             <field name="is_nephro"/>
                             <field name="dialysis_type" invisible="not is_nephro"/>
-                            <field name="dry_weight" invisible="not is_nephro"/>
                             <field name="dialysis_start_date" invisible="not is_nephro"/>
                             <field name="physician_id"/>
                         </group>
                     </group>
 
                     <notebook>
-                        <!-- ===== 1. Antécédants ===== -->
+                        <!-- ===== 1. Histoire médicale ===== -->
+                        <page string="Histoire médicale" name="medical_history">
+                            <group>
+                                <field name="main_complaint"/>
+                            </group>
+                            <group string="Histoire de la maladie">
+                                <field name="disease_history" nolabel="1"/>
+                            </group>
+                            <separator string="Historique médical général"/>
+                            <field name="medical_history" nolabel="1"/>
+                        </page>
+
+                        <!-- ===== 2. Antécédants ===== -->
                         <page string="Antécédants" name="antecedents">
                             <notebook>
                                 <page string="Personnels" name="antecedent_personal">
@@ -75,6 +86,8 @@
                                             <field name="date"/>
                                             <field name="gestity"/>
                                             <field name="parity"/>
+                                            <field name="avortement"/>
+                                            <field name="deces"/>
                                             <field name="notes"/>
                                         </list>
                                     </field>
@@ -102,7 +115,7 @@
                             </notebook>
                         </page>
 
-                        <!-- ===== 2. Examens Physiques ===== -->
+                        <!-- ===== 3. Examens Physiques ===== -->
                         <page string="Examens Physiques" name="physical_exams">
                             <field name="physical_exam_ids" nolabel="1">
                                 <list>
@@ -155,34 +168,64 @@
                             </field>
                         </page>
 
-                        <!-- ===== 3. Imagerie ===== -->
+                        <!-- ===== 4. Imagerie ===== -->
                         <page string="Imagerie" name="imaging">
                             <notebook>
                                 <page string="Échographies" name="echographies">
                                     <field name="echography_ids" nolabel="1">
-                                        <list editable="bottom">
+                                        <list>
                                             <field name="name"/>
                                             <field name="date"/>
                                             <field name="organ"/>
                                             <field name="result"/>
                                             <field name="conclusion"/>
                                         </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="organ"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
                                     </field>
                                 </page>
                                 <page string="Radiographies" name="radiographies">
                                     <field name="radiography_ids" nolabel="1">
-                                        <list editable="bottom">
+                                        <list>
                                             <field name="name"/>
                                             <field name="date"/>
                                             <field name="region"/>
                                             <field name="result"/>
                                             <field name="conclusion"/>
                                         </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
                                     </field>
                                 </page>
                                 <page string="TDM" name="tdm">
                                     <field name="tdm_ids" nolabel="1">
-                                        <list editable="bottom">
+                                        <list>
                                             <field name="name"/>
                                             <field name="date"/>
                                             <field name="region"/>
@@ -190,11 +233,27 @@
                                             <field name="result"/>
                                             <field name="conclusion"/>
                                         </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                    <field name="contrast"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
                                     </field>
                                 </page>
                                 <page string="IRM" name="irm">
                                     <field name="irm_ids" nolabel="1">
-                                        <list editable="bottom">
+                                        <list>
                                             <field name="name"/>
                                             <field name="date"/>
                                             <field name="region"/>
@@ -202,30 +261,38 @@
                                             <field name="result"/>
                                             <field name="conclusion"/>
                                         </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                    <field name="contrast"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
                                     </field>
                                 </page>
                             </notebook>
                         </page>
 
-                        <!-- ===== 4. Diagnostic ===== -->
+                        <!-- ===== 5. Diagnostic ===== -->
                         <page string="Diagnostic" name="diagnostic">
-                            <group>
-                                <field name="main_complaint"/>
+                            <group string="Résumé néphro">
+                                <field name="nephro_summary" nolabel="1" colspan="2"/>
                             </group>
-                            <group string="Histoire de la maladie">
-                                <field name="disease_history" nolabel="1"/>
-                            </group>
-                            <group>
-                                <group string="Résumé néphro">
-                                    <field name="nephro_summary" nolabel="1"/>
-                                </group>
-                                <group string="Risque génétique">
-                                    <field name="genetic_risk" nolabel="1"/>
-                                </group>
+                            <group string="Risque génétique">
+                                <field name="genetic_risk" nolabel="1" colspan="2"/>
                             </group>
                         </page>
 
-                        <!-- ===== 5. Néphropathie Initiale ===== -->
+                        <!-- ===== 6. Néphropathie Initiale ===== -->
                         <page string="Néphropathie Initiale" name="nephropathy"
                             invisible="not is_nephro">
                             <group>
@@ -246,11 +313,6 @@
                             <group string="Notes">
                                 <field name="nephropathy_notes" nolabel="1"/>
                             </group>
-                        </page>
-
-                        <!-- ===== 6. Historique médical ===== -->
-                        <page string="Historique médical" name="medical_history">
-                            <field name="medical_history"/>
                         </page>
                     </notebook>
                 </sheet>
