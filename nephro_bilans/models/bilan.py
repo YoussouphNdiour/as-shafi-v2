@@ -140,6 +140,7 @@ class NephroBilan(models.Model):
     hbs_ag = fields.Selection(SEROLOGY_STATES, string="HBs Ag", default='not_done')
     anti_hbs = fields.Selection(SEROLOGY_STATES, string="Anti-HBs", default='not_done')
     anti_hbc = fields.Selection(SEROLOGY_STATES, string="Anti-HBc", default='not_done')
+    anti_hbe = fields.Selection(SEROLOGY_STATES, string="Anti-HBe", default='not_done')
     anti_hcv = fields.Selection(SEROLOGY_STATES, string="Anti-VHC", default='not_done')
     anti_hiv = fields.Selection(SEROLOGY_STATES, string="Anti-VIH", default='not_done')
     tpha = fields.Selection(SEROLOGY_STATES, string="TPHA", default='not_done')

@@ -202,6 +202,7 @@
                                     <field name="hbs_ag"/>
                                     <field name="anti_hbs"/>
                                     <field name="anti_hbc"/>
+                                    <field name="anti_hbe"/>
                                 </group>
                                 <group string="Autres">
                                     <field name="anti_hcv"/>
