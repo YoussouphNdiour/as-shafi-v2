@@ -13,3 +13,16 @@ class NephroPatientBilans(models.Model):
             rec.bilan_count = self.env['nephro.bilan'].search_count([
                 ('patient_id', '=', rec.id),
             ])
+
+    def action_open_bilan_stats(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id(
+            'nephro_bilans.nephro_bilan_stats_action'
+        )
+        action['domain'] = [('patient_id', '=', self.id)]
+        action['context'] = {
+            'default_patient_id': self.id,
+            'search_default_patient_id': self.id,
+        }
+        action['display_name'] = "Statistiques — %s" % self.name
+        return action

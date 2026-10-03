@@ -315,11 +315,52 @@
         </field>
     </record>
 
+    <!-- ===== GRAPH VIEW ===== -->
+    <record id="nephro_bilan_view_graph" model="ir.ui.view">
+        <field name="name">nephro.bilan.graph</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <graph string="Évolution des bilans" type="line" sample="1">
+                <field name="date" type="row"/>
+                <field name="hemoglobin" type="measure" string="Hémoglobine (g/dL)"/>
+                <field name="potassium" type="measure" string="Potassium (mmol/L)"/>
+                <field name="phosphorus" type="measure" string="Phosphore (mmol/L)"/>
+                <field name="calcium" type="measure" string="Calcium (mmol/L)"/>
+                <field name="albumin" type="measure" string="Albumine (g/L)"/>
+                <field name="pth" type="measure" string="PTH (pg/mL)"/>
+                <field name="crp" type="measure" string="CRP (mg/L)"/>
+                <field name="ferritin" type="measure" string="Ferritine (µg/L)"/>
+                <field name="creatinine" type="measure" string="Créatinine (µmol/L)"/>
+                <field name="urea_pre" type="measure" string="Urée pré (mmol/L)"/>
+                <field name="hba1c" type="measure" string="HbA1c"/>
+                <field name="alert_count" type="measure" string="Nb alertes"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- ===== PIVOT VIEW ===== -->
+    <record id="nephro_bilan_view_pivot" model="ir.ui.view">
+        <field name="name">nephro.bilan.pivot</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <pivot string="Statistiques bilans" sample="1" display_quantity="1">
+                <field name="patient_id" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="hemoglobin" type="measure" string="Hb (g/dL)"/>
+                <field name="potassium" type="measure" string="K (mmol/L)"/>
+                <field name="phosphorus" type="measure" string="P (mmol/L)"/>
+                <field name="albumin" type="measure" string="Albumine (g/L)"/>
+                <field name="crp" type="measure" string="CRP (mg/L)"/>
+                <field name="alert_count" type="measure" string="Alertes"/>
+            </pivot>
+        </field>
+    </record>
+
     <!-- ===== ACTION ===== -->
     <record id="nephro_bilan_action" model="ir.actions.act_window">
         <field name="name">Résultats biologiques</field>
         <field name="res_model">nephro.bilan</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,form,graph,pivot</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Aucun résultat biologique pour le moment.
@@ -328,7 +369,15 @@
         </field>
     </record>
 
-    <!-- Patient smart button -->
+    <!-- Action statistiques filtrée par patient (depuis fiche patient) -->
+    <record id="nephro_bilan_stats_action" model="ir.actions.act_window">
+        <field name="name">Statistiques biologiques</field>
+        <field name="res_model">nephro.bilan</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">{'search_default_group_date': 1}</field>
+    </record>
+
+    <!-- Patient smart buttons -->
     <record id="nephro_bilan_patient_form_inherit" model="ir.ui.view">
         <field name="name">nephro.patient.bilan.button</field>
         <field name="model">nephro.patient</field>
@@ -338,6 +387,10 @@
                 <button name="%(nephro_bilan_action)d" type="action"
                     class="oe_stat_button" icon="fa-flask">
                     <field name="bilan_count" widget="statinfo" string="Bilans"/>
+                </button>
+                <button name="action_open_bilan_stats" type="object"
+                    class="oe_stat_button" icon="fa-line-chart">
+                    <span class="o_stat_text">Statistiques</span>
                 </button>
             </div>
         </field>
