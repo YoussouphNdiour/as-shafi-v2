@@ -43,9 +43,8 @@
                             <group>
                                 <field name="main_complaint"/>
                             </group>
-                            <group string="Histoire de la maladie">
-                                <field name="disease_history" nolabel="1"/>
-                            </group>
+                            <separator string="Histoire de la maladie"/>
+                            <field name="disease_history" nolabel="1"/>
                             <separator string="Historique médical général"/>
                             <field name="medical_history" nolabel="1"/>
                         </page>
