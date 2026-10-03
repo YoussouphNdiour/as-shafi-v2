@@ -90,7 +90,6 @@
                                 </group>
                                 <group>
                                     <field name="uric_acid"/>
-                                    <field name="crp"/>
                                 </group>
                             </group>
                         </page>
@@ -109,6 +108,12 @@
                                     <field name="bicarbonate"/>
                                     <field name="reserve_alcaline"/>
                                 </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== MINÉRAUX ET VITAMINES ===== -->
+                        <page string="Minéraux et Vitamines" name="minerals_bone">
+                            <group>
                                 <group>
                                     <field name="calcium"/>
                                     <field name="phosphorus"/>
@@ -121,12 +126,6 @@
                                         decoration-danger="caxp_status == 'high'"
                                         decoration-success="caxp_status == 'ok'"/>
                                 </group>
-                            </group>
-                        </page>
-
-                        <!-- ===== MINÉRAUX ET VITAMINES ===== -->
-                        <page string="Minéraux et Vitamines" name="minerals_bone">
-                            <group>
                                 <group>
                                     <field name="pth"/>
                                     <field name="pth_normal_lab" string="Norme labo (N)"/>
@@ -134,8 +133,6 @@
                                         decoration-danger="pth_status == 'high'"
                                         decoration-success="pth_status == 'ok'"
                                         decoration-warning="pth_status == 'low'"/>
-                                </group>
-                                <group>
                                     <field name="vitamin_d"/>
                                     <field name="alkaline_phosphatase"/>
                                 </group>
@@ -152,9 +149,6 @@
                                     <field name="tg"/>
                                 </group>
                                 <group>
-                                    <field name="albuminemie"/>
-                                    <field name="proteidemie"/>
-                                    <field name="pal"/>
                                     <field name="bilirubine_t"/>
                                     <field name="bilirubine_i"/>
                                     <field name="epps"/>
