@@ -154,6 +154,7 @@
                                                 <field name="abdomen"/>
                                                 <field name="limbs"/>
                                                 <field name="genital"/>
+                                                <field name="other_systems"/>
                                             </group>
                                         </page>
                                         <page string="Synthèse">

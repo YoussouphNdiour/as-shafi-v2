@@ -31,6 +31,7 @@ class NephroPhysicalExam(models.Model):
     abdomen = fields.Text(string="Abdomen")
     limbs = fields.Text(string="Membres supérieurs et inférieurs (MSMI)")
     genital = fields.Text(string="Organes génitaux externes (OGE)")
+    other_systems = fields.Text(string="Autres systèmes")
 
     # --- Synthèse ---
     treatment = fields.Text(string="Traitement en cours")
