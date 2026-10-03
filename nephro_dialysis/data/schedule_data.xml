@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Demo Stations -->
+        <record id="station_1a" model="nephro.station">
+            <field name="name">Station 1-A</field>
+            <field name="station_type">standard</field>
+            <field name="room">Salle A</field>
+        </record>
+        <record id="station_2a" model="nephro.station">
+            <field name="name">Station 2-A</field>
+            <field name="station_type">standard</field>
+            <field name="room">Salle A</field>
+        </record>
+        <record id="station_3b" model="nephro.station">
+            <field name="name">Station 3-B</field>
+            <field name="station_type">isolation</field>
+            <field name="room">Salle B</field>
+        </record>
+        <record id="station_4b" model="nephro.station">
+            <field name="name">Station 4-B</field>
+            <field name="station_type">standard</field>
+            <field name="room">Salle B</field>
+        </record>
+
+        <!-- Demo Schedules -->
+        <record id="schedule_mwf_morning_a" model="nephro.schedule">
+            <field name="name">LMV Matin (A)</field>
+            <field name="monday" eval="True"/>
+            <field name="tuesday" eval="False"/>
+            <field name="wednesday" eval="True"/>
+            <field name="thursday" eval="False"/>
+            <field name="friday" eval="True"/>
+            <field name="saturday" eval="False"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">7.0</field>
+            <field name="end_time">11.5</field>
+            <field name="station_id" ref="station_1a"/>
+        </record>
+        <record id="schedule_mwf_afternoon_a" model="nephro.schedule">
+            <field name="name">LMV Après-midi (A)</field>
+            <field name="monday" eval="True"/>
+            <field name="tuesday" eval="False"/>
+            <field name="wednesday" eval="True"/>
+            <field name="thursday" eval="False"/>
+            <field name="friday" eval="True"/>
+            <field name="saturday" eval="False"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">13.0</field>
+            <field name="end_time">17.5</field>
+            <field name="station_id" ref="station_1a"/>
+        </record>
+        <record id="schedule_tts_morning_b" model="nephro.schedule">
+            <field name="name">MJS Matin (B)</field>
+            <field name="monday" eval="False"/>
+            <field name="tuesday" eval="True"/>
+            <field name="wednesday" eval="False"/>
+            <field name="thursday" eval="True"/>
+            <field name="friday" eval="False"/>
+            <field name="saturday" eval="True"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">7.0</field>
+            <field name="end_time">11.5</field>
+            <field name="station_id" ref="station_2a"/>
+        </record>
+        <record id="schedule_tts_afternoon_b" model="nephro.schedule">
+            <field name="name">MJS Après-midi (B)</field>
+            <field name="monday" eval="False"/>
+            <field name="tuesday" eval="True"/>
+            <field name="wednesday" eval="False"/>
+            <field name="thursday" eval="True"/>
+            <field name="friday" eval="False"/>
+            <field name="saturday" eval="True"/>
+            <field name="sunday" eval="False"/>
+            <field name="start_time">13.0</field>
+            <field name="end_time">17.5</field>
+            <field name="station_id" ref="station_2a"/>
+        </record>
+    </data>
+</odoo>

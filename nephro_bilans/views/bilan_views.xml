@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ===== FORM VIEW ===== -->
+    <record id="nephro_bilan_view_form" model="ir.ui.view">
+        <field name="name">nephro.bilan.form</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <form string="Bilan Biologique">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="date" string="Date du bilan"/>
+                            <field name="bilan_type"/>
+                        </group>
+                        <group>
+                            <field name="physician_id"/>
+                            <field name="status" widget="badge"
+                                decoration-success="status == 'normal'"
+                                decoration-warning="status == 'warning'"
+                                decoration-danger="status == 'critical'"/>
+                            <field name="alert_count"/>
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <!-- ===== HÉMATOLOGIE ===== -->
+                        <page string="Hématologie" name="hematology">
+                            <notebook>
+                                <page string="NFS" name="nfs">
+                                    <group>
+                                        <group string="NFS">
+                                            <field name="hemoglobin"/>
+                                            <field name="hemoglobin_status" widget="badge"
+                                                decoration-danger="hemoglobin_status == 'low'"
+                                                decoration-success="hemoglobin_status == 'ok'"
+                                                decoration-warning="hemoglobin_status == 'high'"/>
+                                            <field name="vgm"/>
+                                            <field name="ccmh"/>
+                                            <field name="hematocrit"/>
+
+                                            <field name="platelets"/>
+                                            <field name="leu"/>
+                                        </group>
+                                        <group>
+                                            <separator string="Formule leucocytaire"/>
+                                            <field name="neutrophiles"/>
+                                            <field name="eosinophiles"/>
+                                            <field name="basophiles"/>
+                                            <field name="lymphocytes"/>
+                                            <field name="monocytes"/>
+                                            <separator string="Autres"/>
+                                            <field name="uricemie"/>
+                                            <field name="gaj"/>
+                                            <field name="hba1c"/>
+                                        </group>
+                                    </group>
+                                </page>
+
+                                <page string="Bilan martial" name="martial">
+                                    <group>
+                                        <group>
+                                            <field name="ferritin"/>
+                                            <field name="transferrin_saturation"/>
+                                        </group>
+                                        <group>
+                                            <field name="cst"/>
+                                            <field name="serum_iron"/>
+                                        </group>
+                                    </group>
+                                </page>
+                            </notebook>
+                        </page>
+
+                        <!-- ===== BIOCHIMIE RÉNALE ===== -->
+                        <page string="Biochimie Rénale" name="renal_biochemistry">
+                            <group>
+                                <group>
+                                    <field name="creatinine"/>
+                                    <field name="dfg_mdrd"/>
+                                    <field name="urea_pre"/>
+                                    <field name="urea_post"/>
+                                    <field name="urr_calculated" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="uric_acid"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== ÉLECTROLYTES ===== -->
+                        <page string="Électrolytes" name="electrolytes">
+                            <group>
+                                <group>
+                                    <field name="sodium"/>
+                                    <field name="potassium"/>
+                                    <field name="potassium_status" widget="badge"
+                                        decoration-danger="potassium_status == 'high'"
+                                        decoration-success="potassium_status == 'ok'"
+                                        decoration-warning="potassium_status == 'low'"/>
+                                    <field name="chloride"/>
+                                    <field name="bicarbonate"/>
+                                    <field name="reserve_alcaline"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== MINÉRAUX ET VITAMINES ===== -->
+                        <page string="Minéraux et Vitamines" name="minerals_bone">
+                            <group>
+                                <group>
+                                    <field name="calcium"/>
+                                    <field name="phosphorus"/>
+                                    <field name="phosphorus_status" widget="badge"
+                                        decoration-danger="phosphorus_status == 'high'"
+                                        decoration-success="phosphorus_status == 'ok'"
+                                        decoration-warning="phosphorus_status == 'low'"/>
+                                    <field name="ca_p_ratio" readonly="1"/>
+                                    <field name="caxp_status" widget="badge"
+                                        decoration-danger="caxp_status == 'high'"
+                                        decoration-success="caxp_status == 'ok'"/>
+                                </group>
+                                <group>
+                                    <field name="pth"/>
+                                    <field name="pth_normal_lab" string="Norme labo (N)"/>
+                                    <field name="pth_status" widget="badge"
+                                        decoration-danger="pth_status == 'high'"
+                                        decoration-success="pth_status == 'ok'"
+                                        decoration-warning="pth_status == 'low'"/>
+                                    <field name="vitamin_d"/>
+                                    <field name="alkaline_phosphatase"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== BILAN LIPIDIQUE ===== -->
+                        <page string="Bilan Lipidique" name="lipid_profile">
+                            <group>
+                                <group>
+                                    <field name="hdl"/>
+                                    <field name="ldl"/>
+                                    <field name="ct"/>
+                                    <field name="tg"/>
+                                </group>
+                                <group>
+                                    <field name="bilirubine_t"/>
+                                    <field name="bilirubine_i"/>
+                                    <field name="epps"/>
+                                    <separator string="Thyroïde"/>
+                                    <field name="tsh"/>
+                                    <field name="t3"/>
+                                    <field name="t4"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== BILAN HÉPATIQUE ===== -->
+                        <page string="Bilan Hépatique" name="liver_function">
+                            <group string="Transaminases">
+                                <group>
+                                    <field name="alat"/>
+                                    <field name="asat"/>
+                                    <field name="gamma_gt"/>
+                                    <field name="ldh_bilan"/>
+                                </group>
+                                <group>
+                                    <field name="cpk"/>
+                                    <field name="haptoglobine"/>
+                                    <field name="schizocytes"/>
+                                    <field name="rac"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== NUTRITION / INFLAMMATION ===== -->
+                        <page string="Nutrition / Inflammation" name="nutrition_inflammation">
+                            <group>
+                                <group string="Nutrition">
+                                    <field name="albumin"/>
+                                    <field name="albumin_status" widget="badge"
+                                        decoration-danger="albumin_status == 'low'"
+                                        decoration-success="albumin_status == 'ok'"/>
+                                    <field name="prealbumin"/>
+                                    <field name="total_protein"/>
+                                </group>
+                                <group string="Inflammation">
+                                    <field name="crp"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== SÉROLOGIES ===== -->
+                        <page string="Sérologies" name="serologies">
+                            <group>
+                                <group string="Hépatite B">
+                                    <field name="hbs_ag"/>
+                                    <field name="anti_hbs"/>
+                                    <field name="anti_hbc"/>
+                                    <field name="anti_hbe"/>
+                                </group>
+                                <group string="Autres">
+                                    <field name="anti_hcv"/>
+                                    <field name="anti_hiv"/>
+                                </group>
+                                <group string="Syphilis">
+                                    <field name="tpha"/>
+                                    <field name="vdrl"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== URINE ===== -->
+                        <page string="Urine" name="urine">
+                            <group>
+                                <group>
+                                    <field name="pu_24h"/>
+                                    <field name="eppu"/>
+                                    <field name="ecbu"/>
+                                    <field name="nau"/>
+                                </group>
+                                <group>
+                                    <field name="ku"/>
+                                    <field name="rapport_na_k"/>
+                                    <field name="uree_urinaire"/>
+                                    <field name="creat_urinaire"/>
+                                </group>
+                            </group>
+                        </page>
+
+                        <!-- ===== PBR ===== -->
+                        <page string="PBR" name="pbr">
+                            <group>
+                                <field name="pbr_resultat" nolabel="1"
+                                    placeholder="Résultat de la PBR..."/>
+                            </group>
+                        </page>
+
+                        <!-- ===== NOTES ===== -->
+                        <page string="Notes" name="notes">
+                            <field name="notes" placeholder="Observations, commentaires..."/>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ===== LIST VIEW ===== -->
+    <record id="nephro_bilan_view_list" model="ir.ui.view">
+        <field name="name">nephro.bilan.list</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <list string="Bilans Biologiques"
+                decoration-danger="hemoglobin_status == 'low' or potassium_status == 'high'"
+                decoration-warning="phosphorus_status == 'high' or albumin_status == 'low'"
+                decoration-success="status == 'normal'">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="bilan_type"/>
+                <field name="hemoglobin"/>
+                <field name="hemoglobin_status" widget="badge"
+                    decoration-danger="hemoglobin_status == 'low'"
+                    decoration-success="hemoglobin_status == 'ok'"
+                    decoration-warning="hemoglobin_status == 'high'"/>
+                <field name="potassium"/>
+                <field name="potassium_status" widget="badge"
+                    decoration-danger="potassium_status == 'high'"
+                    decoration-success="potassium_status == 'ok'"
+                    decoration-warning="potassium_status == 'low'"/>
+                <field name="phosphorus" optional="show"/>
+                <field name="phosphorus_status" widget="badge" optional="show"
+                    decoration-danger="phosphorus_status == 'high'"
+                    decoration-success="phosphorus_status == 'ok'"
+                    decoration-warning="phosphorus_status == 'low'"/>
+                <field name="albumin" optional="show"/>
+                <field name="albumin_status" widget="badge" optional="show"
+                    decoration-danger="albumin_status == 'low'"
+                    decoration-success="albumin_status == 'ok'"/>
+                <field name="alert_count"/>
+                <field name="status" widget="badge"
+                    decoration-success="status == 'normal'"
+                    decoration-warning="status == 'warning'"
+                    decoration-danger="status == 'critical'"/>
+                <field name="physician_id" optional="hide"/>
+                <!-- champs cachés pour les décoration de lignes -->
+                <field name="hemoglobin_status" column_invisible="1"/>
+                <field name="potassium_status" column_invisible="1"/>
+                <field name="phosphorus_status" column_invisible="1"/>
+                <field name="albumin_status" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ===== SEARCH VIEW ===== -->
+    <record id="nephro_bilan_view_search" model="ir.ui.view">
+        <field name="name">nephro.bilan.search</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="physician_id"/>
+                <filter name="normal" string="Normal" domain="[('status', '=', 'normal')]"/>
+                <filter name="warning" string="Attention" domain="[('status', '=', 'warning')]"/>
+                <filter name="critical" string="Critique" domain="[('status', '=', 'critical')]"/>
+                <group>
+                    <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
+                    <filter name="group_type" string="Type" context="{'group_by': 'bilan_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- ===== GRAPH VIEW ===== -->
+    <record id="nephro_bilan_view_graph" model="ir.ui.view">
+        <field name="name">nephro.bilan.graph</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <graph string="Évolution des bilans" type="line" sample="1">
+                <field name="date" type="row"/>
+                <field name="hemoglobin" type="measure" string="Hémoglobine (g/dL)"/>
+                <field name="potassium" type="measure" string="Potassium (mmol/L)"/>
+                <field name="phosphorus" type="measure" string="Phosphore (mmol/L)"/>
+                <field name="calcium" type="measure" string="Calcium (mmol/L)"/>
+                <field name="albumin" type="measure" string="Albumine (g/L)"/>
+                <field name="pth" type="measure" string="PTH (pg/mL)"/>
+                <field name="crp" type="measure" string="CRP (mg/L)"/>
+                <field name="ferritin" type="measure" string="Ferritine (µg/L)"/>
+                <field name="creatinine" type="measure" string="Créatinine (µmol/L)"/>
+                <field name="urea_pre" type="measure" string="Urée pré (mmol/L)"/>
+                <field name="hba1c" type="measure" string="HbA1c"/>
+                <field name="alert_count" type="measure" string="Nb alertes"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- ===== PIVOT VIEW ===== -->
+    <record id="nephro_bilan_view_pivot" model="ir.ui.view">
+        <field name="name">nephro.bilan.pivot</field>
+        <field name="model">nephro.bilan</field>
+        <field name="arch" type="xml">
+            <pivot string="Statistiques bilans" sample="1" display_quantity="1">
+                <field name="patient_id" type="row"/>
+                <field name="date" type="col" interval="month"/>
+                <field name="hemoglobin" type="measure" string="Hb (g/dL)"/>
+                <field name="potassium" type="measure" string="K (mmol/L)"/>
+                <field name="phosphorus" type="measure" string="P (mmol/L)"/>
+                <field name="albumin" type="measure" string="Albumine (g/L)"/>
+                <field name="crp" type="measure" string="CRP (mg/L)"/>
+                <field name="alert_count" type="measure" string="Alertes"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- ===== ACTION ===== -->
+    <record id="nephro_bilan_action" model="ir.actions.act_window">
+        <field name="name">Résultats biologiques</field>
+        <field name="res_model">nephro.bilan</field>
+        <field name="view_mode">list,form,graph,pivot</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucun résultat biologique pour le moment.
+            </p>
+            <p>Créez le premier bilan pour un patient.</p>
+        </field>
+    </record>
+
+    <!-- Action statistiques filtrée par patient (depuis fiche patient) -->
+    <record id="nephro_bilan_stats_action" model="ir.actions.act_window">
+        <field name="name">Statistiques biologiques</field>
+        <field name="res_model">nephro.bilan</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="context">{'search_default_group_date': 1}</field>
+    </record>
+
+    <!-- Patient smart buttons -->
+    <record id="nephro_bilan_patient_form_inherit" model="ir.ui.view">
+        <field name="name">nephro.patient.bilan.button</field>
+        <field name="model">nephro.patient</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_patient_view_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="%(nephro_bilan_action)d" type="action"
+                    class="oe_stat_button" icon="fa-flask">
+                    <field name="bilan_count" widget="statinfo" string="Bilans"/>
+                </button>
+                <button name="action_open_bilan_stats" type="object"
+                    class="oe_stat_button" icon="fa-line-chart">
+                    <span class="o_stat_text">Statistiques</span>
+                </button>
+            </div>
+        </field>
+    </record>
+
+</odoo>

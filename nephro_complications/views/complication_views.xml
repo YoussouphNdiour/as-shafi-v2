@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="nephro_complication_view_form" model="ir.ui.view">
+        <field name="name">nephro.complication.form</field>
+        <field name="model">nephro.complication</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group string="Séance">
+                            <field name="procedure_id"/>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="occurrence_time"/>
+                        </group>
+                        <group string="Complication">
+                            <field name="complication_type"/>
+                            <field name="resolution"/>
+                            <field name="bp_at_occurrence"/>
+                            <field name="early_stop_minutes"
+                                invisible="complication_type != 'early_stop'"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Réponse clinique">
+                            <field name="action_taken"/>
+                        </group>
+                        <group string="Notes">
+                            <field name="notes"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view -->
+    <record id="nephro_complication_view_list" model="ir.ui.view">
+        <field name="name">nephro.complication.list</field>
+        <field name="model">nephro.complication</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="occurrence_time"/>
+                <field name="patient_id"/>
+                <field name="procedure_id"/>
+                <field name="complication_type"/>
+                <field name="bp_at_occurrence"/>
+                <field name="resolution" widget="badge"
+                    decoration-success="resolution == 'resolved'"
+                    decoration-warning="resolution == 'partial'"
+                    decoration-danger="resolution == 'unresolved'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="nephro_complication_view_search" model="ir.ui.view">
+        <field name="name">nephro.complication.search</field>
+        <field name="model">nephro.complication</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="patient_id"/>
+                <field name="procedure_id"/>
+                <field name="complication_type"/>
+                <filter name="resolved" string="Résolu" domain="[('resolution', '=', 'resolved')]"/>
+                <filter name="unresolved" string="Non résolu" domain="[('resolution', '=', 'unresolved')]"/>
+                <group>
+                    <filter name="group_patient" string="Patient" context="{'group_by': 'patient_id'}"/>
+                    <filter name="group_type" string="Type" context="{'group_by': 'complication_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="nephro_complication_action" model="ir.actions.act_window">
+        <field name="name">Complications</field>
+        <field name="res_model">nephro.complication</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Aucune complication enregistrée.
+            </p>
+            <p>Les complications sont enregistrées par séance depuis le formulaire d'hémodialyse.</p>
+        </field>
+    </record>
+
+    <!-- Complications tab inside Hemodialysis Session form -->
+    <record id="nephro_procedure_form_complications_tab" model="ir.ui.view">
+        <field name="name">nephro.procedure.form.complications</field>
+        <field name="model">nephro.procedure</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_procedure_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Complications">
+                    <field name="complication_ids">
+                        <list editable="bottom">
+                            <field name="complication_type"/>
+                            <field name="occurrence_time"/>
+                            <field name="bp_at_occurrence"/>
+                            <field name="action_taken"/>
+                            <field name="resolution" widget="badge"
+                                decoration-success="resolution == 'resolved'"
+                                decoration-warning="resolution == 'partial'"
+                                decoration-danger="resolution == 'unresolved'"/>
+                            <field name="early_stop_minutes"
+                                column_invisible="True"/>
+                            <field name="notes"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

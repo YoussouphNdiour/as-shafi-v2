@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Vascular Access Types -->
+        <record id="vascular_access_fav" model="nephro.vascular.access.type">
+            <field name="name">FAV (Fistule artério-veineuse)</field>
+        </record>
+        <record id="vascular_access_kt_temp" model="nephro.vascular.access.type">
+            <field name="name">Cathéter temporaire</field>
+        </record>
+        <record id="vascular_access_kt_perm" model="nephro.vascular.access.type">
+            <field name="name">Cathéter tunnelisé (Permcath)</field>
+        </record>
+        <record id="vascular_access_avg" model="nephro.vascular.access.type">
+            <field name="name">PAV (Pontage artério-veineux)</field>
+        </record>
+
+        <!-- Dialyzer Types -->
+        <record id="dialyzer_fx60" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX60</field>
+        </record>
+        <record id="dialyzer_fx80" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX80</field>
+        </record>
+        <record id="dialyzer_fx100" model="nephro.dialyzer.type">
+            <field name="name">Fresenius FX100</field>
+        </record>
+        <record id="dialyzer_polyflux170" model="nephro.dialyzer.type">
+            <field name="name">Gambro Polyflux 170H</field>
+        </record>
+        <record id="dialyzer_elisio17" model="nephro.dialyzer.type">
+            <field name="name">Nipro Elisio 17H</field>
+        </record>
+        <record id="dialyzer_toray_bk16" model="nephro.dialyzer.type">
+            <field name="name">Toray BK-1.6U</field>
+        </record>
+
+        <!-- Dialysate Types -->
+        <record id="dialysate_bicarb_std" model="nephro.dialysate.type">
+            <field name="name">Bicarbonate standard</field>
+        </record>
+        <record id="dialysate_bicarb_low_ca" model="nephro.dialysate.type">
+            <field name="name">Bicarbonate pauvre en calcium</field>
+        </record>
+        <record id="dialysate_acetate" model="nephro.dialysate.type">
+            <field name="name">Acetate</field>
+        </record>
+        <record id="dialysate_citrate" model="nephro.dialysate.type">
+            <field name="name">Citrate</field>
+        </record>
+
+        <!-- Holidays (Senegal) -->
+        <record id="holiday_new_year" model="nephro.holiday">
+            <field name="name">Jour de l'An</field>
+            <field name="date">2026-01-01</field>
+        </record>
+        <record id="holiday_independence" model="nephro.holiday">
+            <field name="name">Fête de l'Indépendance</field>
+            <field name="date">2026-04-04</field>
+        </record>
+        <record id="holiday_labor" model="nephro.holiday">
+            <field name="name">Fête du Travail</field>
+            <field name="date">2026-05-01</field>
+        </record>
+        <record id="holiday_assumption" model="nephro.holiday">
+            <field name="name">Assomption</field>
+            <field name="date">2026-08-15</field>
+        </record>
+        <record id="holiday_all_saints" model="nephro.holiday">
+            <field name="name">Toussaint</field>
+            <field name="date">2026-11-01</field>
+        </record>
+        <record id="holiday_christmas" model="nephro.holiday">
+            <field name="name">Noël</field>
+            <field name="date">2026-12-25</field>
+        </record>
+
+        <!-- Allergies (types définis dans nephro_core) -->
+    </data>
+</odoo>

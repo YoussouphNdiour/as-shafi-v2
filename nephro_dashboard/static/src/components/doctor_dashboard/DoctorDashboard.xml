@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="nephro_dashboard.DoctorDashboard">
+        <div class="o_doctor_dashboard p-3">
+            <t t-if="state.loading">
+                <div class="d-flex justify-content-center align-items-center" style="min-height:200px">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Chargement…</span>
+                    </div>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="d-flex align-items-center mb-4">
+                    <h2 class="mb-0 me-auto">Tableau de bord médecin</h2>
+                    <small class="text-muted">Actualisation auto toutes les 30 s</small>
+                </div>
+
+                <!-- KPI cards -->
+                <div class="row g-3 mb-4">
+                    <div class="col-6 col-md-3">
+                        <div class="card border-primary h-100 text-center p-3">
+                            <h1 class="mb-1 text-primary" t-esc="state.kpis.total_today"/>
+                            <small class="text-muted">Séances du jour</small>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card border-success h-100 text-center p-3">
+                            <h1 class="mb-1 text-success" t-esc="state.kpis.done_today"/>
+                            <small class="text-muted">Terminées</small>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card border-warning h-100 text-center p-3">
+                            <h1 class="mb-1 text-warning" t-esc="state.kpis.running"/>
+                            <small class="text-muted">En cours</small>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="card border-danger h-100 text-center p-3">
+                            <h1 class="mb-1 text-danger" t-esc="state.kpis.alerts"/>
+                            <small class="text-muted">Alertes</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <!-- Station grid -->
+                    <div class="col-12 col-lg-8">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <strong>Postes</strong>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Poste</th>
+                                            <th>Patient</th>
+                                            <th>Statut</th>
+                                            <th>Kt/V</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="state.stations" t-as="st" t-key="st.station_id">
+                                            <tr class="cursor-pointer"
+                                                t-on-click="() => this.onStationClick(st.procedure_id)">
+                                                <td t-esc="st.station_name"/>
+                                                <td t-esc="st.patient_name || '—'"/>
+                                                <td>
+                                                    <span t-attf-class="badge rounded-pill text-bg-#{
+                                                        st.state === 'done' ? 'success' :
+                                                        st.state === 'running' ? 'warning' :
+                                                        st.state === 'scheduled' ? 'info' : 'secondary'
+                                                    }" t-esc="st.state"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="st.ktv">
+                                                        <t t-esc="st.ktv.toFixed(2)"/>
+                                                    </t>
+                                                    <t t-else="">—</t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                        <tr t-if="!state.stations.length">
+                                            <td colspan="4" class="text-muted text-center">Aucun poste configuré</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Alert panel -->
+                    <div class="col-12 col-lg-4">
+                        <div class="card border-danger h-100">
+                            <div class="card-header bg-danger text-white">
+                                <strong>Alertes (<t t-esc="state.alerts.length"/>)</strong>
+                            </div>
+                            <div class="list-group list-group-flush" style="max-height:400px;overflow-y:auto">
+                                <t t-foreach="state.alerts" t-as="alert" t-key="alert_index">
+                                    <a class="list-group-item list-group-item-action list-group-item-danger"
+                                       t-on-click="() => this.onAlertClick(alert.procedure_id)">
+                                        <div class="d-flex justify-content-between">
+                                            <strong t-esc="alert.category"/>
+                                            <small class="text-muted" t-esc="alert.station"/>
+                                        </div>
+                                        <div>
+                                            <small><strong t-esc="alert.patient_name"/></small>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted" t-esc="alert.detail"/>
+                                        </div>
+                                    </a>
+                                </t>
+                                <div t-if="!state.alerts.length"
+                                     class="list-group-item text-muted text-center py-4">
+                                    Aucune alerte active
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

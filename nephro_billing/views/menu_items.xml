@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Billing parent menu under Nephrology root -->
+    <menuitem id="nephro_billing_menu"
+        name="Facturation"
+        parent="nephro_core.menu_nephrology_root"
+        sequence="90"
+        groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
+
+    <!-- Uninvoiced Sessions -->
+    <menuitem id="nephro_billing_menu_uninvoiced"
+        name="Séances non facturées"
+        parent="nephro_billing_menu"
+        action="nephro_uninvoiced_sessions_action"
+        sequence="10"
+        groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
+
+    <!-- All Invoices -->
+    <menuitem id="nephro_billing_menu_invoices"
+        name="Toutes les factures"
+        parent="nephro_billing_menu"
+        action="nephro_billing_all_invoices_action"
+        sequence="20"
+        groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
+
+    <!-- Batch Invoicing -->
+    <menuitem id="nephro_billing_menu_batch"
+        name="Facturation groupée"
+        parent="nephro_billing_menu"
+        action="nephro_batch_invoice_wizard_action"
+        sequence="30"
+        groups="nephro_core.group_nephro_billing,nephro_core.group_nephro_manager"/>
+
+    <!-- Pricing Rules under Configuration -->
+    <menuitem id="nephro_billing_menu_pricing_rules"
+        name="Règles tarifaires"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_pricing_rule_action"
+        sequence="90"
+        groups="nephro_core.group_nephro_manager"/>
+</odoo>

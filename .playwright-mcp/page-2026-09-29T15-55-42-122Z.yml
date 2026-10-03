@@ -1,0 +1,44 @@
+- generic [ref=f5e1]:
+  - banner [ref=f5e2]:
+    - navigation [ref=f5e3]:
+      - button "" [ref=f5e5] [cursor=pointer]
+      - menuitem "Néphrologie" [ref=f5e7] [cursor=pointer]
+      - menu [ref=f5e8]:
+        - menuitem "Patients" [ref=f5e9] [cursor=pointer]
+        - menuitem "Rendez-vous" [ref=f5e10] [cursor=pointer]
+        - menuitem "Hémodialyse" [ref=f5e11] [cursor=pointer]
+        - menuitem "Ordonnances" [ref=f5e12] [cursor=pointer]
+        - menuitem "Bilans biologiques" [ref=f5e13] [cursor=pointer]
+        - menuitem "Générer les séances" [ref=f5e14] [cursor=pointer]
+        - button "" [ref=f5e16] [cursor=pointer]
+      - menu [ref=f5e18]:
+        - button "Messages 1" [ref=f5e20] [cursor=pointer]:
+          - img "Messages" [ref=f5e21]: 
+          - generic [ref=f5e22]: "1"
+        - button [ref=f5e23] [cursor=pointer]:
+          - img "Activités" [ref=f5e24]: 
+        - button "AS SHAFI" [disabled] [ref=f5e26]: 
+        - generic: 
+        - button [ref=f5e29] [cursor=pointer]:
+          - generic [ref=f5e30]:
+            - img "Utilisateur" [ref=f5e31]
+            - img "L'utilisateur est en ligne" [ref=f5e34]: 
+          - text: 
+  - generic [ref=f5e36]:
+    - generic [ref=f5e38]:
+      - generic [ref=f5e39]:
+        - button "Nouveau" [ref=f5e41] [cursor=pointer]
+        - generic [ref=f5e42]:
+          - generic [ref=f5e43]: Bilans biologiques
+          - button "Menu Actions" [ref=f5e48] [cursor=pointer]:
+            - generic [ref=f5e49]: 
+      - search [ref=f5e51]:
+        - search [ref=f5e52]:
+          - button "Rechercher…" [ref=f5e53] [cursor=pointer]:
+            - img [ref=f5e54]: 
+          - searchbox "Rechercher…" [active] [ref=f5e56]
+        - button "" [ref=f5e57] [cursor=pointer]
+    - main [ref=f5e58]
+  - generic:
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_doctor_dashboard"
+        name="Tableau de bord médecin"
+        parent="nephro_core.menu_nephrology_root"
+        action="action_doctor_dashboard"
+        sequence="70"
+        groups="nephro_core.group_nephro_doctor"/>
+
+    <menuitem id="menu_nurse_dashboard"
+        name="Interface infirmier"
+        parent="nephro_core.menu_nephrology_root"
+        action="action_nurse_dashboard"
+        sequence="80"
+        groups="nephro_core.group_nephro_nurse"/>
+</odoo>

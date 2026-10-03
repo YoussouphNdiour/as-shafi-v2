@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Module category -->
+        <record id="module_category_nephrology" model="ir.module.category">
+            <field name="name">HMS Néphrologie</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- Odoo 19: privilege replaces category_id on res.groups -->
+        <record id="privilege_nephrology" model="res.groups.privilege">
+            <field name="name">Néphrologie</field>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- Base group — read-only access, implies internal user -->
+        <record id="group_nephro_user" model="res.groups">
+            <field name="name">Utilisateur Néphro</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <!-- Secretary — CRUD patients, RDV, absences -->
+        <record id="group_nephro_secretary" model="res.groups">
+            <field name="name">Secrétaire</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Nurse — sessions, vitals, complications -->
+        <record id="group_nephro_nurse" model="res.groups">
+            <field name="name">Infirmier(ère)</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Billing — invoices, pricing, payments -->
+        <record id="group_nephro_billing" model="res.groups">
+            <field name="name">Facturation</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Doctor — all clinical (prescriptions, bilans, dashboard) -->
+        <record id="group_nephro_doctor" model="res.groups">
+            <field name="name">Médecin</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_user'))]"/>
+        </record>
+
+        <!-- Manager — configuration, all menus, all rights -->
+        <record id="group_nephro_manager" model="res.groups">
+            <field name="name">Responsable</field>
+            <field name="privilege_id" ref="privilege_nephrology"/>
+            <field name="implied_ids" eval="[(4, ref('group_nephro_doctor'))]"/>
+        </record>
+    </data>
+</odoo>

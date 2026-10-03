@@ -1,0 +1,41 @@
+- generic [active] [ref=f3e1]:
+  - banner [ref=f3e2]:
+    - navigation [ref=f3e3]:
+      - button "" [ref=f3e5] [cursor=pointer]
+      - menuitem "Discuss" [ref=f3e7] [cursor=pointer]
+      - menu [ref=f3e8]:
+        - menuitem "Discuss" [ref=f3e9] [cursor=pointer]
+        - menuitem "Channels" [ref=f3e10] [cursor=pointer]
+        - button "Configuration" [ref=f3e11] [cursor=pointer]
+      - menu [ref=f3e13]:
+        - button "Messages 2" [ref=f3e15] [cursor=pointer]:
+          - img "Messages" [ref=f3e16]: 
+          - generic [ref=f3e17]: "2"
+        - button "Activités 1" [ref=f3e18] [cursor=pointer]:
+          - img "Activités" [ref=f3e19]: 
+          - generic [ref=f3e20]: "1"
+        - button "AS SHAFI" [disabled] [ref=f3e22]: 
+        - generic: 
+        - button [ref=f3e25] [cursor=pointer]:
+          - generic [ref=f3e26]:
+            - img "Utilisateur" [ref=f3e27]
+            - img "L'utilisateur est en hors ligne" [ref=f3e30]: 
+          - text: 
+  - generic [ref=f3e33]:
+    - generic [ref=f3e36]:
+      - generic [ref=f3e37]:
+        - generic [ref=f3e38]:
+          - generic [ref=f3e39]:
+            - generic [ref=f3e40]: 
+            - textbox "Rechercher des conversations" [disabled] [ref=f3e41]
+          - generic [ref=f3e42] [cursor=pointer]
+        - button "Nouvelle réunion" [ref=f3e43] [cursor=pointer]
+      - button " Messages marqués d’une étoile" [ref=f3e47] [cursor=pointer]:
+        - generic [ref=f3e48]: 
+        - generic [ref=f3e50]: Messages marqués d’une étoile
+      - button "Canaux" [ref=f3e52] [cursor=pointer]: 
+      - button "Messages directs" [ref=f3e56] [cursor=pointer]: 
+    - generic [ref=f3e59]: 
+  - generic:
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

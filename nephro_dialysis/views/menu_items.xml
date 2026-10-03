@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Configuration items under Nephrology > Configuration (parent defined in nephro_core) -->
+    <menuitem id="nephro_dialysis_menu_dialyzer_types"
+        name="Types de dialyseurs"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_dialyzer_type_action"
+        sequence="20"/>
+
+    <menuitem id="nephro_dialysis_menu_dialysate_types"
+        name="Types de dialysat"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_dialysate_type_action"
+        sequence="30"/>
+
+    <menuitem id="nephro_dialysis_menu_vascular_access_types"
+        name="Types d'abord vasculaire"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_vascular_access_type_action"
+        sequence="40"/>
+
+    <menuitem id="nephro_dialysis_menu_holidays"
+        name="Jours fériés"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_holiday_action"
+        sequence="60"/>
+
+    <menuitem id="nephro_dialysis_menu_stations"
+        name="Postes"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_station_action"
+        sequence="70"/>
+
+    <menuitem id="nephro_dialysis_menu_schedules"
+        name="Programmes"
+        parent="nephro_core.nephro_core_menu_config"
+        action="nephro_dialysis_schedule_action"
+        sequence="80"/>
+
+    <!-- Session Generator under Nephrology root -->
+    <menuitem id="nephro_dialysis_menu_session_generator"
+        name="Générer des séances"
+        parent="nephro_core.menu_nephrology_root"
+        action="nephro_dialysis_session_generator_action"
+        sequence="60"
+        groups="nephro_core.group_nephro_secretary,nephro_core.group_nephro_doctor,nephro_core.group_nephro_manager"/>
+</odoo>

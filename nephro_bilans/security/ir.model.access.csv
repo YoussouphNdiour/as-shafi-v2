@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bilan_user,nephro.bilan.user,model_nephro_bilan,nephro_core.group_nephro_user,1,0,0,0
+access_bilan_nurse,nephro.bilan.nurse,model_nephro_bilan,nephro_core.group_nephro_nurse,1,0,0,0
+access_bilan_doctor,nephro.bilan.doctor,model_nephro_bilan,nephro_core.group_nephro_doctor,1,1,1,0
+access_bilan_manager,nephro.bilan.manager,model_nephro_bilan,nephro_core.group_nephro_manager,1,1,1,1
+access_threshold_user,nephro.bilan.threshold.user,model_nephro_bilan_threshold,nephro_core.group_nephro_user,1,0,0,0
+access_bilan_portal,nephro.bilan.portal,model_nephro_bilan,base.group_portal,1,0,0,0
+access_threshold_doctor,nephro.bilan.threshold.doctor,model_nephro_bilan_threshold,nephro_core.group_nephro_doctor,1,1,0,0
+access_threshold_manager,nephro.bilan.threshold.manager,model_nephro_bilan_threshold,nephro_core.group_nephro_manager,1,1,1,1

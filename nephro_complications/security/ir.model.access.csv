@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_complication_user,nephro.complication.user,model_nephro_complication,nephro_core.group_nephro_user,1,0,0,0
+access_complication_nurse,nephro.complication.nurse,model_nephro_complication,nephro_core.group_nephro_nurse,1,1,1,0
+access_complication_doctor,nephro.complication.doctor,model_nephro_complication,nephro_core.group_nephro_doctor,1,1,1,1
+access_complication_manager,nephro.complication.manager,model_nephro_complication,nephro_core.group_nephro_manager,1,1,1,1

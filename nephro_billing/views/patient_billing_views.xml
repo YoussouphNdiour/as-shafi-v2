@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Add billing tab to patient form -->
+    <record id="nephro_billing_patient_form_inherit" model="ir.ui.view">
+        <field name="name">nephro.patient.billing.form.inherit</field>
+        <field name="model">nephro.patient</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_patient_view_form"/>
+        <field name="arch" type="xml">
+            <page name="medical_history" position="after">
+                <page string="Facturation" name="billing">
+                    <group>
+                        <group string="Tarification">
+                            <field name="pricing_rule_id"/>
+                            <field name="balance_due" readonly="1"/>
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>

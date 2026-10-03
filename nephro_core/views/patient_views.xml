@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="nephro_core_patient_view_form" model="ir.ui.view">
+        <field name="name">nephro.patient.form</field>
+        <field name="model">nephro.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="%(nephro_core_procedure_action)d" type="action"
+                            class="oe_stat_button" icon="fa-medkit">
+                            <field name="procedure_count" widget="statinfo" string="Séances"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger"
+                        invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nom du patient"/></h1>
+                        <h3><field name="hms_id" readonly="1"/></h3>
+                    </div>
+                    <group>
+                        <group string="Identité">
+                            <field name="birth_date"/>
+                            <field name="age"/>
+                            <field name="gender"/>
+                            <field name="blood_group"/>
+                            <field name="phone"/>
+                            <field name="emergency_contact"/>
+                        </group>
+                        <group string="Néphrologie" name="nephrology_group">
+                            <field name="is_nephro"/>
+                            <field name="dialysis_type" invisible="not is_nephro"/>
+                            <field name="dialysis_start_date" invisible="not is_nephro"/>
+                            <field name="physician_id"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <!-- ===== 1. Histoire médicale ===== -->
+                        <page string="Histoire médicale" name="medical_history">
+                            <group>
+                                <field name="main_complaint"/>
+                            </group>
+                            <separator string="Histoire de la maladie"/>
+                            <field name="disease_history" nolabel="1"/>
+                            <separator string="Historique médical général"/>
+                            <field name="medical_history" nolabel="1"/>
+                        </page>
+
+                        <!-- ===== 2. Antécédants ===== -->
+                        <page string="Antécédants" name="antecedents">
+                            <notebook>
+                                <page string="Personnels" name="antecedent_personal">
+                                    <group string="Habitudes toxiques / Mode de vie">
+                                        <field name="lifestyle_ids" widget="many2many_tags" nolabel="1"/>
+                                    </group>
+                                    <field name="antecedent_personal_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="treatment"/>
+                                            <field name="active_disease"/>
+                                            <field name="notes"/>
+                                        </list>
+                                    </field>
+                                </page>
+                                <page string="Chirurgicaux" name="antecedent_surgical">
+                                    <field name="antecedent_surgical_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="surgical_type_id"/>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="hospital"/>
+                                            <field name="notes"/>
+                                        </list>
+                                    </field>
+                                </page>
+                                <page string="Gynéco-obstétricaux" name="antecedent_go"
+                                    invisible="gender != 'female'">
+                                    <field name="antecedent_go_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="gestity"/>
+                                            <field name="parity"/>
+                                            <field name="avortement"/>
+                                            <field name="deces"/>
+                                            <field name="notes"/>
+                                        </list>
+                                    </field>
+                                </page>
+                                <page string="Allergies" name="antecedent_allergies">
+                                    <field name="allergy_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="allergy_type_id"/>
+                                            <field name="name"/>
+                                            <field name="severity"/>
+                                            <field name="reaction"/>
+                                            <field name="notes"/>
+                                        </list>
+                                    </field>
+                                </page>
+                                <page string="Familiaux" name="antecedent_family">
+                                    <field name="antecedent_family_ids" nolabel="1">
+                                        <list editable="bottom">
+                                            <field name="relation_id"/>
+                                            <field name="name"/>
+                                            <field name="notes"/>
+                                        </list>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </page>
+
+                        <!-- ===== 3. Examens Physiques ===== -->
+                        <page string="Examens Physiques" name="physical_exams">
+                            <field name="physical_exam_ids" nolabel="1">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="physician_id"/>
+                                    <field name="weight"/>
+                                    <field name="height"/>
+                                    <field name="bmi"/>
+                                    <field name="blood_pressure_sys"/>
+                                    <field name="blood_pressure_dia"/>
+                                    <field name="heart_rate"/>
+                                    <field name="conclusion" optional="show"/>
+                                </list>
+                                <form>
+                                    <group>
+                                        <group string="Général">
+                                            <field name="date"/>
+                                            <field name="physician_id"/>
+                                        </group>
+                                        <group string="Constantes">
+                                            <field name="weight"/>
+                                            <field name="height"/>
+                                            <field name="bmi"/>
+                                            <field name="blood_pressure_sys"/>
+                                            <field name="blood_pressure_dia"/>
+                                            <field name="heart_rate"/>
+                                            <field name="temperature"/>
+                                            <field name="spo2"/>
+                                        </group>
+                                    </group>
+                                    <notebook>
+                                        <page string="Examen par appareil">
+                                            <group>
+                                                <field name="head"/>
+                                                <field name="neck"/>
+                                                <field name="thorax"/>
+                                                <field name="abdomen"/>
+                                                <field name="limbs"/>
+                                                <field name="genital"/>
+                                                <field name="other_systems"/>
+                                            </group>
+                                        </page>
+                                        <page string="Synthèse">
+                                            <group>
+                                                <field name="treatment"/>
+                                                <field name="conclusion"/>
+                                            </group>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+
+                        <!-- ===== 4. Imagerie ===== -->
+                        <page string="Imagerie" name="imaging">
+                            <notebook>
+                                <page string="Échographies" name="echographies">
+                                    <field name="echography_ids" nolabel="1">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="organ"/>
+                                            <field name="result"/>
+                                            <field name="conclusion"/>
+                                        </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="organ"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="Radiographies" name="radiographies">
+                                    <field name="radiography_ids" nolabel="1">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="region"/>
+                                            <field name="result"/>
+                                            <field name="conclusion"/>
+                                        </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="TDM" name="tdm">
+                                    <field name="tdm_ids" nolabel="1">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="region"/>
+                                            <field name="contrast"/>
+                                            <field name="result"/>
+                                            <field name="conclusion"/>
+                                        </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                    <field name="contrast"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
+                                    </field>
+                                </page>
+                                <page string="IRM" name="irm">
+                                    <field name="irm_ids" nolabel="1">
+                                        <list>
+                                            <field name="name"/>
+                                            <field name="date"/>
+                                            <field name="region"/>
+                                            <field name="contrast"/>
+                                            <field name="result"/>
+                                            <field name="conclusion"/>
+                                        </list>
+                                        <form>
+                                            <group>
+                                                <group>
+                                                    <field name="name"/>
+                                                    <field name="date"/>
+                                                    <field name="region"/>
+                                                    <field name="contrast"/>
+                                                </group>
+                                                <group>
+                                                    <field name="result"/>
+                                                    <field name="conclusion"/>
+                                                </group>
+                                            </group>
+                                            <separator string="Documents (PDF / images)"/>
+                                            <field name="attachment_ids" widget="many2many_binary" nolabel="1"/>
+                                        </form>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </page>
+
+                        <!-- ===== 5. Diagnostic ===== -->
+                        <page string="Diagnostic" name="diagnostic">
+                            <group string="Résumé néphro">
+                                <field name="nephro_summary" nolabel="1" colspan="2"/>
+                            </group>
+                            <group string="Risque génétique">
+                                <field name="genetic_risk" nolabel="1" colspan="2"/>
+                            </group>
+                        </page>
+
+                        <!-- ===== 6. Néphropathie Initiale ===== -->
+                        <page string="Néphropathie Initiale" name="nephropathy"
+                            invisible="not is_nephro">
+                            <group>
+                                <group>
+                                    <field name="nephropathy_type_id"/>
+                                    <field name="nephropathy_date"/>
+                                </group>
+                                <group>
+                                    <field name="nephropathy_biopsy"/>
+                                    <field name="nephropathy_biopsy_date"
+                                        invisible="not nephropathy_biopsy"/>
+                                </group>
+                            </group>
+                            <group string="Résultat de la biopsie"
+                                invisible="not nephropathy_biopsy">
+                                <field name="nephropathy_biopsy_result" nolabel="1"/>
+                            </group>
+                            <group string="Notes">
+                                <field name="nephropathy_notes" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- List view -->
+    <record id="nephro_core_patient_view_list" model="ir.ui.view">
+        <field name="name">nephro.patient.list</field>
+        <field name="model">nephro.patient</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="hms_id"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="blood_group"/>
+                <field name="is_nephro"/>
+                <field name="physician_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Search view -->
+    <record id="nephro_core_patient_view_search" model="ir.ui.view">
+        <field name="name">nephro.patient.search</field>
+        <field name="model">nephro.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="hms_id"/>
+                <field name="physician_id"/>
+                <filter name="nephro" string="Prise en charge néphro" domain="[('is_nephro', '=', True)]"/>
+                <filter name="active" string="Actif" domain="[('active', '=', True)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="nephro_core_patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">nephro.patient</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_nephro': 1}</field>
+    </record>
+</odoo>

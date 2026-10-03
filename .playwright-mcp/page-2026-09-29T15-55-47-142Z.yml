@@ -1,0 +1,130 @@
+- generic [active] [ref=f5e1]:
+  - banner [ref=f5e2]:
+    - navigation [ref=f5e3]:
+      - button "" [ref=f5e5] [cursor=pointer]
+      - menuitem "Néphrologie" [ref=f5e7] [cursor=pointer]
+      - menu [ref=f5e8]:
+        - menuitem "Patients" [ref=f5e9] [cursor=pointer]
+        - menuitem "Rendez-vous" [ref=f5e10] [cursor=pointer]
+        - menuitem "Hémodialyse" [ref=f5e11] [cursor=pointer]
+        - menuitem "Ordonnances" [ref=f5e12] [cursor=pointer]
+        - menuitem "Bilans biologiques" [ref=f5e13] [cursor=pointer]
+        - menuitem "Générer les séances" [ref=f5e14] [cursor=pointer]
+        - button "" [ref=f5e16] [cursor=pointer]
+      - menu [ref=f5e18]:
+        - button "Messages 3" [ref=f5e59] [cursor=pointer]:
+          - img "Messages" [ref=f5e21]: 
+          - generic [ref=f5e22]: "3"
+        - button "Activités 1" [ref=f5e60] [cursor=pointer]:
+          - img "Activités" [ref=f5e24]: 
+          - generic [ref=f5e61]: "1"
+        - button "AS SHAFI" [disabled] [ref=f5e26]: 
+        - generic: 
+        - button [ref=f5e29] [cursor=pointer]:
+          - generic [ref=f5e30]:
+            - img "Utilisateur" [ref=f5e31]
+            - img "L'utilisateur est en ligne" [ref=f5e34]: 
+          - text: 
+  - generic [ref=f5e63]:
+    - generic [ref=f5e65]:
+      - generic [ref=f5e66]:
+        - button "Nouveau" [ref=f5e68] [cursor=pointer]
+        - generic [ref=f5e69]:
+          - list [ref=f5e70]:
+            - listitem [ref=f5e71]:
+              - link "Bilans biologiques" [ref=f5e72] [cursor=pointer]:
+                - /url: /odoo/action-430
+          - generic [ref=f5e73]:
+            - generic [ref=f5e74]: BIL/2026/0002
+            - button "Menu Actions" [ref=f5e79] [cursor=pointer]:
+              - generic [ref=f5e80]: 
+      - search [ref=f5e83]:
+        - navigation "Bipeur" [ref=f5e84]:
+          - generic [ref=f5e85]:
+            - generic [ref=f5e86]: "1"
+            - text: / 2
+          - generic [ref=f5e87]:
+            - button "Précédent" [ref=f5e88] [cursor=pointer]:
+              - generic [ref=f5e89]: 
+            - button "Suivant" [ref=f5e90] [cursor=pointer]:
+              - generic [ref=f5e91]: 
+    - main [ref=f5e92]:
+      - generic [ref=f5e93]:
+        - generic [ref=f5e95]:
+          - heading "BIL/2026/0002" [level=1] [ref=f5e97]
+          - generic [ref=f5e99]:
+            - generic [ref=f5e100]:
+              - generic [ref=f5e101]: Patient
+              - generic [ref=f5e103]: Patient
+              - combobox "Patient" [ref=f5e111]: Aminata Sow
+              - generic [ref=f5e112]: Médecin
+              - combobox "Médecin" [ref=f5e120]: Dr Ndiaye
+              - generic [ref=f5e121]: Date
+              - button "Date" [ref=f5e126] [cursor=pointer]: 20 sept.
+              - generic [ref=f5e127]: Type
+              - textbox "Type" [ref=f5e133]: Mensuel
+            - generic [ref=f5e134]:
+              - generic [ref=f5e135]: Statut
+              - generic [ref=f5e137]: Statut
+              - generic [ref=f5e139]: Normal
+              - generic [ref=f5e142]: Alertes
+              - generic [ref=f5e144]: "0"
+              - generic [ref=f5e146]: Rapport Ca×P
+              - generic [ref=f5e148]: 4,1
+          - generic [ref=f5e150]:
+            - list [ref=f5e152]:
+              - listitem [ref=f5e153]:
+                - tab "Hématologie" [ref=f5e154]
+              - listitem [ref=f5e155]:
+                - tab "Biochimie" [ref=f5e156] [cursor=pointer]
+              - listitem [ref=f5e157]:
+                - tab "Électrolytes" [ref=f5e158] [cursor=pointer]
+              - listitem [ref=f5e159]:
+                - tab "Minéral-Osseux" [ref=f5e160] [cursor=pointer]
+              - listitem [ref=f5e161]:
+                - tab "Nutrition / Inflammation" [ref=f5e162] [cursor=pointer]
+              - listitem [ref=f5e163]:
+                - tab "Sérologie" [ref=f5e164] [cursor=pointer]
+              - listitem [ref=f5e165]:
+                - tab "Documents" [ref=f5e166] [cursor=pointer]
+            - generic [ref=f5e169]:
+              - generic [ref=f5e170]:
+                - generic [ref=f5e171]: Hémoglobine (g/dL)
+                - textbox "Hémoglobine (g/dL)" [ref=f5e175]: 10,2
+                - generic [ref=f5e176]: Hématocrite (%)
+                - textbox "Hématocrite (%)" [ref=f5e180]: 31,5
+                - generic [ref=f5e181]: WBC (G/L)
+                - textbox "WBC (G/L)" [ref=f5e185]: 6,8
+              - generic [ref=f5e186]:
+                - generic [ref=f5e187]: Platelets (G/L)
+                - textbox "Platelets (G/L)" [ref=f5e191]: "220"
+                - generic [ref=f5e192]: Ferritine (µg/L)
+                - textbox "Ferritine (µg/L)" [ref=f5e196]: "450"
+        - generic [ref=f5e198]:
+          - generic [ref=f5e200]:
+            - button "Envoyer message" [ref=f5e201] [cursor=pointer]
+            - button "Note" [ref=f5e202] [cursor=pointer]
+            - button "Rechercher des messages" [ref=f5e204] [cursor=pointer]:
+              - img [ref=f5e205]: 
+            - button "Joindre des fichiers" [ref=f5e208] [cursor=pointer]:
+              - generic [ref=f5e209]: 
+            - button "1" [ref=f5e211] [cursor=pointer]:
+              - img [ref=f5e212]: 
+              - superscript: "1"
+          - generic [ref=f5e215]:
+            - generic [ref=f5e217]:
+              - separator [ref=f5e218]
+              - generic [ref=f5e219]: 27 sept. 2026
+              - separator [ref=f5e220]
+            - group "Notification système" [ref=f5e221]:
+              - generic [ref=f5e222]:
+                - generic "Carte ouverte" [ref=f5e224] [cursor=pointer]
+                - generic [ref=f5e226]:
+                  - generic [ref=f5e227]:
+                    - generic "Carte ouverte" [ref=f5e228] [cursor=pointer]:
+                      - strong [ref=f5e229]: Administrator
+                    - generic "27/09/2026 09:14:10" [ref=f5e230]: 27 sept., 09:14
+                  - paragraph [ref=f5e237]: Biological Lab Results créé
+  - generic:
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

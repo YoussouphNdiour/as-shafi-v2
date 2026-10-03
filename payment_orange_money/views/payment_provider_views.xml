@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_provider_orange_money_form_inherit" model="ir.ui.view">
+        <field name="name">payment.provider.orange_money.form.inherit</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group string="Identifiants Orange Money"
+                       invisible="code != 'orange_money'">
+                    <field name="orange_money_api_url"/>
+                    <field name="orange_money_client_id"
+                           required="code == 'orange_money'"/>
+                    <field name="orange_money_client_secret"
+                           password="True"
+                           required="code == 'orange_money'"/>
+                    <field name="orange_money_merchant_code"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

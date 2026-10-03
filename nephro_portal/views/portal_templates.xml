@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Nephro Home Dashboard -->
+    <template id="portal_nephro_home" name="Nephro Home">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="0"/>
+            <div class="container py-4">
+                <h2 class="mb-4">My Nephrology Dashboard</h2>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="card text-center p-3">
+                            <h6>Next Appointment</h6>
+                            <strong t-if="next_rdv" t-esc="next_rdv.date" t-options="{'widget': 'datetime'}"/>
+                            <span t-else="" class="text-muted">None scheduled</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center p-3">
+                            <h6>Last Bilan</h6>
+                            <t t-if="last_bilan">
+                                <strong>Hb <t t-esc="last_bilan.hemoglobin"/> g/dL</strong>
+                            </t>
+                            <span t-else="" class="text-muted">No bilan</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center p-3">
+                            <h6>Balance</h6>
+                            <strong t-if="patient and patient.balance_due" t-esc="'%.0f FCFA' % patient.balance_due"/>
+                            <span t-else="" class="text-muted">0 FCFA</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card text-center p-3">
+                            <h6>Last Session</h6>
+                            <t t-if="last_session">
+                                <strong>Kt/V <t t-esc="'%.2f' % last_session.ktv"/></strong>
+                            </t>
+                            <span t-else="" class="text-muted">None</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-4"><a href="/my/seances" class="btn btn-outline-primary w-100">My Sessions</a></div>
+                    <div class="col-md-4"><a href="/my/bilans" class="btn btn-outline-primary w-100">My Lab Results</a></div>
+                    <div class="col-md-4"><a href="/my/rdv" class="btn btn-outline-primary w-100">My Appointments</a></div>
+                    <div class="col-md-4"><a href="/my/ordonnances" class="btn btn-outline-primary w-100">My Prescriptions</a></div>
+                    <div class="col-md-4"><a href="/my/factures" class="btn btn-outline-primary w-100">My Invoices</a></div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- Sessions List -->
+    <template id="portal_seances" name="My Sessions">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2 class="mb-4">My Dialysis Sessions</h2>
+                <table class="table">
+                    <thead><tr>
+                        <th>Date</th><th>Duration</th><th>Kt/V</th><th>UF</th><th>Tolerance</th><th/>
+                    </tr></thead>
+                    <tbody>
+                        <tr t-foreach="procedures" t-as="proc" t-key="proc.id">
+                            <td t-esc="proc.date" t-options="{'widget': 'datetime'}"/>
+                            <td><t t-esc="'%.1f' % proc.actual_duration"/>h</td>
+                            <td><t t-esc="'%.2f' % proc.ktv"/></td>
+                            <td><t t-esc="'%.1f' % proc.actual_uf"/> L</td>
+                            <td t-esc="proc.global_tolerance"/>
+                            <td><a t-attf-href="/my/seances/#{proc.id}" class="btn btn-sm btn-outline-secondary">Detail</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Session Detail -->
+    <template id="portal_seance_detail" name="Session Detail">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2>Session <t t-esc="procedure.name"/></h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Pre-dialysis</h5>
+                        <p>Weight: <strong t-esc="procedure.pre_weight"/> kg</p>
+                        <p>BP: <strong t-esc="procedure.pre_bp"/></p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Post-dialysis</h5>
+                        <p>Weight: <strong t-esc="procedure.post_weight"/> kg</p>
+                        <p>UF: <strong t-esc="'%.1f' % procedure.actual_uf"/> L</p>
+                        <p>Kt/V: <strong t-esc="'%.2f' % procedure.ktv"/></p>
+                        <p>Tolerance: <strong t-esc="procedure.global_tolerance"/></p>
+                    </div>
+                </div>
+                <a href="/my/seances" class="btn btn-secondary mt-3">Back</a>
+            </div>
+        </t>
+    </template>
+
+    <!-- Bilans List -->
+    <template id="portal_bilans" name="My Lab Results">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2 class="mb-4">My Lab Results</h2>
+                <table class="table">
+                    <thead><tr>
+                        <th>Date</th><th>Type</th><th>Hb</th><th>K</th><th>PTH</th><th>Status</th><th/>
+                    </tr></thead>
+                    <tbody>
+                        <tr t-foreach="bilans" t-as="b" t-key="b.id">
+                            <td t-esc="b.date"/>
+                            <td t-esc="b.bilan_type"/>
+                            <td t-esc="b.hemoglobin"/>
+                            <td t-esc="b.potassium"/>
+                            <td t-esc="b.pth"/>
+                            <td><span t-attf-class="badge text-bg-#{
+                                b.status == 'normal' and 'success' or
+                                b.status == 'warning' and 'warning' or 'danger'
+                            }" t-esc="b.status"/></td>
+                            <td><a t-attf-href="/my/bilans/#{b.id}" class="btn btn-sm btn-outline-secondary">Detail</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Bilan Detail -->
+    <template id="portal_bilan_detail" name="Bilan Detail">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2>Lab Results — <t t-esc="bilan.date"/></h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>Hematology</h5>
+                        <p>Hemoglobin: <strong t-esc="bilan.hemoglobin"/> g/dL</p>
+                        <p>Ferritin: <strong t-esc="bilan.ferritin"/> µg/L</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Electrolytes</h5>
+                        <p>Potassium: <strong t-esc="bilan.potassium"/> mmol/L</p>
+                        <p>Calcium: <strong t-esc="bilan.calcium"/> mmol/L</p>
+                        <p>Phosphorus: <strong t-esc="bilan.phosphorus"/> mmol/L</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Mineral-Bone</h5>
+                        <p>PTH: <strong t-esc="bilan.pth"/> pg/mL</p>
+                        <p>Albumin: <strong t-esc="bilan.albumin"/> g/L</p>
+                    </div>
+                </div>
+                <a href="/my/bilans" class="btn btn-secondary mt-3">Back</a>
+            </div>
+        </t>
+    </template>
+
+    <!-- Appointments List -->
+    <template id="portal_rdv" name="My Appointments">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2 class="mb-4">My Appointments</h2>
+                <table class="table">
+                    <thead><tr><th>Date</th><th>Physician</th><th>Status</th><th/></tr></thead>
+                    <tbody>
+                        <tr t-foreach="appointments" t-as="a" t-key="a.id">
+                            <td t-esc="a.date" t-options="{'widget': 'datetime'}"/>
+                            <td t-esc="a.physician_id.name"/>
+                            <td><span t-attf-class="badge text-bg-#{
+                                a.state == 'confirmed' and 'success' or
+                                a.state == 'draft' and 'info' or
+                                a.state == 'cancel' and 'danger' or 'secondary'
+                            }" t-esc="a.state"/></td>
+                            <td t-if="a.state in ('draft', 'confirmed')">
+                                <form t-attf-action="/my/rdv/#{a.id}/cancel" method="post">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Cancel</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Prescriptions List -->
+    <template id="portal_ordonnances" name="My Prescriptions">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2 class="mb-4">My Prescriptions</h2>
+                <table class="table">
+                    <thead><tr><th>Reference</th><th>Date</th><th>Physician</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr t-foreach="prescriptions" t-as="p" t-key="p.id">
+                            <td t-esc="p.name"/>
+                            <td t-esc="p.date"/>
+                            <td t-esc="p.physician_id.name"/>
+                            <td><span class="badge text-bg-info" t-esc="p.state"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+
+    <!-- Invoices List -->
+    <template id="portal_factures" name="My Invoices">
+        <t t-call="portal.portal_layout">
+            <div class="container py-4">
+                <h2 class="mb-4">My Invoices</h2>
+                <div t-if="patient" class="alert alert-info mb-3">
+                    Balance due: <strong t-esc="patient.balance_due" t-options="{'widget': 'monetary'}"/>
+                </div>
+                <table class="table">
+                    <thead><tr><th>Number</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+                    <tbody>
+                        <tr t-foreach="invoices" t-as="inv" t-key="inv.id">
+                            <td t-esc="inv.name"/>
+                            <td t-esc="inv.invoice_date"/>
+                            <td t-esc="inv.amount_total" t-options="{'widget': 'monetary'}"/>
+                            <td><span t-attf-class="badge text-bg-#{
+                                inv.payment_state == 'paid' and 'success' or
+                                inv.payment_state == 'not_paid' and 'danger' or 'warning'
+                            }" t-esc="inv.payment_state"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <t t-call="portal.pager"/>
+            </div>
+        </t>
+    </template>
+</odoo>

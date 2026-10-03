@@ -1,0 +1,114 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - navigation [ref=f1e3]:
+      - button "" [expanded] [active] [ref=f1e5] [cursor=pointer]
+      - menuitem "Discuss" [ref=f1e7] [cursor=pointer]
+      - menu [ref=f1e8]:
+        - menuitem "Discuss" [ref=f1e9] [cursor=pointer]
+        - menuitem "Channels" [ref=f1e10] [cursor=pointer]
+        - button "Configuration" [ref=f1e11] [cursor=pointer]
+      - menu [ref=f1e13]:
+        - button "Messages 3" [ref=f1e15] [cursor=pointer]:
+          - img "Messages" [ref=f1e16]: 
+          - generic [ref=f1e17]: "3"
+        - button [ref=f1e18] [cursor=pointer]:
+          - img "Activités" [ref=f1e19]: 
+        - button "AS SHAFI" [disabled] [ref=f1e21]: 
+        - generic: 
+        - button [ref=f1e24] [cursor=pointer]:
+          - generic [ref=f1e25]:
+            - img "Utilisateur" [ref=f1e26]
+            - img "L'utilisateur est en ligne" [ref=f1e29]: 
+          - text: 
+  - generic [ref=f1e32]:
+    - generic [ref=f1e35]:
+      - generic [ref=f1e36]:
+        - generic [ref=f1e37]:
+          - generic [ref=f1e38]:
+            - generic [ref=f1e39]: 
+            - textbox "Rechercher des conversations" [disabled] [ref=f1e40]
+          - generic [ref=f1e41] [cursor=pointer]
+        - button "Nouvelle réunion" [ref=f1e42] [cursor=pointer]
+      - button " Messages marqués d’une étoile" [ref=f1e46] [cursor=pointer]:
+        - generic [ref=f1e47]: 
+        - generic [ref=f1e49]: Messages marqués d’une étoile
+      - button " Canaux" [ref=f1e51] [cursor=pointer]:
+        - generic [ref=f1e52]: 
+        - generic [ref=f1e53]: Canaux
+      - button "Image de fil general " [ref=f1e56] [cursor=pointer]:
+        - generic "general" [ref=f1e57]:
+          - img "Image de fil" [ref=f1e59]
+        - generic "Le fil de discussion a des messages non lus" [ref=f1e61]: 
+        - text: 
+      - button " Messages directs" [ref=f1e64] [cursor=pointer]:
+        - generic [ref=f1e65]: 
+        - generic [ref=f1e66]: Messages directs
+      - button "Image de fil Utilisateur est un robot OdooBot" [ref=f1e68] [cursor=pointer]:
+        - generic "OdooBot" [ref=f1e69]:
+          - generic [ref=f1e70]:
+            - img "Image de fil" [ref=f1e71]
+            - img "Utilisateur est un robot" [ref=f1e75]: 
+        - text: 
+    - generic [ref=f1e78]:
+      - generic [ref=f1e79]:
+        - generic [ref=f1e80]:
+          - img "Image de fil" [ref=f1e81]
+          - img "Utilisateur est un robot" [ref=f1e84]: 
+        - generic [ref=f1e85]:
+          - textbox "OdooBot" [ref=f1e86]:
+            - /placeholder: ""
+          - generic [ref=f1e88]:
+            - button "Paramètres de notification" [ref=f1e90] [cursor=pointer]:
+              - generic [ref=f1e91]: 
+            - generic [ref=f1e92]:
+              - button "Inviter des gens" [ref=f1e93] [cursor=pointer]:
+                - generic [ref=f1e94]: 
+              - button "Rechercher des messages" [ref=f1e95] [cursor=pointer]:
+                - generic [ref=f1e96]: 
+            - generic [ref=f1e97]:
+              - button "Pièces jointes" [ref=f1e98] [cursor=pointer]:
+                - generic [ref=f1e99]: 
+              - button "Messages épinglés" [ref=f1e100] [cursor=pointer]:
+                - generic [ref=f1e101]: 
+      - generic [ref=f1e104]:
+        - generic [ref=f1e106]:
+          - generic [ref=f1e107]:
+            - generic [ref=f1e108]:
+              - img "Image de fil" [ref=f1e110]
+              - heading "OdooBot" [level=1] [ref=f1e111]
+            - paragraph [ref=f1e112]: Ceci est le début de votre conversation directe avec OdooBot
+          - generic [ref=f1e113]:
+            - separator [ref=f1e114]
+            - generic [ref=f1e115]: Aujourd'hui
+            - separator [ref=f1e116]
+          - group "Message" [ref=f1e117]:
+            - generic [ref=f1e118]:
+              - generic "Carte ouverte" [ref=f1e120] [cursor=pointer]
+              - generic [ref=f1e122]:
+                - generic [ref=f1e123]:
+                  - generic "Carte ouverte" [ref=f1e124] [cursor=pointer]:
+                    - strong [ref=f1e125]: OdooBot
+                  - generic "29/09/2026 15:46:42" [ref=f1e126]: 15:46
+                - paragraph [ref=f1e138]: Bonjour,Le chat d'Odoo aide les employés à collaborer efficacement. Je suis là pour vous aider à découvrir ses fonctionnalités.Essayez de m'envoyer un émoji :)
+        - generic [ref=f1e141]:
+          - text: 
+          - img "Avatar de l'utilisateur" [ref=f1e143]
+          - generic [ref=f1e145]:
+            - button "Plus d'actions" [ref=f1e151] [cursor=pointer]:
+              - generic [ref=f1e152]: 
+            - textbox "Message OdooBot…" [ref=f1e154]
+            - generic [ref=f1e158]:
+              - button "Ajouter des émojis" [ref=f1e159] [cursor=pointer]:
+                - generic [ref=f1e160]: 
+              - button "Envoyer" [disabled]:
+                - generic: 
+  - generic:
+    - menu [ref=f1e161]:
+      - menuitem "Discuss" [ref=f1e162] [cursor=pointer]
+      - menuitem "Contacts" [ref=f1e163] [cursor=pointer]
+      - menuitem "Dashboards" [ref=f1e164] [cursor=pointer]
+      - menuitem "Néphrologie" [ref=f1e165] [cursor=pointer]
+      - menuitem "Website" [ref=f1e166] [cursor=pointer]
+      - menuitem "Apps" [ref=f1e167] [cursor=pointer]
+    - generic:
+      - paragraph: Appuyez sur esc pour quitter le mode plein écran

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="nephro_dialysis_station_view_list" model="ir.ui.view">
+        <field name="name">nephro.station.list</field>
+        <field name="model">nephro.station</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="room"/>
+                <field name="station_type"/>
+                <field name="equipment_model"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_station_view_form" model="ir.ui.view">
+        <field name="name">nephro.station.form</field>
+        <field name="model">nephro.station</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archivé" bg_color="text-bg-danger"
+                        invisible="active"/>
+                    <field name="active" invisible="1"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Nom du poste"/></h1>
+                    </div>
+                    <group>
+                        <field name="room"/>
+                        <field name="station_type"/>
+                        <field name="equipment_model"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nephro_dialysis_station_action" model="ir.actions.act_window">
+        <field name="name">Postes</field>
+        <field name="res_model">nephro.station</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
