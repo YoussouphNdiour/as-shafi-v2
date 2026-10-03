@@ -17,7 +17,6 @@ jobs:
           BRANCH="${{ github.ref_name }}"
           echo "Deploying branch: $BRANCH"
 
-          # Create exec to run git pull inside the Odoo container
           EXEC_RESP=$(curl -sk -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/exec" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
@@ -29,16 +28,12 @@ jobs:
             }")
 
           EXEC_ID=$(echo "$EXEC_RESP" | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
-          echo "Exec ID: $EXEC_ID"
-
-          # Start exec (blocking until done)
           curl -sk -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/start" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
             -H "Content-Type: application/json" \
-            -d '{"Detach": false, "Tty": false}' > /tmp/exec_output.bin
+            -d '{"Detach": false, "Tty": false}' > /dev/null
 
-          # Check exec exit code
           INSPECT=$(curl -sk \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/json" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}")
@@ -49,30 +44,68 @@ jobs:
             exit 1
           fi
 
+      - name: Run odoo -u to update modules
+        run: |
+          # Run odoo -u detached (Odoo is running, so we pass the config file)
+          EXEC_RESP=$(curl -sk -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/exec" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "AttachStdout": false,
+              "AttachStderr": false,
+              "Cmd": ["sh", "-c",
+                "kill $(cat /tmp/odoo.pid 2>/dev/null) 2>/dev/null; sleep 2; odoo -u nephro_core,nephro_dialysis,nephro_billing,nephro_bilans -d test-officiel --db_host=db --db_user=odoo --db_password=odoo19@2025 --stop-after-init --no-http >> /etc/odoo/odoo-server.log 2>&1; echo DEPLOY_DONE:$? >> /etc/odoo/odoo-server.log"
+              ]
+            }')
+
+          EXEC_ID=$(echo "$EXEC_RESP" | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
+          curl -sk -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$EXEC_ID/start" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"Detach": true}'
+
+          echo "odoo -u launched in background, waiting 90s..."
+          sleep 90
+
+          # Check result in log
+          CHECK_RESP=$(curl -sk -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/exec" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"AttachStdout": true, "AttachStderr": true, "Cmd": ["sh", "-c", "grep DEPLOY_DONE /etc/odoo/odoo-server.log | tail -1"]}')
+          CHECK_ID=$(echo "$CHECK_RESP" | python3 -c "import sys,json; print(json.load(sys.stdin)['Id'])")
+          RESULT=$(curl -sk -X POST \
+            "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/exec/$CHECK_ID/start" \
+            -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"Detach": false, "Tty": true}')
+          echo "odoo -u result: $RESULT"
+
       - name: Restart Odoo container
         run: |
           HTTP_STATUS=$(curl -sk -o /dev/null -w "%{http_code}" -X POST \
             "${{ secrets.PORTAINER_URL }}/api/endpoints/${{ secrets.PORTAINER_ENDPOINT_ID }}/docker/containers/${{ secrets.PORTAINER_CONTAINER_ID }}/restart" \
             -H "X-API-Key: ${{ secrets.PORTAINER_API_KEY }}")
 
-          echo "Restart HTTP status: $HTTP_STATUS"
+          echo "Restart: $HTTP_STATUS"
           if [ "$HTTP_STATUS" != "204" ]; then
             echo "ERROR: restart failed with status $HTTP_STATUS"
             exit 1
           fi
-          echo "Container restarted"
 
       - name: Wait for Odoo to be ready
         run: |
           echo "Waiting for Odoo to come up..."
-          for i in $(seq 1 30); do
+          for i in $(seq 1 36); do
             STATUS=$(curl -sk -o /dev/null -w "%{http_code}" -m 5 \
               "https://as-shafi.com/web/health" 2>/dev/null || echo "000")
-            echo "  Attempt $i/30 → HTTP $STATUS"
+            echo "  Attempt $i/36 → HTTP $STATUS"
             if [ "$STATUS" = "200" ]; then
               echo "Odoo is ready!"
               exit 0
             fi
             sleep 5
           done
-          echo "WARNING: Odoo did not respond within 150s (may still be starting)"
+          echo "WARNING: Odoo did not respond within 3min"
