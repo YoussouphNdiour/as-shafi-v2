@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Add invoice button to procedure form (defined here because action_create_invoice is in nephro_billing) -->
+    <record id="nephro_billing_procedure_form_inherit" model="ir.ui.view">
+        <field name="name">nephro.procedure.billing.form.inherit</field>
+        <field name="model">nephro.procedure</field>
+        <field name="inherit_id" ref="nephro_core.nephro_core_procedure_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="action_create_invoice" string="Créer la facture" type="object"
+                    class="btn-success" invisible="state != 'done' or is_invoiced"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
