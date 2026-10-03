@@ -44,7 +44,7 @@
                                             <field name="vgm"/>
                                             <field name="ccmh"/>
                                             <field name="hematocrit"/>
-                                            <field name="wbc"/>
+
                                             <field name="platelets"/>
                                             <field name="leu"/>
                                         </group>
