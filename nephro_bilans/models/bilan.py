@@ -104,6 +104,9 @@ class NephroBilan(models.Model):
     bilirubine_t = fields.Float(string="Bilirubine T")
     bilirubine_i = fields.Float(string="Bilirubine I")
     epps = fields.Char(string="EPPS")
+    tsh = fields.Float(string="TSH (mUI/L)", digits=(6, 3))
+    t3 = fields.Float(string="T3 (pmol/L)", digits=(5, 2))
+    t4 = fields.Float(string="T4 (pmol/L)", digits=(5, 2))
 
     # ===== BILAN HÉPATIQUE =====
     alat = fields.Float(string="ALAT")

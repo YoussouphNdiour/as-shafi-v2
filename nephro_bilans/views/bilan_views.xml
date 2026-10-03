@@ -152,6 +152,10 @@
                                     <field name="bilirubine_t"/>
                                     <field name="bilirubine_i"/>
                                     <field name="epps"/>
+                                    <separator string="Thyroïde"/>
+                                    <field name="tsh"/>
+                                    <field name="t3"/>
+                                    <field name="t4"/>
                                 </group>
                             </group>
                         </page>
